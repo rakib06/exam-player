@@ -25,6 +25,7 @@ class RegistrationForm extends React.Component {
           values.confirm,
           is_student
         );
+        this.props.history.push("/");
         // this.props.history.push("/");
       }
     });
@@ -153,9 +154,10 @@ class RegistrationForm extends React.Component {
           >
             Signup
           </Button>
-          Or
-          <NavLink style={{ marginRight: "10px" }} to="/login/">
-            login
+
+          <NavLink style={{ marginRight: "12px" }} to="/login/">
+            {" "}
+            I've an account
           </NavLink>
         </FormItem>
       </Form>
