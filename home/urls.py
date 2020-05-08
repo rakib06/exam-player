@@ -2,7 +2,9 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from django.views.generic import TemplateView
 
-admin.site.site_header = 'RK Premium customer Panel'
+admin.site.site_header = 'RK-MCQ Premium '
+admin.site.site_title = 'RK-MCQ'
+admin.site.index_title = "Welcome to RK-MCQ"
 
 urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
