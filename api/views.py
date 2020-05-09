@@ -12,7 +12,7 @@ from .serializers import AssignmentSerializer, GradedAssignmentSerializer
 
 class AssignmentViewSet(viewsets.ModelViewSet):
     serializer_class = AssignmentSerializer
-    queryset = Assignment.objects.all()
+    queryset = Assignment.objects.filter(is_hide=False)
 
     def create(self, request):
         serializer = AssignmentSerializer(data=request.data)

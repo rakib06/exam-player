@@ -5,6 +5,7 @@ from users.models import User
 class Assignment(models.Model):
     title = models.CharField(max_length=50)
     teacher = models.ForeignKey(User, on_delete=models.CASCADE)
+    is_hide = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title
