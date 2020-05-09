@@ -7,6 +7,7 @@ from django.db import migrations, models
 import django.db.models.deletion
 import django.utils.timezone
 
+# user=User.objects.create_user('admin', password='12345678', is_student=False, is_teacher=True, is_staff=True, is_superuser=True) 
 
 class Migration(migrations.Migration):
 
