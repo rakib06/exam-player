@@ -21,7 +21,8 @@ class GradedAssignment(models.Model):
     grade = models.FloatField()
 
     def wrong_answer(self):
-        return self.total_marks - self.right_answer
+        return (self.obtained_marks - self.right_answer) * 4
+        
 
     def __str__(self):
         return self.student.username
