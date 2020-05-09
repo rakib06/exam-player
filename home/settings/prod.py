@@ -43,7 +43,7 @@ MIDDLEWARE += [
 
 
 '''
-http://127.0.0.1:8001/ | https://git.heroku.com/rkmcq.git
+https://rk-mcq.herokuapp.com// | https://git.heroku.com/rkmcq.git
 '''
 # for heroku
 if os.getcwd() == '/app':
