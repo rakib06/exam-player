@@ -92,17 +92,25 @@ class GradedAssignmentSerializer(serializers.ModelSerializer):
 
         questions = [q for q in assignment.questions.all()]
         answers = [data['answers'][a] for a in data['answers']]
-
+        wrong_answer = 0
         answered_correct_count = 0
+        blank = 0
         for i in range(len(questions)):
             if questions[i].answer.title == answers[i]:
-                print("--->>", questions[i].answer.title)
+                print("Answer--->>", answers[i])
                 answered_correct_count += 1
-            i += 1
+
+            elif answers[i] == "blank":
+                blank += 1
+
+            else:
+                wrong_answer += 1
+
         right_answer = graded_asnt.right_answer = answered_correct_count
         total_marks = graded_asnt.total_marks = len(questions)
-
-        wrong_answer = total_marks - right_answer
+        print("right answer", right_answer)
+        print("wrong anser", wrong_answer)
+        print("blank", blank)
         om = graded_asnt.right_answer - wrong_answer * .25
 
         graded_asnt.obtained_marks = om
