@@ -30,7 +30,9 @@ class UserAdmin(BaseUserAdmin):
 
 
 # Define a new User admin
+class UserAdmin(BaseUserAdmin):
+    list_display = ['email', 'username', 'is_student', 'is_teacher']
 
 
 admin.site.register(Student)
-admin.site.register(User)
+admin.site.register(User, UserAdmin)
