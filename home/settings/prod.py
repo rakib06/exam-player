@@ -3,8 +3,6 @@ import django_heroku
 from .base import *
 import dj_database_url
 
-
-DEBUG = False
 # WSGI_APPLICATION = 'home.wsgi.prod.application'
 WSGI_APPLICATION = 'config.wsgi.prod.application'
 
