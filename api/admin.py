@@ -13,14 +13,18 @@ class AdminGradedAssignment(admin.ModelAdmin):
 
 @admin.register(Assignment)
 class AdminAssignment(admin.ModelAdmin):
-    list_display = ['title', 'teacher', ]
+    list_display = ['title', 'teacher', 'is_hide']
     search_fields = ('title',)
     ordering = ('title',)
 
 
 @admin.register(Question)
 class AdminQuestion(admin.ModelAdmin):
-    list_display = ['question', 'assignment', ]
+    list_display = ['assignment', 'question',  'answer', 'order']
+    search_fields = ('assignment__title', 'question')
+    ordering = ('assignment',)
+    list_display_links = ('assignment',)
+    list_editable = ('question', 'answer', 'order')
 
 
 admin.site.register(Choice)
