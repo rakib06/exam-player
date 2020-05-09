@@ -33,7 +33,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 PROJECT_ROOT = os.path.join(os.path.abspath(__file__))
 MIDDLEWARE += [
@@ -73,3 +73,7 @@ LOGGING = {
         },
     },
 }
+
+DEBUG_PROPAGATE_EXCEPTIONS = True
+COMPRESS_ENABLED = os.environ.get('COMPRESS_ENABLED', False)
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
