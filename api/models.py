@@ -14,7 +14,13 @@ class GradedAssignment(models.Model):
     student = models.ForeignKey(User, on_delete=models.CASCADE)
     assignment = models.ForeignKey(
         Assignment, on_delete=models.SET_NULL, blank=True, null=True)
+    right_answer = models.FloatField(default=969.0)
+    total_marks = models.FloatField(default=969.0)
+    obtained_marks = models.FloatField(default=969.0)
     grade = models.FloatField()
+
+    def wrong_answer(self):
+        return self.total_marks - self.right_answer
 
     def __str__(self):
         return self.student.username

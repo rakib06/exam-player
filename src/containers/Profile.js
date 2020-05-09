@@ -1,9 +1,10 @@
 import React from "react";
-import { List, Skeleton } from "antd";
+import { List, Skeleton, Card } from "antd";
 import { connect } from "react-redux";
 import Result from "../components/Result";
 import { getGradedASNTS } from "../store/actions/gradedAssignments";
 import Hoc from "../hoc/hoc";
+import { Link } from "react-router-dom";
 
 class Profile extends React.PureComponent {
   componentDidMount() {
@@ -26,15 +27,42 @@ class Profile extends React.PureComponent {
         {this.props.loading ? (
           <Skeleton active />
         ) : (
-          <Hoc>
-            <h1>Hi {this.props.username}</h1>
-            <List
-              size="large"
-              dataSource={this.props.gradedAssignments}
-              renderItem={a => <Result key={a.id} grade={a.grade} />}
-            />
-          </Hoc>
-        )}
+
+            <Hoc>
+              <h1>Progress Report: {this.props.username}</h1>
+              <div class="row">
+
+                <List
+                  size="small"
+                  dataSource={this.props.gradedAssignments}
+                  renderItem={a =>
+                    <div class="col-4">
+                      <Card bordered="5"
+
+                        type="inner"
+                      >
+                        <Result key={a.id} grade={a.grade} />
+                        <p >  <strong> {a.obtained_marks}</strong> {"out of "}
+                          <strong> {a.total_marks}</strong> </p>
+                        <Link to={`/assignments/${a.assignment}`}>
+                          <p>  Exam id : {a.assignment}</p>
+                        </Link>
+                      </Card>
+                    </div>
+
+
+
+
+                  }
+
+                />
+
+
+              </div>
+
+            </Hoc>
+
+          )}
       </Hoc>
     );
   }

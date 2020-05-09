@@ -35,6 +35,7 @@ class AssignmentDetail extends React.Component {
     const { usersAnswers } = this.state;
     usersAnswers[qId] = e.target.value;
     this.setState({ usersAnswers });
+    console.log("line 38", e.target.value, qId);
   };
 
   handleSubmit() {
@@ -46,12 +47,14 @@ class AssignmentDetail extends React.Component {
       answers: usersAnswers
     };
     this.props.createGradedASNT(this.props.token, asnt);
+    this.props.history.push("/");
   }
 
   render() {
     const { currentAssignment } = this.props;
     const { title } = currentAssignment;
     const { usersAnswers } = this.state;
+
     return (
       <Hoc>
         {Object.keys(currentAssignment).length > 0 ? (
@@ -59,29 +62,29 @@ class AssignmentDetail extends React.Component {
             {this.props.loading ? (
               <Skeleton active />
             ) : (
-              <Card title={title}>
-                <Questions
-                  submit={() => this.handleSubmit()}
-                  questions={currentAssignment.questions.map(q => {
-                    return (
-                      <Card
-                        style={cardStyle}
-                        type="inner"
-                        key={q.id}
-                        title={`${q.order}. ${q.question}`}
-                      >
-                        <Choices
-                          questionId={q.order}
-                          choices={q.choices}
-                          change={this.onChange}
-                          usersAnswers={usersAnswers}
-                        />
-                      </Card>
-                    );
-                  })}
-                />
-              </Card>
-            )}
+                <Card title={title}>
+                  <Questions
+                    submit={() => this.handleSubmit()}
+                    questions={currentAssignment.questions.map(q => {
+                      return (
+                        <Card
+                          style={cardStyle}
+                          type="inner"
+                          key={q.id}
+                          title={`${q.order}. ${q.question}`}
+                        >
+                          <Choices
+                            questionId={q.order}
+                            choices={q.choices}
+                            change={this.onChange}
+                            usersAnswers={usersAnswers}
+                          />
+                        </Card>
+                      );
+                    })}
+                  />
+                </Card>
+              )}
           </Hoc>
         ) : null}
       </Hoc>

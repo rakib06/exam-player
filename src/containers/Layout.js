@@ -59,19 +59,12 @@ class CustomLayout extends React.Component {
         </Header>
         <Content style={{ padding: "0 50px" }}>
           <Breadcrumb style={{ margin: "16px 0" }}>
+
+
             <Breadcrumb.Item>
-              <Link to="/">Home</Link>
+              <Link to="/">Jobair's Special Batch</Link>
             </Breadcrumb.Item>
-            {this.props.token !== null ? (
-              <Breadcrumb.Item>
-                <Link to={`/profile/${this.props.userId}`}>Profile</Link>
-              </Breadcrumb.Item>
-            ) : null}
-            {this.props.token !== null && this.props.is_teacher ? (
-              <Breadcrumb.Item>
-                <Link to="/create">Create</Link>
-              </Breadcrumb.Item>
-            ) : null}
+
           </Breadcrumb>
           <div style={{ background: "#fff", padding: 24, minHeight: 280 }}>
             {this.props.children}

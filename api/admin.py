@@ -5,7 +5,8 @@ from .models import Choice, Question, Assignment, GradedAssignment
 
 @admin.register(GradedAssignment)
 class AdminGradedAssignment(admin.ModelAdmin):
-    list_display = ['student', 'assignment', 'grade']
+    list_display = ['student', 'assignment',
+                    'right_answer', 'wrong_answer', 'obtained_marks', 'total_marks', 'grade']
     search_fields = ('student__username', 'assignment__title')
     ordering = ('assignment',)
 
@@ -17,5 +18,9 @@ class AdminAssignment(admin.ModelAdmin):
     ordering = ('title',)
 
 
+@admin.register(Question)
+class AdminQuestion(admin.ModelAdmin):
+    list_display = ['question', 'assignment', ]
+
+
 admin.site.register(Choice)
-admin.site.register(Question)

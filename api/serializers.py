@@ -51,8 +51,10 @@ class AssignmentSerializer(serializers.ModelSerializer):
                 newC.save()
                 newQ.choices.add(newC)
 
-            newQ.answer = Choice.objects.get(title=q['answer'])
+            newQ.answer = Choice.objects.filter(title=q['answer'])[:1].get()
+            print("NewQ.anser", newQ.answer)
             newQ.assignment = assignment
+            print("newQ.assignment", newQ.assignment)
             newQ.save()
             order += 1
         return assignment
@@ -60,6 +62,14 @@ class AssignmentSerializer(serializers.ModelSerializer):
 
 class GradedAssignmentSerializer(serializers.ModelSerializer):
     student = StringSerializer(many=False)
+    exam = serializers.SerializerMethodField('exam')
+    wrong_answer = serializers.SerializerMethodField('exam')
+
+    def exam(self):
+        return this.assignment__title
+
+    def wrong_answer(self):
+        return GradedAssignment.wrong_answer
 
     class Meta:
         model = GradedAssignment
@@ -82,10 +92,19 @@ class GradedAssignmentSerializer(serializers.ModelSerializer):
         answered_correct_count = 0
         for i in range(len(questions)):
             if questions[i].answer.title == answers[i]:
+                print("--->>", questions[i].answer.title)
                 answered_correct_count += 1
             i += 1
+        right_answer = graded_asnt.right_answer = answered_correct_count
+        total_marks = graded_asnt.total_marks = len(questions)
 
-        grade = answered_correct_count / len(questions) * 100
-        graded_asnt.grade = grade
+        wrong_answer = total_marks - right_answer
+        om = graded_asnt.right_answer - wrong_answer * .25
+
+        graded_asnt.obtained_marks = om
+        grade_1 = answered_correct_count / len(questions) * 100
+        grade = om / len(questions) * 100
+        graded_asnt.grade = "{:.2f}".format(grade)
+        # graded_asnt.grade = round(grade, 2)
         graded_asnt.save()
         return graded_asnt

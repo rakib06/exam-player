@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Form, Input, Icon, Button, Divider } from "antd";
+import { Form, Input, Icon, Button, Divider, message } from "antd";
 import QuestionForm from "./QuestionForm";
 import Hoc from "../hoc/hoc";
 import { createASNT } from "../store/actions/assignments";
@@ -45,6 +45,8 @@ class AssignmentCreate extends React.Component {
           questions
         };
         this.props.createASNT(this.props.token, asnt);
+        message.success("Creating your assignment!");
+        this.props.history.push("/");
       }
     });
   };
