@@ -3,6 +3,8 @@ import django_heroku
 from .base import *
 import dj_database_url
 
+
+DEBUG = False
 # WSGI_APPLICATION = 'home.wsgi.prod.application'
 WSGI_APPLICATION = 'config.wsgi.prod.application'
 
@@ -33,7 +35,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 PROJECT_ROOT = os.path.join(os.path.abspath(__file__))
 MIDDLEWARE += [
@@ -52,27 +54,9 @@ if os.getcwd() == '/app':
 
     # Allow all host headers
     ALLOWED_HOSTS = ['rk-mcq.herokuapp.com']
-    DEBUG = False
+    DEBUG = True
 
     # Static asset configuration
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 django_heroku.settings(locals())
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['console'],
-            'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
-        },
-    },
-}
-
-DEBUG_PROPAGATE_EXCEPTIONS = True
-COMPRESS_ENABLED = os.environ.get('COMPRESS_ENABLED', False)
