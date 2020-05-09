@@ -29,7 +29,7 @@ export const getASNTS = token => {
       Authorization: `Token ${token}`
     };
     axios
-      .get("http://127.0.0.1:8001/assignments/")
+      .get("rk-mcq.herokuapp.comassignments/")
       .then(res => {
         const assignments = res.data;
         dispatch(getASNTListSuccess(assignments));
@@ -68,7 +68,7 @@ export const getASNTSDetail = (token, id) => {
       Authorization: `Token ${token}`
     };
     axios
-      .get(`http://127.0.0.1:8001/assignments/${id}/`)
+      .get(`rk-mcq.herokuapp.comassignments/${id}/`)
       .then(res => {
         const assignment = res.data;
         dispatch(getASNTDetailSuccess(assignment));
@@ -107,7 +107,7 @@ export const createASNT = (token, asnt) => {
       Authorization: `Token ${token}`
     };
     axios
-      .post(`http://127.0.0.1:8001/assignments/`, asnt)
+      .post(`rk-mcq.herokuapp.comassignments/`, asnt)
       .then(res => {
         dispatch(createASNTSuccess());
       })
