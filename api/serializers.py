@@ -50,7 +50,11 @@ class AssignmentSerializer(serializers.ModelSerializer):
                 newC.title = c
                 newC.save()
                 newQ.choices.add(newC)
-
+            # add a blank field
+            newC = Choice()
+            newC.title = "blank"
+            newC.save()
+            newQ.choices.add(newC)
             newQ.answer = Choice.objects.filter(title=q['answer'])[:1].get()
             print("NewQ.anser", newQ.answer)
             newQ.assignment = assignment
