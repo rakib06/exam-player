@@ -48,7 +48,7 @@ export const createGradedASNT = (token, asnt) => {
       Authorization: `Token ${token}`
     };
     axios
-      .post(`https://rk-mcq.herokuapp.com/graded-assignments/create/`, asnt)
+      .post(`https://rk-mcq.herokuapp.com/graded-assignments/create`, asnt)
       .then(res => {
         console.log("success");
         //   dispatch(createASNTSuccess());
