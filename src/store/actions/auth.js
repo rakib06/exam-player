@@ -80,6 +80,7 @@ export const authSignup = (
       is_student,
       is_teacher: !is_student
     };
+    console.log(user);
     axios
       .post("https://rk-mcq.herokuapp.com/rest-auth/registration/", user)
       .then(res => {
