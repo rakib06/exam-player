@@ -7,10 +7,7 @@ import dj_database_url
 # WSGI_APPLICATION = 'home.wsgi.prod.application'
 WSGI_APPLICATION = 'config.wsgi.prod.application'
 
-CORS_ORIGIN_WHITELIST = (
-    'https://rk-mcq.herokuapp.com',
-    'http://localhost:3000',
-)
+CORS_ORIGIN_ALLOW_ALL = True
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
