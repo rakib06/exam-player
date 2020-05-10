@@ -63,19 +63,22 @@ class AssignmentDetail extends React.Component {
                     submit={() => this.handleSubmit()}
                     questions={currentAssignment.questions.map(q => {
                       return (
-                        <Card
+                        <div>
+                          <strong>
 
-                          type="inner"
-                          key={q.order}
-                          title={`${q.order}. ${q.question}`}
-                        >
+                            {`${q.order}. ${q.question}`}
+                          </strong>
+                          <br></br>
+                          <br></br>
                           <Choices
                             questionId={q.order}
                             choices={q.choices}
                             change={this.onChange}
                             usersAnswers={usersAnswers}
                           />
-                        </Card>
+                          <br></br>
+                          <br></br>
+                        </div>
                       );
                     })}
                   />

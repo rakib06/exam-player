@@ -31,7 +31,10 @@ class UserAdmin(BaseUserAdmin):
 
 # Define a new User admin
 class UserAdmin(BaseUserAdmin):
-    list_display = ['email', 'username', 'is_student', 'is_teacher']
+    list_display = ['username', 'mobile', 'email', 'is_student', ]
+    search_fields = ('username', 'mobile')
+    # ordering = ('order',)
+    list_display_links = ('username',)
 
 
 admin.site.register(Student)

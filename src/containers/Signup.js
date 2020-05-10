@@ -19,14 +19,14 @@ class RegistrationForm extends React.Component {
         let is_student = false;
         if (values.userType === "student") is_student = true;
         this.props.onAuth(
-          values.userName,
-          values.email,
+          values.username,
+          values.mobile,
           values.password,
           values.confirm,
           is_student
         );
         //this.props.history.push("/");
-        // this.props.history.push("/");
+        
       }
     });
   };
@@ -59,32 +59,30 @@ class RegistrationForm extends React.Component {
     return (
       <Form onSubmit={this.handleSubmit}>
         <FormItem>
-          {getFieldDecorator("userName", {
+          {getFieldDecorator("username", {
             rules: [{ required: true, message: "Please input your username!" }]
           })(
             <Input
               prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
-              placeholder="Username"
+              placeholder="username"
             />
           )}
         </FormItem>
 
         <FormItem>
-          {getFieldDecorator("email", {
+          {getFieldDecorator("mobile", {
             rules: [
               {
-                type: "email",
-                message: "The input is not valid E-mail!"
+                required: true,
+                message: 'Please input your phone number!'
               },
               {
-                required: true,
-                message: "Please input your E-mail!"
-              }
-            ]
+                validator: this.validateMobileNumber,
+              }]
           })(
             <Input
-              prefix={<Icon type="mail" style={{ color: "rgba(0,0,0,.25)" }} />}
-              placeholder="Email"
+              prefix={<Icon type="mobile" style={{ color: "rgba(0,0,0,.25)" }} />}
+              placeholder="Mobile Number"
             />
           )}
         </FormItem>
@@ -176,9 +174,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAuth: (username, email, password1, password2, is_student) =>
+    onAuth: (username, mobile, password1, password2, is_student) =>
       dispatch(
-        actions.authSignup(username, email, password1, password2, is_student)
+        actions.authSignup(username, mobile, password1, password2, is_student)
       )
   };
 };

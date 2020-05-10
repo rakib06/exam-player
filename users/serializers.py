@@ -9,23 +9,25 @@ from .models import User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('email', 'username', 'password', 'is_student', 'is_teacher')
+        fields = ('mobile', 'username', 'password', 'is_student', 'is_teacher')
 
 
 class CustomRegisterSerializer(RegisterSerializer):
     is_student = serializers.BooleanField()
     is_teacher = serializers.BooleanField()
+    mobile = serializers.CharField()
 
     class Meta:
         model = User
-        fields = ('email', 'username', 'password', 'is_student', 'is_teacher')
+        fields = ('mobile', 'username', 'password', 'is_student', 'is_teacher')
 
     def get_cleaned_data(self):
+
         return {
             'username': self.validated_data.get('username', ''),
             'password1': self.validated_data.get('password1', ''),
             'password2': self.validated_data.get('password2', ''),
-            'email': self.validated_data.get('email', ''),
+            'mobile': self.validated_data.get('mobile', ''),
             'is_student': self.validated_data.get('is_student', ''),
             'is_teacher': self.validated_data.get('is_teacher', '')
         }
@@ -33,9 +35,15 @@ class CustomRegisterSerializer(RegisterSerializer):
     def save(self, request):
         adapter = get_adapter()
         user = adapter.new_user(request)
+
         self.cleaned_data = self.get_cleaned_data()
+        user.username = self.cleaned_data.get('username')
+        user.mobile = self.cleaned_data.get('mobile')
         user.is_student = self.cleaned_data.get('is_student')
         user.is_teacher = self.cleaned_data.get('is_teacher')
+        print('XXXXXXXXXXXXXXXXXXXX username', user.username)
+        print('XXXXXXXXXXXXXXXXXXXX mobile', user.mobile)
+        print('XXXXXXXXXXXXXXXXXXXX mobile', user.is_student)
         user.save()
         adapter.save_user(request, user, self)
         return user

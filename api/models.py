@@ -35,7 +35,7 @@ class Choice(models.Model):
 
 
 class Question(models.Model):
-    question = models.CharField(max_length=200)
+    question = models.CharField(max_length=2000)
     choices = models.ManyToManyField(Choice)
     answer = models.ForeignKey(
         Choice, on_delete=models.CASCADE, related_name='answer', blank=True, null=True)

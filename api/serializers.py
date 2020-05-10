@@ -26,7 +26,8 @@ class AssignmentSerializer(serializers.ModelSerializer):
         fields = ('__all__')
 
     def get_questions(self, obj):
-        questions = QuestionSerializer(obj.questions.all(), many=True).data
+        questions = QuestionSerializer(
+            obj.questions.all().order_by('order'), many=True).data
         return questions
 
     def create(self, request):
