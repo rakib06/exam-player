@@ -7,10 +7,6 @@ import { getASNTSDetail } from "../store/actions/assignments";
 import { createGradedASNT } from "../store/actions/gradedAssignments";
 import Hoc from "../hoc/hoc";
 
-const cardStyle = {
-  marginTop: "20px",
-  marginBottom: "20px"
-};
 
 class AssignmentDetail extends React.Component {
   state = {
@@ -47,7 +43,7 @@ class AssignmentDetail extends React.Component {
       answers: usersAnswers
     };
     this.props.createGradedASNT(this.props.token, asnt);
-    this.props.history.push("/");
+    //this.props.history.push("/");
   }
 
   render() {
@@ -68,9 +64,9 @@ class AssignmentDetail extends React.Component {
                     questions={currentAssignment.questions.map(q => {
                       return (
                         <Card
-                          style={cardStyle}
+
                           type="inner"
-                          key={q.id}
+                          key={q.order}
                           title={`${q.order}. ${q.question}`}
                         >
                           <Choices
