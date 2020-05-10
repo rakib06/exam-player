@@ -4,10 +4,13 @@ from .base import *
 import dj_database_url
 
 
-DEBUG = False
 # WSGI_APPLICATION = 'home.wsgi.prod.application'
 WSGI_APPLICATION = 'config.wsgi.prod.application'
 
+CORS_ORIGIN_WHITELIST = (
+    'https://rk-mcq.herokuapp.com',
+    'http://localhost:3000',
+)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -60,9 +63,3 @@ if os.getcwd() == '/app':
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 django_heroku.settings(locals())
-
-
-CORS_ORIGIN_WHITELIST = (
-    'https://rk-mcq.herokuapp.com',
-    'http://localhost:3000',
-)
