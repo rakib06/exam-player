@@ -60,3 +60,9 @@ if os.getcwd() == '/app':
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 django_heroku.settings(locals())
+
+
+CORS_ORIGIN_WHITELIST = (
+    'https://rk-mcq.herokuapp.com',
+    'http://localhost:3000',
+)

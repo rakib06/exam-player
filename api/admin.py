@@ -20,9 +20,9 @@ class AdminAssignment(admin.ModelAdmin):
 
 @admin.register(Question)
 class AdminQuestion(admin.ModelAdmin):
-    list_display = ['question', 'assignment', 'answer', 'order']
+    list_display = ['id', 'question', 'assignment', 'answer', 'order']
     search_fields = ('assignment__title', 'question')
-    ordering = ('assignment',)
+    # ordering = ('order',)
     list_display_links = ('question',)
     list_editable = ('answer', 'order')
 
