@@ -52,9 +52,9 @@ class AssignmentSerializer(serializers.ModelSerializer):
                 newC.save()
                 newQ.choices.add(newC)
             # add a blank field
-            newC = Choice()
-            newC.title = "blank"
-            newC.save()
+            # newC = Choice()
+            # newC.title = "blank"
+            # newC.save()
             newQ.choices.add(newC)
             newQ.answer = Choice.objects.filter(title=q['answer'])[:1].get()
             print("NewQ.anser", newQ.answer)
@@ -68,13 +68,12 @@ class AssignmentSerializer(serializers.ModelSerializer):
 class GradedAssignmentSerializer(serializers.ModelSerializer):
     student = StringSerializer(many=False)
     exam = serializers.SerializerMethodField('exam')
-    wrong_answer = serializers.SerializerMethodField('exam')
+    # right_answer = serializers.SerializerMethodField('right_answer')
+    # wrong_answer = serializers.SerializerMethodField('wrong_answer')
+    # assignment_name = serializers.SerializerMethodField('assignment_name')
 
     def exam(self):
-        return this.assignment__title
-
-    def wrong_answer(self):
-        return GradedAssignment.wrong_answer
+        return Assignment.objects.get(id=assignment)
 
     class Meta:
         model = GradedAssignment
@@ -129,6 +128,7 @@ class GradedAssignmentSerializer(serializers.ModelSerializer):
 
 '''
 class AnswerSheet(serializers.ModelSerializer):
+    
     questions = serializers.SerializerMethodField()
     teacher = StringSerializer(many=False)
 

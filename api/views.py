@@ -27,11 +27,19 @@ class GradedAssignmentListView(ListAPIView):
     serializer_class = GradedAssignmentSerializer
 
     def get_queryset(self):
-        queryset = GradedAssignment.objects.all()
+        queryset = GradedAssignment.objects.all().order_by('id')
         username = self.request.query_params.get('username', None)
         if username is not None:
-            queryset = queryset.filter(student__username=username)
+            queryset = queryset.filter(
+                student__username=username).order_by('-id')
+            # print(type(queryset))
+
         return queryset
+    '''
+            for item in queryset:
+                item.assignment = item.assignment.title
+                print("LLLLLLLLLLLLL", item.assignment.title)
+        '''
 
 
 class GradedAssignmentCreateView(CreateAPIView):

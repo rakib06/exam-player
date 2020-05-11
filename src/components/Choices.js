@@ -23,14 +23,14 @@ class Choices extends React.Component {
             : usersAnswers[questionId] = "blank"
         }
       >
-        {this.props.choices.map((c, index - 1) => {
+        {this.props.choices.map((c, index) => {
           return (
-        <Radio style={radioStyle} value={c} key={index} >
-          {c}
+            <Radio style={radioStyle} value={c} key={index} >
+              {c}
 
               }
               {console.log(c)}
-        </Radio>
+            </Radio>
           );
         })}
       </RadioGroup>

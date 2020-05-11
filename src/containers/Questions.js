@@ -42,7 +42,7 @@ class Questions extends React.Component {
         }
 
         <div>{questions[current]}</div>
-        <strong>  Select blank to skip otherwise your submission will be failed  </strong>
+
         <div>
 
           {current === 0 && (

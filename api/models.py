@@ -30,7 +30,7 @@ class GradedAssignment(models.Model):
     grade = models.FloatField()
     # exam_start_at = CustomDateTimeField(auto_now=True, null=True)
     exam_start_at = models.CharField(max_length=50, default='NA')
-
+    
     def wrong_answer(self):
         return -(self.right_answer - self.obtained_marks)
 

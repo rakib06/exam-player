@@ -37,17 +37,24 @@ class Profile extends React.PureComponent {
                   dataSource={this.props.gradedAssignments}
                   renderItem={a =>
                     <div class="col-4">
-                      <Card bordered="5"
-
-                        type="inner"
-                      >
-                        <Result key={a.id} grade={a.grade} />
-                        <p >  <strong> {a.obtained_marks}</strong> {"out of "}
-                          <strong> {a.total_marks}</strong> </p>
+                      <Card bordered="5" type="inner">
                         <Link to={`/assignments/${a.assignment}`}>
                           <p>  Exam id : {a.assignment}</p>
-
                         </Link>
+
+
+                        <Result key={a.id} grade={a.grade} />
+                        <p >
+                          <h3> <strong> {a.obtained_marks}</strong> {"out of "}
+                            <strong> {a.total_marks}</strong></h3>
+                        </p>
+                        <Card>
+                          <p>
+                            <strong> Right Answer: {a.right_answer}</strong> </p>
+                          <strong > Wrong Answer: {-(a.right_answer - a.obtained_marks)}</strong>
+
+                        </Card>
+
 
                         <p>  Exam date : {a.exam_start_at}</p>
                       </Card>
