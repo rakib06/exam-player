@@ -39,7 +39,7 @@ class Profile extends React.PureComponent {
                     <div class="col-4">
                       <Card bordered="5" type="inner">
                         <Link to={`/assignments/${a.assignment}`}>
-                          <p>  Exam id : {a.assignment}</p>
+                          <p>  Exam id : {a.assignment_title}</p>
                         </Link>
 
 

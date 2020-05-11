@@ -35,7 +35,7 @@ class AssignmentDetail extends React.Component {
   };
 
   handleSubmit() {
-    message.success("Submitting your assignment!");
+    message.success("Thank you ! Check your profile for result!");
     const { usersAnswers } = this.state;
     const asnt = {
       username: this.props.username,
@@ -43,6 +43,7 @@ class AssignmentDetail extends React.Component {
       answers: usersAnswers
     };
     this.props.createGradedASNT(this.props.token, asnt);
+    this.props.history.push("/");
   }
 
   render() {
