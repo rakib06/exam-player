@@ -60,3 +60,18 @@ if os.getcwd() == '/app':
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 django_heroku.settings(locals())
+
+
+STATICFILES_DIRS = [
+    # So Django knows about webpack files
+    os.path.join(BASE_DIR, "build", "static"),
+]
+'''
+WEBPACK_LOADER = {
+    "DEFAULT": {
+        "CACHE": not DEBUG,
+        "BUNDLE_DIR_NAME": "build/static/",  # must end with slash
+        "STATS_FILE": os.path.join(BASE_DIR, "build", "webpack-stats.json"),
+    }
+}
+'''

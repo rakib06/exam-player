@@ -1,2 +1,2 @@
-web: gunicorn home.wsgi.prod:application --log-file - 
-python manage.py migrate
+release: python manage.py migrate
+web: gunicorn reactdjango.wsgi --log-file -
