@@ -14,5 +14,5 @@ urlpatterns = [
     path('assignments/', include('api.assignments.urls')),
     path('graded-assignments/', include('api.graded_assignments.urls')),
     path('users/', include('users.urls')),
-    path('', TemplateView.as_view(template_name='index.html')),
+    re_path('.*', TemplateView.as_view(template_name='index.html')),
 ]
