@@ -9,6 +9,7 @@ django-allauth==0.37.1
 django-cors-headers==2.4.0
 django-heroku==0.3.1
 django-rest-auth==0.9.5
+django-webpack-loader==0.7.0
 djangorestframework==3.8.2
 gunicorn==19.7.1
 idna==2.7
