@@ -28,7 +28,7 @@ class Choices extends React.Component {
             <Radio style={radioStyle} value={c} key={index} >
               {c}
 
-              }
+
               {console.log(c)}
             </Radio>
           );
