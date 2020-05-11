@@ -1,5 +1,5 @@
 from rest_framework import serializers
-
+import datetime
 from users.models import User
 from .models import Assignment, Question, Choice, GradedAssignment
 
@@ -80,6 +80,8 @@ class GradedAssignmentSerializer(serializers.ModelSerializer):
         model = GradedAssignment
         fields = ('__all__')
 
+        # model.date_time = model.date_time.strftime("new Date(%Y, %m, %d)")
+
     def create(self, request):
         data = request.data
         print(data)
@@ -91,7 +93,8 @@ class GradedAssignmentSerializer(serializers.ModelSerializer):
         graded_asnt.assignment = assignment
         graded_asnt.student = student
 
-        questions = [q for q in assignment.questions.all()]
+        questions = [q for q in assignment.questions.all().order_by('order')]
+        print(type(assignment.questions.all()))
         answers = [data['answers'][a] for a in data['answers']]
         wrong_answer = 0
         answered_correct_count = 0
@@ -106,7 +109,8 @@ class GradedAssignmentSerializer(serializers.ModelSerializer):
 
             else:
                 wrong_answer += 1
-
+        time = datetime.datetime.now()
+        graded_asnt.exam_start_at = time.strftime("%B %d %Y %I:%M:%S %p")
         right_answer = graded_asnt.right_answer = answered_correct_count
         total_marks = graded_asnt.total_marks = len(questions)
         print("right answer", right_answer)
@@ -121,3 +125,20 @@ class GradedAssignmentSerializer(serializers.ModelSerializer):
         # graded_asnt.grade = round(grade, 2)
         graded_asnt.save()
         return graded_asnt
+
+
+'''
+class AnswerSheet(serializers.ModelSerializer):
+    questions = serializers.SerializerMethodField()
+    teacher = StringSerializer(many=False)
+
+    class Meta:
+        model = Assignment
+        fields = ('__all__')
+
+    def get_questions(self, obj):
+        questions = QuestionSerializer(
+            obj.questions.all().order_by('order'), many=True).data
+        return questions
+    
+'''

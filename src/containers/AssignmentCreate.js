@@ -45,8 +45,8 @@ class AssignmentCreate extends React.Component {
           questions
         };
         this.props.createASNT(this.props.token, asnt);
-        message.success("Creating your assignment!");
-        this.props.history.push("/");
+        message.success("Thank you! We are Creating your Question!\n Please check your admin panel ");
+        //this.props.history.push("/");
       }
     });
   };
@@ -72,7 +72,7 @@ class AssignmentCreate extends React.Component {
     }
     return (
       <Form onSubmit={this.handleSubmit}>
-        <h1>Create an assignment</h1>
+        <h1>Create an Exam / Assignment</h1>
         <FormItem label={"Title: "}>
           {getFieldDecorator(`title`, {
             validateTrigger: ["onChange", "onBlur"],

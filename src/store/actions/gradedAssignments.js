@@ -51,6 +51,7 @@ export const createGradedASNT = (token, asnt) => {
       .post(`https://rk-mcq.herokuapp.com/graded-assignments/create/`, asnt)
       .then(res => {
         console.log("success");
+        console.log(asnt)
         //   dispatch(createASNTSuccess());
       })
       .catch(err => {

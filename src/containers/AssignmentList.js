@@ -34,16 +34,16 @@ class AssignmentList extends React.PureComponent {
         {this.props.loading ? (
           <Skeleton active />
         ) : (
-          <div>
-            <h3 style={{ margin: "16px 0" }}>Assignment List</h3>
-            <List
-              size="large"
-              bordered
-              dataSource={this.props.assignments}
-              renderItem={item => this.renderItem(item)}
-            />
-          </div>
-        )}
+            <div>
+              <h3 style={{ margin: "16px 0" }}>Available Exams </h3>
+              <List
+                size="large"
+                bordered
+                dataSource={this.props.assignments}
+                renderItem={item => this.renderItem(item)}
+              />
+            </div>
+          )}
       </Hoc>
     );
   }

@@ -25,8 +25,8 @@ class RegistrationForm extends React.Component {
           values.confirm,
           is_student
         );
-        //this.props.history.push("/");
-        
+        this.props.history.push("/");
+
       }
     });
   };
@@ -72,13 +72,12 @@ class RegistrationForm extends React.Component {
         <FormItem>
           {getFieldDecorator("mobile", {
             rules: [
+
               {
                 required: true,
-                message: 'Please input your phone number!'
-              },
-              {
-                validator: this.validateMobileNumber,
-              }]
+                message: "Please input your Mobile Number!"
+              }
+            ]
           })(
             <Input
               prefix={<Icon type="mobile" style={{ color: "rgba(0,0,0,.25)" }} />}

@@ -1,6 +1,6 @@
 import React from "react";
 import { Steps, Button } from "antd";
-
+import { ProgressTimer } from "react-progress-timer";
 const Step = Steps.Step;
 
 
@@ -31,7 +31,12 @@ class Questions extends React.Component {
         {
           < Steps current={current}>
             {questions.map((q, index) => (
-              <Step key={index} />
+              <strong>
+                {//current} of {questions.length
+                  //Total Questions : {questions.length}
+                }
+              </strong>
+
             ))}
           </Steps>
         }
@@ -39,6 +44,13 @@ class Questions extends React.Component {
         <div>{questions[current]}</div>
         <strong>  Select blank to skip otherwise your submission will be failed  </strong>
         <div>
+
+          {current === 0 && (
+            <Button type="danger" >
+              Start
+            </Button>
+
+          )}
           {current > 0 && (
             <Button type="danger" onClick={() => this.prev()}>
               Prev

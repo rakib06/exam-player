@@ -8,6 +8,7 @@ import { createGradedASNT } from "../store/actions/gradedAssignments";
 import Hoc from "../hoc/hoc";
 
 
+
 class AssignmentDetail extends React.Component {
   state = {
     usersAnswers: {}
@@ -31,7 +32,6 @@ class AssignmentDetail extends React.Component {
     const { usersAnswers } = this.state;
     usersAnswers[qId] = e.target.value;
     this.setState({ usersAnswers });
-    console.log("line 38", e.target.value, qId);
   };
 
   handleSubmit() {
@@ -43,14 +43,12 @@ class AssignmentDetail extends React.Component {
       answers: usersAnswers
     };
     this.props.createGradedASNT(this.props.token, asnt);
-    //this.props.history.push("/");
   }
 
   render() {
     const { currentAssignment } = this.props;
     const { title } = currentAssignment;
     const { usersAnswers } = this.state;
-
     return (
       <Hoc>
         {Object.keys(currentAssignment).length > 0 ? (
@@ -58,34 +56,41 @@ class AssignmentDetail extends React.Component {
             {this.props.loading ? (
               <Skeleton active />
             ) : (
-                <Card title={title}>
+
+
+
+
+                <div >
+                  Exam: { title}
                   <Questions
                     submit={() => this.handleSubmit()}
                     questions={currentAssignment.questions.map(q => {
                       return (
-                        <div>
-                          <strong>
+                        <Card
 
-                            {`${q.order}. ${q.question}`}
-                          </strong>
+                          type="inner"
+                          key={q.id}
+
+                        >
+                          <strong> {`${q.order}. ${q.question}`}</strong>
                           <br></br>
-                          <br></br>
-                          <Choices
-                            questionId={q.order}
-                            choices={q.choices}
-                            change={this.onChange}
-                            usersAnswers={usersAnswers}
-                          />
-                          <br></br>
-                          <br></br>
-                        </div>
+                          <Card>
+                            <Choices
+                              questionId={q.order}
+                              choices={q.choices}
+                              change={this.onChange}
+                              usersAnswers={usersAnswers}
+                            />
+                          </Card>
+                        </Card>
                       );
                     })}
                   />
-                </Card>
+                </div>
               )}
           </Hoc>
-        ) : null}
+        ) : null
+        }
       </Hoc>
     );
   }

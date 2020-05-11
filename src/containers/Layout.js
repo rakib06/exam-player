@@ -34,7 +34,7 @@ class CustomLayout extends React.Component {
 
             {this.props.token !== null && this.props.is_teacher ? (
               <Menu.Item key="5">
-                <Link to="/create">Create An Assignment</Link>
+                <Link to="/create">Create an Exam Now!</Link>
               </Menu.Item>
             ) : null}
 

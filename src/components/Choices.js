@@ -18,16 +18,19 @@ class Choices extends React.Component {
         onChange={(e, qId) => this.props.change(e, questionId)}
         value={
           usersAnswers[questionId] !== undefined &&
-          usersAnswers[questionId] !== null
+            usersAnswers[questionId] !== null
             ? usersAnswers[questionId]
-            : null
+            : usersAnswers[questionId] = "blank"
         }
       >
-        {this.props.choices.map((c, index) => {
+        {this.props.choices.map((c, index - 1) => {
           return (
-            <Radio style={radioStyle} value={c} key={index}>
-              {c}
-            </Radio>
+        <Radio style={radioStyle} value={c} key={index} >
+          {c}
+
+              }
+              {console.log(c)}
+        </Radio>
           );
         })}
       </RadioGroup>

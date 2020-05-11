@@ -1,7 +1,6 @@
 import axios from "axios";
 import * as actionTypes from "./actionTypes";
 
-
 export const authStart = () => {
   return {
     type: actionTypes.AUTH_START
@@ -37,18 +36,18 @@ export const checkAuthTimeout = expirationTime => {
   };
 };
 
-export const authLogin = (userName, password) => {
+export const authLogin = (username, password) => {
   return dispatch => {
     dispatch(authStart());
     axios
       .post("https://rk-mcq.herokuapp.com/rest-auth/login/", {
-        username: userName,
+        username: username,
         password: password
       })
       .then(res => {
         const user = {
           token: res.data.key,
-          userName,
+          username,
           userId: res.data.user,
           is_student: res.data.user_type.is_student,
           is_teacher: res.data.user_type.is_teacher,
@@ -81,7 +80,6 @@ export const authSignup = (
       is_student,
       is_teacher: !is_student
     };
-    console.log(user);
     axios
       .post("https://rk-mcq.herokuapp.com/rest-auth/registration/", user)
       .then(res => {
@@ -99,7 +97,6 @@ export const authSignup = (
       })
       .catch(err => {
         dispatch(authFail(err));
-
       });
   };
 };

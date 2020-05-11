@@ -46,7 +46,10 @@ class Profile extends React.PureComponent {
                           <strong> {a.total_marks}</strong> </p>
                         <Link to={`/assignments/${a.assignment}`}>
                           <p>  Exam id : {a.assignment}</p>
+
                         </Link>
+
+                        <p>  Exam date : {a.exam_start_at}</p>
                       </Card>
                     </div>
 

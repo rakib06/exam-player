@@ -13,7 +13,7 @@ class NormalLoginForm extends React.Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        this.props.onAuth(values.userName, values.password);
+        this.props.onAuth(values.username, values.password);
         this.props.history.push("/");
       }
     });
@@ -34,7 +34,7 @@ class NormalLoginForm extends React.Component {
         ) : (
             <Form onSubmit={this.handleSubmit} className="login-form">
               <FormItem>
-                {getFieldDecorator("userName", {
+                {getFieldDecorator("username", {
                   rules: [
                     { required: true, message: "Please input your username!" }
                   ]
