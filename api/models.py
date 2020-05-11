@@ -43,7 +43,7 @@ class GradedAssignment(models.Model):
             i = i + 1
             if item.obtained_marks == self.obtained_marks:
                 break
-        return "Your Postion: ", i, "  Total Participant: ", t
+        return "Your Obtained Marks: ", q[i-1].obtained_marks, "   Highest: ", q[0].obtained_marks, ",  Your Postion: (", i, ")  Total Participant: ", t
 
     def wrong_answer(self):
         return -(self.right_answer - self.obtained_marks)
