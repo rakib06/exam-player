@@ -6,8 +6,8 @@ from rest_framework.status import (
     HTTP_400_BAD_REQUEST
 )
 
-from .models import Assignment, GradedAssignment
-from .serializers import AssignmentSerializer, GradedAssignmentSerializer
+from .models import Assignment, GradedAssignment, Question
+from .serializers import AssignmentSerializer, GradedAssignmentSerializer, AnswerSheetSerializer
 
 
 class AssignmentViewSet(viewsets.ModelViewSet):
@@ -54,3 +54,17 @@ class GradedAssignmentCreateView(CreateAPIView):
         if graded_assignment:
             return Response(status=HTTP_201_CREATED)
         return Response(status=HTTP_400_BAD_REQUEST)
+
+
+class AnswerSheetListView(ListAPIView):
+    serializer_class = AnswerSheetSerializer
+
+    def get_queryset(self):
+        queryset = Question.objects.all().order_by('id')
+        assignment = self.request.query_params.get('assignment_id', None)
+
+        if assignment is not None:
+            queryset = queryset.filter(
+                assignment=username).order_by('order')
+            # print(type(queryset))
+        return queryset

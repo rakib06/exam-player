@@ -13,7 +13,7 @@ class AdminGradedAssignment(admin.ModelAdmin):
 
 @admin.register(Assignment)
 class AdminAssignment(admin.ModelAdmin):
-    list_display = ['title', 'teacher', 'is_hide']
+    list_display = ['id', 'title', 'teacher', 'is_hide']
     search_fields = ('title',)
     ordering = ('title',)
 

@@ -30,7 +30,7 @@ class GradedAssignment(models.Model):
     grade = models.FloatField()
     # exam_start_at = CustomDateTimeField(auto_now=True, null=True)
     exam_start_at = models.CharField(max_length=50, default='NA')
-    
+
     def wrong_answer(self):
         return -(self.right_answer - self.obtained_marks)
 
@@ -46,8 +46,8 @@ class Choice(models.Model):
 
 
 class Question(models.Model):
-    question = models.CharField(max_length=2000)
 
+    question = models.CharField(max_length=2000)
     choices = models.ManyToManyField(Choice)
     answer = models.ForeignKey(
         Choice, on_delete=models.CASCADE, related_name='answer', blank=True, null=True)
@@ -56,12 +56,23 @@ class Question(models.Model):
     order = models.SmallIntegerField()
 
     def __str__(self):
-        return self.question
+        return self.question, self.answer__title
+
+    @property
+    def answer_title(self):
+        return self.answer.title
 
 
 '''
-class ExamSolution(models.Model):
-    student_name = models.ForeignKey(User, on_delete=models.CASCADE)
-    exam_name = models.ForeignKey(Assignment, on_delete=models.CASCADE)
-    selected_answers = models.IntegerField()
+class StudentAnswer(models.Model):
+    student = models.ForeignKey(User, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    selected_choice = models.CharField(max_length=100, null=True)
+    assignment = models.ForeignKey(
+        Assignment, on_delete=models.CASCADE, related_name='answer', blank=True, null=True)
+
+    def __str__(self):
+        return self.selected_choice
+
+
 '''

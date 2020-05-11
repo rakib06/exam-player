@@ -72,14 +72,17 @@ class AssignmentDetail extends React.Component {
                           key={q.id}
 
                         >
-                          <strong> {`${q.order}. ${q.question}`}</strong>
+                          <strong> {`${q.order}. ${q.question}   `}</strong>
                           <br></br>
                           <Card>
                             <Choices
                               questionId={q.order}
                               choices={q.choices}
+                              answer={q.answer_title}
+
                               change={this.onChange}
                               usersAnswers={usersAnswers}
+
                             />
                           </Card>
                         </Card>

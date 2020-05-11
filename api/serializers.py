@@ -9,12 +9,29 @@ class StringSerializer(serializers.StringRelatedField):
         return value
 
 
+class ChoiceSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Choice
+        fields = ('__all__')
+
+
 class QuestionSerializer(serializers.ModelSerializer):
     choices = StringSerializer(many=True)
+    # correct_answer = serializers.SerializerMethodField('answer')
+    answer_title = serializers.ReadOnlyField()
 
     class Meta:
         model = Question
-        fields = ('id', 'choices', 'question', 'order')
+        fields = ('id', 'choices', 'question', 'order', 'answer_title')
+
+
+'''
+    def correct_answer(self):
+        a = Choice.objects.get(id=self.answer)
+        print('title', a.title)
+        return a.title
+'''
 
 
 class AssignmentSerializer(serializers.ModelSerializer):
@@ -128,7 +145,7 @@ class GradedAssignmentSerializer(serializers.ModelSerializer):
 
 '''
 class AnswerSheet(serializers.ModelSerializer):
-    
+
     questions = serializers.SerializerMethodField()
     teacher = StringSerializer(many=False)
 
@@ -140,5 +157,11 @@ class AnswerSheet(serializers.ModelSerializer):
         questions = QuestionSerializer(
             obj.questions.all().order_by('order'), many=True).data
         return questions
-    
+
 '''
+
+
+class AnswerSheetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Question
+        fields = ('question', 'answer')
