@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Choice, Question, Assignment, GradedAssignment
+from .models import Choice, Question, Assignment, GradedAssignment, AnswerPaper
 
 
 @admin.register(GradedAssignment)
@@ -28,3 +28,4 @@ class AdminQuestion(admin.ModelAdmin):
 
 
 admin.site.register(Choice)
+admin.site.register(AnswerPaper)

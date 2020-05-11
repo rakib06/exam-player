@@ -88,6 +88,7 @@ class GradedAssignmentSerializer(serializers.ModelSerializer):
     # right_answer = serializers.SerializerMethodField('right_answer')
     # wrong_answer = serializers.SerializerMethodField('wrong_answer')
     # assignment_name = serializers.SerializerMethodField('assignment_name')
+    assignment_title = serializers.ReadOnlyField()
 
     def exam(self):
         return Assignment.objects.get(id=assignment)
