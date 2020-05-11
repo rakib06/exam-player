@@ -31,6 +31,20 @@ class GradedAssignment(models.Model):
     # exam_start_at = CustomDateTimeField(auto_now=True, null=True)
     exam_start_at = models.CharField(max_length=50, default='NA')
 
+    @property
+    def position(self):
+        q = GradedAssignment.objects.filter(
+            assignment=self.assignment).order_by('-obtained_marks')
+        print('QQQQQQQQQQQ', q)
+        # print(len(q))
+        t = len(q)
+        i = 0
+        for item in q:
+            i = i + 1
+            if item.obtained_marks == self.obtained_marks:
+                break
+        return "Your Postion: ", i, "  Total Participant: ", t
+
     def wrong_answer(self):
         return -(self.right_answer - self.obtained_marks)
 
@@ -38,7 +52,7 @@ class GradedAssignment(models.Model):
         return self.student.username
 
     @property
-    def assignment_title(selelf):
+    def assignment_title(self):
         return self.assignment.title
 
 

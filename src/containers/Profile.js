@@ -38,15 +38,20 @@ class Profile extends React.PureComponent {
                   renderItem={a =>
                     <div class="col-4">
                       <Card bordered="5" type="inner">
-                        <Link to={`/assignments/${a.assignment}`}>
-                          <p>  Exam id : {a.assignment_title}</p>
-                        </Link>
+                        <p>
+                          <Link to={`/assignments/${a.assignment}`}>
+                            <strong>  Exam : {a.assignment_title}</strong>
 
+                          </Link>
+                          {"    "}
+                          Date : {a.exam_start_at}</p>
 
                         <Result key={a.id} grade={a.grade} />
                         <p >
                           <h3> <strong> {a.obtained_marks}</strong> {"out of "}
                             <strong> {a.total_marks}</strong></h3>
+
+                          <strong>   {a.position}</strong>
                         </p>
                         <Card>
                           <p>
@@ -56,7 +61,7 @@ class Profile extends React.PureComponent {
                         </Card>
 
 
-                        <p>  Exam date : {a.exam_start_at}</p>
+
                       </Card>
                     </div>
 
