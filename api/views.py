@@ -5,6 +5,7 @@ from rest_framework.status import (
     HTTP_201_CREATED,
     HTTP_400_BAD_REQUEST
 )
+from django.db.models import Q
 
 from .models import Assignment, GradedAssignment
 from .serializers import AssignmentSerializer, GradedAssignmentSerializer
@@ -12,7 +13,8 @@ from .serializers import AssignmentSerializer, GradedAssignmentSerializer
 
 class AssignmentViewSet(viewsets.ModelViewSet):
     serializer_class = AssignmentSerializer
-    queryset = Assignment.objects.filter(is_hide=False)
+
+    queryset = Assignment.objects.filter(Q(is_hide=False) | Q(teacher='admin'))
 
     def create(self, request):
         serializer = AssignmentSerializer(data=request.data)

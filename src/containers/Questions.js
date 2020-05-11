@@ -1,7 +1,7 @@
 import React from "react";
 import { Steps, Button } from "antd";
-import { ProgressTimer } from "react-progress-timer";
-const Step = Steps.Step;
+//import { ProgressTimer } from "react-progress-timer";
+//const Step = Steps.Step;
 
 
 class Questions extends React.Component {
