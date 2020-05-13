@@ -40,7 +40,7 @@ class QuestionForm extends React.Component {
               message: "Please input a choice to the question"
             }
           ]
-        })(<Input placeholder="Answer choice" />)}
+        })(<Input placeholder="Options/ Choice" />)}
         {keys.length > 1 ? (
           <Icon
             className="dynamic-delete-button"
@@ -78,7 +78,7 @@ class QuestionForm extends React.Component {
         {formItems}
         <FormItem>
           <Button type="dashed" onClick={this.add} style={{ width: "60%" }}>
-            <Icon type="plus" /> Add an answer choice
+            <Icon type="plus" /> Add an Option / Choice
           </Button>
         </FormItem>
       </Hoc>

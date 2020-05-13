@@ -75,8 +75,9 @@ class NormalLoginForm extends React.Component {
 
                 <NavLink style={{ marginRight: "10px" }} to="/signup/">
                   {" "}
-                Don't have an account
+                Don't have an account? Tap to Sign Up
               </NavLink>
+
               </FormItem>
             </Form>
           )}
