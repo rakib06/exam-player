@@ -56,8 +56,8 @@ class AdminQuestion(admin.ModelAdmin):
     search_fields = ('assignment__title', 'question')
     # ordering = ('order',)
     list_display_links = ('question',)
-    list_editable = ('answer',)
-
+    # list_editable = ('answer',)
+    list_filter = ('assignment__title',)
     ordering = ('order',)
 
     def get_queryset(self, request):
