@@ -34,7 +34,7 @@ class AdminAssignment(admin.ModelAdmin):
     list_display = ['title', 'is_hide', 'time_in_min']
     search_fields = ('title',)
     list_display_links = ('title',)
-    list_editable = ('is_hide',)
+    list_editable = ('is_hide', 'time_in_min')
     ordering = ('title',)
     list_filter = (
         # ('teacher', admin.RelatedOnlyFieldListFilter),
