@@ -17,6 +17,7 @@ class AdminGradedAssignment(admin.ModelAdmin):
     )
 
     def get_queryset(self, request):
+        qs = super().get_queryset(request)
         results = super().get_queryset(request)
         teacher_ID = request.user.id
         t_assigntments = Assignment.objects.filter(teacher=teacher_ID)
@@ -60,6 +61,7 @@ class AdminQuestion(admin.ModelAdmin):
     ordering = ('order',)
 
     def get_queryset(self, request):
+        qs = super().get_queryset(request)
         results = super().get_queryset(request)
         teacher_ID = request.user.id
         t_assigntments = Assignment.objects.filter(teacher=teacher_ID)
