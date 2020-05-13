@@ -9,12 +9,32 @@ from django.db.models import Q
 
 from .models import Assignment, GradedAssignment
 from .serializers import AssignmentSerializer, GradedAssignmentSerializer
+from users.models import User
 
 
 class AssignmentViewSet(viewsets.ModelViewSet):
     serializer_class = AssignmentSerializer
 
-    queryset = Assignment.objects.filter(is_hide=False)
+    def get_queryset(self):
+        queryset = None
+        teachers = User.objects.filter(is_teacher=True)
+        print('LLLLLLLLLLLLLLLLLLLLLLLLLLL')
+        print(teachers, type(teachers))
+        username = getattr(self.request, 'user', None)
+        print('----------------', username)
+        is_student = False
+        teachers_list = []
+        for item in teachers:
+            if item.is_teacher and item.username == username:
+                queryset = Assignment.objects.filter(
+                    teacher=username.id)
+                return queryset
+                break
+            else:
+                is_student = True
+        if is_student:
+            queryset = Assignment.objects.filter(is_hide=False)
+        return queryset
 
     def create(self, request):
         serializer = AssignmentSerializer(data=request.data)
