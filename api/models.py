@@ -15,6 +15,7 @@ class Assignment(models.Model):
     title = models.CharField(max_length=50)
     teacher = models.ForeignKey(User, on_delete=models.CASCADE)
     is_hide = models.BooleanField(default=True)
+    time_in_min = models.IntegerField(default=20, null=True)
 
     def __str__(self):
         return self.title

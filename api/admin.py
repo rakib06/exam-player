@@ -31,7 +31,7 @@ class AdminGradedAssignment(admin.ModelAdmin):
 @admin.register(Assignment)
 class AdminAssignment(admin.ModelAdmin):
     exclude = ('teacher',)
-    list_display = ['title', 'is_hide']
+    list_display = ['title', 'is_hide', 'time_in_min']
     search_fields = ('title',)
     list_display_links = ('title',)
     list_editable = ('is_hide',)

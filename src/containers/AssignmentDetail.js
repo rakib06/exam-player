@@ -6,7 +6,7 @@ import Choices from "../components/Choices";
 import { getASNTSDetail } from "../store/actions/assignments";
 import { createGradedASNT } from "../store/actions/gradedAssignments";
 import Hoc from "../hoc/hoc";
-
+import Timer from './Timer'
 
 
 class AssignmentDetail extends React.Component {
@@ -48,7 +48,9 @@ class AssignmentDetail extends React.Component {
 
   render() {
     const { currentAssignment } = this.props;
+
     const { title } = currentAssignment;
+    const { time_in_min } = currentAssignment;
     const { usersAnswers } = this.state;
     return (
       <Hoc>
@@ -63,6 +65,8 @@ class AssignmentDetail extends React.Component {
 
                 <div >
                   Exam: { title}
+                  <Timer startCount={time_in_min * 60} />
+
                   <Questions
                     submit={() => this.handleSubmit()}
                     questions={currentAssignment.questions.map(q => {
@@ -87,6 +91,7 @@ class AssignmentDetail extends React.Component {
                       );
                     })}
                   />
+
                 </div>
               )}
           </Hoc>
