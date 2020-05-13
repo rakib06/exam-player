@@ -62,7 +62,7 @@ class CustomLayout extends React.Component {
 
 
             <Breadcrumb.Item>
-              <Link to="/">Example Special Batch</Link>
+              <Link to="/">Exam Player </Link>
             </Breadcrumb.Item>
 
           </Breadcrumb>

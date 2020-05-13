@@ -29,7 +29,7 @@ export const getASNTS = token => {
       Authorization: `Token ${token}`
     };
     axios
-      .get("127.0.0.1:8000/assignments/")
+      .get("http://127.0.0.1:8000/assignments/")
       .then(res => {
         const assignments = res.data;
         dispatch(getASNTListSuccess(assignments));
@@ -69,7 +69,7 @@ export const getASNTSDetail = (token, id) => {
       Authorization: `Token ${token}`
     };
     axios
-      .get(`127.0.0.1:8000/assignments/${id}/`)
+      .get(`http://127.0.0.1:8000/assignments/${id}/`)
       .then(res => {
         const assignment = res.data;
         dispatch(getASNTDetailSuccess(assignment));
@@ -108,7 +108,7 @@ export const createASNT = (token, asnt) => {
       Authorization: `Token ${token}`
     };
     axios
-      .post(`127.0.0.1:8000/assignments/`, asnt)
+      .post(`http://127.0.0.1:8000/assignments/`, asnt)
       .then(res => {
         dispatch(createASNTSuccess());
       })
