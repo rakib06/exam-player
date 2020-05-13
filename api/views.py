@@ -24,15 +24,10 @@ class AssignmentViewSet(viewsets.ModelViewSet):
         print('----------------', username)
         is_student = False
         teachers_list = []
-        for item in teachers:
-            if item.is_teacher and item.username == username:
-                queryset = Assignment.objects.filter(
-                    teacher=username.id)
-                return queryset
-                break
-            else:
-                is_student = True
-        if is_student:
+        if teachers:
+            queryset = Assignment.objects.filter(teacher__username=username)
+
+        else:
             queryset = Assignment.objects.filter(is_hide=False)
         return queryset
 
