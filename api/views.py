@@ -16,20 +16,28 @@ class AssignmentViewSet(viewsets.ModelViewSet):
     serializer_class = AssignmentSerializer
 
     def get_queryset(self):
-        queryset = None
+
         teachers = User.objects.filter(is_teacher=True)
-        print('LLLLLLLLLLLLLLLLLLLLLLLLLLL')
-        print(teachers, type(teachers))
+
         username = getattr(self.request, 'user', None)
         print('----------------', username)
-        is_student = False
-        teachers_list = []
-        if teachers:
+        is_teacher = False
+        for item in teachers:
+            print(item.username)
+            if str(item.username) == str(username):
+                is_teacher = True
+        if is_teacher:
+            print('LLLLLLLLLLLLLLLLLLLLLLLLLLL')
+            print(teachers, type(teachers))
             queryset = Assignment.objects.filter(teacher__username=username)
+            return queryset
 
         else:
             queryset = Assignment.objects.filter(is_hide=False)
-        return queryset
+            print(
+                'Studenrt--------------------------<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>...')
+
+            return queryset
 
     def create(self, request):
         serializer = AssignmentSerializer(data=request.data)

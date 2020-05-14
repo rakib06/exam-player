@@ -51,11 +51,11 @@ export const authLogin = (username, password) => {
           userId: res.data.user,
           is_student: res.data.user_type.is_student,
           is_teacher: res.data.user_type.is_teacher,
-          expirationDate: new Date(new Date().getTime() + 3600 * 1000)
+          expirationDate: new Date(new Date().getTime() + 36000000 * 1000)
         };
         localStorage.setItem("user", JSON.stringify(user));
         dispatch(authSuccess(user));
-        dispatch(checkAuthTimeout(3600));
+        dispatch(checkAuthTimeout(36000000));
       })
       .catch(err => {
         dispatch(authFail(err));
@@ -89,11 +89,11 @@ export const authSignup = (
           userId: res.data.user,
           is_student,
           is_teacher: !is_student,
-          expirationDate: new Date(new Date().getTime() + 3600 * 1000)
+          expirationDate: new Date(new Date().getTime() + 360000 * 100000)
         };
         localStorage.setItem("user", JSON.stringify(user));
         dispatch(authSuccess(user));
-        dispatch(checkAuthTimeout(3600));
+        dispatch(checkAuthTimeout(36000000));
       })
       .catch(err => {
         dispatch(authFail(err));
