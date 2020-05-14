@@ -77,13 +77,3 @@ class Question(models.Model):
     def __str__(self):
         return self.question
 
-
-class ExamSolution(models.Model):
-    student_name = models.ForeignKey(User, on_delete=models.CASCADE)
-    exam_name = models.ForeignKey(Assignment, on_delete=models.CASCADE)
-    selected_choices = models.IntegerField()
-
-
-class Answer(models.Model):
-    question = models.ForeignKey(Assignment, on_delete=models.CASCADE)
-    select_choice = models.ForeignKey(Choice, null=True, default='')
