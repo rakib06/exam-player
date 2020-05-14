@@ -30,7 +30,7 @@ class AdminGradedAssignment(admin.ModelAdmin):
 
 @admin.register(Assignment)
 class AdminAssignment(admin.ModelAdmin):
-    exclude = ('teacher',)
+
     list_display = ['title', 'is_hide', 'time_in_min']
     search_fields = ('title',)
     list_display_links = ('title',)
@@ -41,12 +41,23 @@ class AdminAssignment(admin.ModelAdmin):
         'title',
     )
 
+    def get_exclude(self, request, obj=None):
+        excluded = super().get_exclude(request, obj) or []  # get overall excluded fields
+
+        if not request.user.is_superuser:  # if user is not a superuser
+            return excluded + ['teacher']
+
+        return excluded
+
+        # return super(MyUserAdmin, self).get_form(request, obj, **kwargs)
+
     def get_queryset(self, request):
 
         qs = super().get_queryset(request)
         print(qs)
         if request.user.is_superuser:
             return qs
+
         return qs.filter(teacher=request.user.id)
 
 
