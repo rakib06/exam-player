@@ -1,7 +1,7 @@
 from rest_framework import serializers
 import datetime
 from users.models import User
-from .models import Assignment, Question, Choice, GradedAssignment
+from .models import Assignment, Question, Choice, GradedAssignment, ExamSolution
 
 
 class StringSerializer(serializers.StringRelatedField):
@@ -92,6 +92,9 @@ class GradedAssignmentSerializer(serializers.ModelSerializer):
         graded_asnt = GradedAssignment()
         graded_asnt.assignment = assignment
         graded_asnt.student = student
+        # Exam solution
+        solution = ExamSolution()
+        solution.student_name = student
 
         questions = [q for q in assignment.questions.all().order_by('order')]
         print(type(assignment.questions.all()))
