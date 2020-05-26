@@ -20,10 +20,12 @@ class QuestionSerializer(serializers.ModelSerializer):
 class AssignmentSerializer(serializers.ModelSerializer):
     questions = serializers.SerializerMethodField()
     teacher = StringSerializer(many=False)
+    total_marks = serializers.ReadOnlyField()
 
     class Meta:
         model = Assignment
         fields = ('__all__')
+        #fields = ('title', 'teacher', 'is_hide', 'time_in_min', 'total_marks')
 
     def get_questions(self, obj):
         questions = QuestionSerializer(

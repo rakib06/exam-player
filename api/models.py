@@ -20,6 +20,14 @@ class Assignment(models.Model):
     def __str__(self):
         return self.title
 
+    @property
+    def total_marks(self):
+        tq = Question.objects.filter(assignment__id=self.id).count()
+        return tq
+
+    class Meta:
+        verbose_name = "Exam"
+
 
 class GradedAssignment(models.Model):
     student = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -56,6 +64,9 @@ class GradedAssignment(models.Model):
     def assignment_title(self):
         return self.assignment.title
 
+    class Meta:
+        verbose_name = "Result"
+
 
 class Choice(models.Model):
     title = models.CharField(max_length=50)
@@ -76,4 +87,3 @@ class Question(models.Model):
 
     def __str__(self):
         return self.question
-
