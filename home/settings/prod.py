@@ -50,10 +50,11 @@ if os.getcwd() == '/app':
     db_from_env = dj_database_url.config(conn_max_age=500)
     DATABASES['default'].update(db_from_env)
     # Honor the 'X-forwarded-Proto' header for request.is_secure().
+    SECURE_SSL_REDIRECT = True
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
     # Allow all host headers
-    ALLOWED_HOSTS = ['rk-mcq.herokuapp.com']
+    ALLOWED_HOSTS = ['rk-mcq.herokuapp.com', 'exam-player.com']
     DEBUG = True
 
     # Static asset configuration
