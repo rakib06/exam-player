@@ -25,7 +25,7 @@ class AssignmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Assignment
         fields = ('__all__')
-        #fields = ('title', 'teacher', 'is_hide', 'time_in_min', 'total_marks')
+        # fields = ('title', 'teacher', 'is_hide', 'time_in_min', 'total_marks')
 
     def get_questions(self, obj):
         questions = QuestionSerializer(
@@ -74,6 +74,9 @@ class GradedAssignmentSerializer(serializers.ModelSerializer):
     # wrong_answer = serializers.SerializerMethodField('wrong_answer')
     assignment_title = serializers.ReadOnlyField()
     position = serializers.ReadOnlyField()
+    rank = serializers.ReadOnlyField()
+    highest = serializers.ReadOnlyField()
+    ttotal_participant = serializers.ReadOnlyField()
 
     def exam(self):
         return Assignment.objects.get(id=assignment)
