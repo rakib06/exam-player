@@ -43,16 +43,22 @@ class Profile extends React.PureComponent {
                             <strong>  Exam : {a.assignment_title}</strong>
 
                           </Link>
-                          {"    "}
-                          Date : {a.exam_start_at}</p>
+                          <br></br>
+                          {a.exam_start_at}</p>
 
                         <Result key={a.id} grade={a.grade} />
-                        <p >
-                          <h3> <strong> {a.obtained_marks}</strong> {"out of "}
-                            <strong> {a.total_marks}</strong></h3>
 
-                          <strong>   {a.position}</strong>
-                        </p>
+                        <Card>
+                          <p>
+                            <h2 > <strong> {a.obtained_marks}</strong> <small>{"out of "}</small>
+                              <strong> {a.total_marks}</strong> {" (Score) "} </h2>
+                          </p>
+                          <p>
+                            <strong>   {a.position}</strong>
+                          </p>
+
+
+                        </Card>
                         <Card>
                           <p>
                             <strong> Right Answer: {a.right_answer}</strong> </p>
