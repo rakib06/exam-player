@@ -44,6 +44,20 @@ class GradedAssignment(models.Model):
     def position(self):
         q = GradedAssignment.objects.filter(
             assignment=self.assignment).order_by('-obtained_marks')
+        # print('QQQQQQQQQQQ', q)
+        # print(len(q))
+        t = len(q)
+        i = 0
+        for item in q:
+            i = i + 1
+            if item.obtained_marks == self.obtained_marks:
+                break
+        return "Highest: ", q[0].obtained_marks, ",  Your Postion: (", i, ")  Total Participant: ", t
+
+    @property
+    def highest(self):
+        q = GradedAssignment.objects.filter(
+            assignment=self.assignment).order_by('-obtained_marks')
         print('QQQQQQQQQQQ', q)
         # print(len(q))
         t = len(q)
@@ -52,7 +66,35 @@ class GradedAssignment(models.Model):
             i = i + 1
             if item.obtained_marks == self.obtained_marks:
                 break
-        return "Your Obtained Marks: ", q[i-1].obtained_marks, "   Highest: ", q[0].obtained_marks, ",  Your Postion: (", i, ")  Total Participant: ", t
+        return q[0].obtained_marks
+
+    @property
+    def total_participant(self):
+        q = GradedAssignment.objects.filter(
+            assignment=self.assignment).order_by('-obtained_marks')
+        print('QQQQQQQQQQQ', q)
+        # print(len(q))
+        t = len(q)
+        i = 0
+        for item in q:
+            i = i + 1
+            if item.obtained_marks == self.obtained_marks:
+                break
+        return t
+
+    @property
+    def rank(self):
+        q = GradedAssignment.objects.filter(
+            assignment=self.assignment).order_by('-obtained_marks')
+        print('QQQQQQQQQQQ', q)
+        # print(len(q))
+        t = len(q)
+        i = 0
+        for item in q:
+            i = i + 1
+            if item.obtained_marks == self.obtained_marks:
+                break
+        return i
 
     def wrong_answer(self):
         return -(self.right_answer - self.obtained_marks)
