@@ -41,9 +41,9 @@ class CustomRegisterSerializer(RegisterSerializer):
         user.mobile = self.cleaned_data.get('mobile')
         user.is_student = self.cleaned_data.get('is_student')
         user.is_teacher = self.cleaned_data.get('is_teacher')
-        print('XXXXXXXXXXXXXXXXXXXX username', user.username)
-        print('XXXXXXXXXXXXXXXXXXXX mobile', user.mobile)
-        print('XXXXXXXXXXXXXXXXXXXX mobile', user.is_student)
+        # print('XXXXXXXXXXXXXXXXXXXX username', user.username)
+        # print('XXXXXXXXXXXXXXXXXXXX mobile', user.mobile)
+        # print('XXXXXXXXXXXXXXXXXXXX mobile', user.is_student)
         user.save()
         adapter.save_user(request, user, self)
         return user

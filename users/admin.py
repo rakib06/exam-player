@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import Group
 
-from .models import User, Student,Teacher
+from .models import User, MyStudent, MyTeacher
 
 '''
 class UserAdmin(BaseUserAdmin):
@@ -37,12 +37,13 @@ class UserAdmin(BaseUserAdmin):
     list_display_links = ('username',)
 
 
-'''
-@admin.register(Student)
+@admin.register(MyStudent)
 class StudentAdmin(admin.ModelAdmin):
-    list_display = ['username']
-'''
+    list_display = ['user', 'is_accepted', 'is_deleted']
+    search_fields = ('user', )
+    list_editable = ('is_accepted', 'is_deleted')
+
 
 admin.site.register(User, UserAdmin)
-admin.site.register(Student)
-admin.site.register(Teacher)
+# admin.site.register(MyStudent)
+admin.site.register(MyTeacher)
