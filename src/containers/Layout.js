@@ -99,7 +99,7 @@ class CustomLayout extends React.Component {
 
           <div className="footer-copyright text-center">
             <MDBContainer fluid>
-              &copy; {new Date().getFullYear()}  <a > LinB1 </a>
+              &copy; {new Date().getFullYear()}  <b > LinB1 </b>
             </MDBContainer>
           </div>
         </MDBFooter>
