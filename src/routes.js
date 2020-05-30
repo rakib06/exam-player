@@ -8,7 +8,6 @@ import Profile from "./containers/Profile";
 import AssignmentList from "./containers/AssignmentList";
 import AssignmentDetail from "./containers/AssignmentDetail";
 import AssignmentCreate from "./containers/AssignmentCreate";
-import Home from "./containers/home"
 //import Signup from "./containers/signup_new";
 const BaseRouter = () => (
   <Hoc>
