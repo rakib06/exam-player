@@ -39,9 +39,11 @@ class GradedAssignment(models.Model):
     grade = models.FloatField()
     # exam_start_at = CustomDateTimeField(auto_now=True, null=True)
     exam_start_at = models.CharField(max_length=50, default='NA')
+    t = 0
 
     @property
     def position(self):
+        global t
         q = GradedAssignment.objects.filter(
             assignment=self.assignment).order_by('-obtained_marks')
         # print('QQQQQQQQQQQ', q)
@@ -56,6 +58,7 @@ class GradedAssignment(models.Model):
 
     @property
     def highest(self):
+
         q = GradedAssignment.objects.filter(
             assignment=self.assignment).order_by('-obtained_marks')
         print('QQQQQQQQQQQ', q)
@@ -70,16 +73,7 @@ class GradedAssignment(models.Model):
 
     @property
     def total_participant(self):
-        q = GradedAssignment.objects.filter(
-            assignment=self.assignment).order_by('-obtained_marks')
-        print('QQQQQQQQQQQ', q)
-        # print(len(q))
-        t = len(q)
-        i = 0
-        for item in q:
-            i = i + 1
-            if item.obtained_marks == self.obtained_marks:
-                break
+        global t
         return t
 
     @property

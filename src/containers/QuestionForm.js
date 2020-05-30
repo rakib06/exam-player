@@ -63,7 +63,10 @@ class QuestionForm extends React.Component {
     return (
       <Hoc>
         <strong>
-          Querstion {this.props.id + 1}
+          <h3 style={{ color: 'red' }}>
+            Querstion {this.props.id + 1}
+          </h3>
+
         </strong>
 
         <FormItem >
@@ -78,7 +81,7 @@ class QuestionForm extends React.Component {
           })(<Input placeholder="Add a question" />)}
         </FormItem>
         <FormItem label="">
-          <strong> Answer (সঠিক উত্তর) </strong>
+          <strong style={{ color: 'green' }}> Answer (সঠিক উত্তর) </strong>
           {getFieldDecorator(`answers[${this.props.id}]`, {
             validateTrigger: ["onChange", "onBlur"],
             rules: [

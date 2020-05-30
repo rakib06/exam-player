@@ -5,7 +5,6 @@ import Result from "../components/Result";
 import { getGradedASNTS } from "../store/actions/gradedAssignments";
 import Hoc from "../hoc/hoc";
 import { Link } from "react-router-dom";
-
 class Profile extends React.PureComponent {
   componentDidMount() {
     if (this.props.token !== undefined && this.props.token !== null) {
@@ -50,19 +49,23 @@ class Profile extends React.PureComponent {
 
                         <Card>
                           <p>
-                            <h2 > <strong> {a.obtained_marks}</strong> <small>{"out of "}</small>
-                              <strong> {a.total_marks}</strong> {" (Score) "} </h2>
+                            <h1><strong style={{ color: ' crimson' }} > {a.obtained_marks === a.highest ? "Congratulations!!!! Rank. 1  " : ""}</strong></h1>
+
+                            <h2> {" Your Score: "}  <strong style={{ color: 'green' }}> {a.obtained_marks}</strong> <small>{"out of "}</small>
+                              <strong style={{ color: 'purple' }}> {a.total_marks}</strong> ( <q style={{ color: 'firebrick' }}> Highest : {a.highest} </q> ) </h2>
                           </p>
                           <p>
-                            <strong>   {a.position}</strong>
+                            <h2>  Position:  <strong style={{ color: ' crimson' }}> {a.rank}  </strong> Total Participant : {a.total_participant}</h2>
                           </p>
-
+                          {a.position}
 
                         </Card>
+
                         <Card>
+
                           <p>
-                            <strong> Right Answer: {a.right_answer}</strong> </p>
-                          <strong > Wrong Answer: {-(a.right_answer - a.obtained_marks)}</strong>
+                            <strong> Right Answer: <b style={{ color: 'green' }} >{a.right_answer} </b></strong> </p>
+                          <strong > Wrong Answer: <b style={{ color: 'red' }}> {-(a.right_answer - a.obtained_marks)}</b></strong>
 
                         </Card>
 
