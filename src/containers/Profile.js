@@ -39,12 +39,14 @@ class Profile extends React.PureComponent {
                       <div>
                         <hr></hr>
                         <p>
-                          <Link to={`/assignments/${a.assignment}`}>
-                            <strong>  Exam : {a.assignment_title}</strong>
+                          <h3>
+                            <Link to={`/assignments/${a.assignment}`}>
+                              <strong>  Exam : {a.assignment_title}</strong>
 
-                          </Link>
+                            </Link></h3>
                           <br></br>
-                          {a.exam_start_at}</p>
+                          {a.exam_start_at}
+                        </p>
 
                         <Result key={a.id} grade={a.grade} />
 
@@ -56,9 +58,9 @@ class Profile extends React.PureComponent {
                               <strong style={{ color: 'purple' }}> {a.total_marks}</strong> ( <q style={{ color: 'firebrick' }}> Highest : {a.highest} </q> ) </h2>
                           </p>
                           <p>
-                            <h2>  Position:  <strong style={{ color: ' crimson' }}> {a.rank}  </strong> Total Participant : {a.total_participant}</h2>
+                            <h2> Your Position:  <strong style={{ color: ' crimson' }}> {a.rank}  </strong> Total Participant :  <strong style={{ color: 'green' }}> {a.total_participant}</strong></h2>
                           </p>
-                          {a.position}
+
 
                         </div>
 
