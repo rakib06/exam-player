@@ -73,7 +73,9 @@ class AssignmentCreate extends React.Component {
     return (
       <Form onSubmit={this.handleSubmit}>
         <h1>Create an Exam / Assignment</h1>
-        <FormItem label={"Title: "}>
+        <FormItem label={""}>
+          <center><h2> Exam Title </h2></center>
+
           {getFieldDecorator(`title`, {
             validateTrigger: ["onChange", "onBlur"],
             rules: [

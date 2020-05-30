@@ -30,7 +30,14 @@ class QuestionForm extends React.Component {
     getFieldDecorator("keys", { initialValue: [] });
     const keys = getFieldValue("keys");
     const formItems = keys.map((k, index) => (
-      <FormItem label={index === 0 ? "Choices" : ""} key={k}>
+
+      <FormItem label={index === 0 ? "" : ""} key={k}>
+        <strong> {index === 0 ? "Choices (A)" : ""}</strong>
+        <strong> {index === 1 ? "Choices (B)" : ""}</strong>
+        <strong> {index === 2 ? "Choices (C)" : ""}</strong>
+        <strong> {index === 3 ? "Choices (D)" : ""}</strong>
+        <strong> {index === 4 ? "Choices (E)" : ""}</strong>
+        <strong> {index === 5 ? "Choices (F)" : ""}</strong>
         {getFieldDecorator(`questions[${this.props.id}]choices[${k}]`, {
           validateTrigger: ["onChange", "onBlur"],
           rules: [
@@ -40,7 +47,9 @@ class QuestionForm extends React.Component {
               message: "Please input a choice to the question"
             }
           ]
-        })(<Input placeholder="Options/ Choice" />)}
+        })(
+
+          <Input placeholder="Options/ Choice" />)}
         {keys.length > 1 ? (
           <Icon
             className="dynamic-delete-button"
@@ -53,7 +62,11 @@ class QuestionForm extends React.Component {
     ));
     return (
       <Hoc>
-        <FormItem label="Question: ">
+        <strong>
+          Querstion {this.props.id + 1}
+        </strong>
+
+        <FormItem >
           {getFieldDecorator(`question[${this.props.id}]`, {
             validateTrigger: ["onChange", "onBlur"],
             rules: [
@@ -64,7 +77,8 @@ class QuestionForm extends React.Component {
             ]
           })(<Input placeholder="Add a question" />)}
         </FormItem>
-        <FormItem label="Answer: ">
+        <FormItem label="">
+          <strong> Answer (সঠিক উত্তর) </strong>
           {getFieldDecorator(`answers[${this.props.id}]`, {
             validateTrigger: ["onChange", "onBlur"],
             rules: [
