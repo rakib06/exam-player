@@ -11,10 +11,7 @@ class AdminGradedAssignment(admin.ModelAdmin):
                     'right_answer', 'wrong_answer', 'obtained_marks', 'total_marks', 'grade']
     search_fields = ('student__username', 'assignment__title')
     ordering = ('assignment',)
-    list_filter = (
-
-        'assignment__title',
-    )
+    list_filter = (('assignment', admin.RelatedOnlyFieldListFilter),)
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
@@ -30,16 +27,12 @@ class AdminGradedAssignment(admin.ModelAdmin):
 
 @admin.register(Assignment)
 class AdminAssignment(admin.ModelAdmin):
-    
+
     list_display = ['title', 'is_hide', 'time_in_min', 'total_marks']
     search_fields = ('title',)
     list_display_links = ('title',)
     list_editable = ('is_hide', 'time_in_min')
     ordering = ('title',)
-    list_filter = (
-        # ('teacher', admin.RelatedOnlyFieldListFilter),
-        'title',
-    )
 
     def get_exclude(self, request, obj=None):
         excluded = super().get_exclude(request, obj) or []  # get overall excluded fields
@@ -67,8 +60,9 @@ class AdminQuestion(admin.ModelAdmin):
     search_fields = ('assignment__title', 'question')
     # ordering = ('order',)
     list_display_links = ('question',)
+
     # list_editable = ('answer',)
-    list_filter = ('assignment__title',)
+    list_filter = (('assignment', admin.RelatedOnlyFieldListFilter),)
     ordering = ('order',)
 
     def get_queryset(self, request):
