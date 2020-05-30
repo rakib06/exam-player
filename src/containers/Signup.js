@@ -58,18 +58,25 @@ class RegistrationForm extends React.Component {
 
     return (
       <Form onSubmit={this.handleSubmit}>
-        <FormItem>
+        <Form.Item>
+
+          <strong> Username  </strong>
+          <br></br>
+          <small>
+            Your name and a number without space
+          </small>
           {getFieldDecorator("username", {
             rules: [{ required: true, message: "Please input your username without space !" }]
           })(
             <Input
               prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
-              placeholder="username"
+              placeholder="Ex: Sakib75 "
             />
           )}
-        </FormItem>
+        </Form.Item>
 
         <FormItem>
+          <strong> Valid Mobile Number </strong>
           {getFieldDecorator("mobile", {
             rules: [
 
@@ -87,6 +94,11 @@ class RegistrationForm extends React.Component {
         </FormItem>
 
         <FormItem>
+          <strong> Password </strong>
+          <br></br>
+          <small> Minimum length: 8, (letter & digit)</small>
+          <br></br>
+          <small> <b> *** আপনার পাসওয়ার্ডে অবশ্যই একটি "@" যুক্ত করতে হবে, , অন্যথায় রেজিস্ট্রেশন ব্যর্থ হবে! </b> </small>
           {getFieldDecorator("password", {
             rules: [
               {
@@ -101,12 +113,14 @@ class RegistrationForm extends React.Component {
             <Input
               prefix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
               type="password"
-              placeholder="Password"
+              placeholder="Ex: sakib@7575"
             />
           )}
         </FormItem>
 
         <FormItem>
+          <strong>Confirm your password</strong> <br></br>
+          <small> Please remember/note down </small>
           {getFieldDecorator("confirm", {
             rules: [
               {
@@ -128,6 +142,7 @@ class RegistrationForm extends React.Component {
         </FormItem>
 
         <FormItem>
+          <strong> Student/Teacher</strong>
           {getFieldDecorator("userType", {
             rules: [
               {

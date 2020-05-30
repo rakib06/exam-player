@@ -34,6 +34,7 @@ class NormalLoginForm extends React.Component {
         ) : (
             <Form onSubmit={this.handleSubmit} className="login-form">
               <FormItem>
+                <strong> Username  </strong>
                 {getFieldDecorator("username", {
                   rules: [
                     { required: true, message: "Please input your username!" }
@@ -49,6 +50,7 @@ class NormalLoginForm extends React.Component {
               </FormItem>
 
               <FormItem>
+                <strong> Password  </strong>
                 {getFieldDecorator("password", {
                   rules: [
                     { required: true, message: "Please input your Password!" }
@@ -75,7 +77,10 @@ class NormalLoginForm extends React.Component {
 
                 <NavLink style={{ marginRight: "10px" }} to="/signup/">
                   {" "}
-                Don't have an account? Tap to Sign Up
+                  <br></br>
+                Don't have an account?
+                <br></br>
+                Tap to Sign Up
               </NavLink>
 
               </FormItem>

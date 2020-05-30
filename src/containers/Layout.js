@@ -21,22 +21,34 @@ class CustomLayout extends React.Component {
             style={{ lineHeight: "64px" }}
           >
 
-            <Menu.Item key="2">
-              <Link to="/">Home</Link>
-            </Menu.Item>
+
+
+            {this.props.isAuthenticated ? (
+
+              <Menu.Item key="10">
+                <Link to="/exam">Exam</Link>
+              </Menu.Item>
+
+            ) : (
+                <Menu.Item key="1">
+                  <Link to="/">Home</Link>
+                </Menu.Item>
+              )}
 
 
             {this.props.token !== null ? (
               <Menu.Item key="4">
-                <Link to={`/profile/${this.props.userId}`}>Profile</Link>
+                <Link to={`/profile/${this.props.userId}`}>Result</Link>
               </Menu.Item>
             ) : null}
 
             {this.props.token !== null && this.props.is_teacher ? (
               <Menu.Item key="5">
-                <Link to="/create">Create an Exam Now!</Link>
+                <Link to="/create">Create Questions </Link>
               </Menu.Item>
             ) : null}
+
+
 
             {this.props.isAuthenticated ? (
               <Menu.Item key="3" onClick={this.props.logout}>
@@ -52,7 +64,19 @@ class CustomLayout extends React.Component {
                 <Menu.Item key="8">
                   <Link to="/login">Login</Link>
                 </Menu.Item>
+
               )}
+
+            {this.props.isAuthenticated ? (
+              null
+
+            ) : (
+                <Menu.Item key="9">
+                  <Link to="/signup">Signup</Link>
+                </Menu.Item>
+              )}
+
+
 
 
           </Menu>
@@ -71,11 +95,11 @@ class CustomLayout extends React.Component {
           </div>
         </Content>
 
-        <MDBFooter color="blue" className="font-small pt-3 mt-2">
+        <MDBFooter color="red" className="font-small pt-3 mt-2">
 
-          <div className="footer-copyright text-center py-3">
+          <div className="footer-copyright text-center">
             <MDBContainer fluid>
-              &copy; {new Date().getFullYear()} Copyright: <a href="https://www.facebook.com/therockib"> Rockib </a>
+              &copy; {new Date().getFullYear()}  <a > LinB1 </a>
             </MDBContainer>
           </div>
         </MDBFooter>
