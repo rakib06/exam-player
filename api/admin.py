@@ -19,7 +19,7 @@ class AdminGradedAssignment(admin.ModelAdmin):
     def get_queryset(self, request):
         qs = super().get_queryset(request)
         results = super().get_queryset(request)
-        teacher_ID = request.user.id
+        teacher_ID = request.user
         t_assigntments = Assignment.objects.filter(teacher=teacher_ID)
         # print(type(assignment))
         if request.user.is_superuser:
