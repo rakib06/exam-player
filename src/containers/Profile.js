@@ -36,7 +36,8 @@ class Profile extends React.PureComponent {
                   dataSource={this.props.gradedAssignments}
                   renderItem={a =>
                     <div class="col-4">
-                      <Card bordered="5" type="inner">
+                      <div>
+                        <hr></hr>
                         <p>
                           <Link to={`/assignments/${a.assignment}`}>
                             <strong>  Exam : {a.assignment_title}</strong>
@@ -47,7 +48,7 @@ class Profile extends React.PureComponent {
 
                         <Result key={a.id} grade={a.grade} />
 
-                        <Card>
+                        <div>
                           <p>
                             <h1><strong style={{ color: ' crimson' }} > {a.obtained_marks === a.highest ? "Congratulations!!!! Rank. 1  " : ""}</strong></h1>
 
@@ -59,7 +60,7 @@ class Profile extends React.PureComponent {
                           </p>
                           {a.position}
 
-                        </Card>
+                        </div>
 
                         <Card>
 
@@ -69,9 +70,9 @@ class Profile extends React.PureComponent {
 
                         </Card>
 
+                        <hr></hr>
 
-
-                      </Card>
+                      </div>
                     </div>
 
 

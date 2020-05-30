@@ -76,7 +76,7 @@ class GradedAssignmentSerializer(serializers.ModelSerializer):
     position = serializers.ReadOnlyField()
     rank = serializers.ReadOnlyField()
     highest = serializers.ReadOnlyField()
-    ttotal_participant = serializers.ReadOnlyField()
+    total_participant = serializers.ReadOnlyField()
 
     def exam(self):
         return Assignment.objects.get(id=assignment)
