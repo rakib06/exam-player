@@ -40,7 +40,7 @@ class Profile extends React.PureComponent {
                         <hr></hr>
                         <p>
                           <h3>
-                            <Link to={`/assignments/${a.assignment}`}>
+                            <Link to={`/answer/${a.assignment}`}>
                               <strong>  Exam : {a.assignment_title}</strong>
 
                             </Link></h3>

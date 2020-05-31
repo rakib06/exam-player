@@ -11,10 +11,11 @@ class StringSerializer(serializers.StringRelatedField):
 
 class QuestionSerializer(serializers.ModelSerializer):
     choices = StringSerializer(many=True)
+    answer = StringSerializer()
 
     class Meta:
         model = Question
-        fields = ('id', 'choices', 'question', 'order',)
+        fields = ('id', 'choices', 'question', 'order', 'answer',)
 
 
 class AssignmentSerializer(serializers.ModelSerializer):
@@ -59,9 +60,9 @@ class AssignmentSerializer(serializers.ModelSerializer):
             # newC.save()
             newQ.choices.add(newC)
             newQ.answer = Choice.objects.filter(title=q['answer'])[:1].get()
-            print("NewQ.anser", newQ.answer)
+            # print("NewQ.anser", newQ.answer)
             newQ.assignment = assignment
-            print("newQ.assignment", newQ.assignment)
+            # print("newQ.assignment", newQ.assignment)
             newQ.save()
             order += 1
         return assignment
@@ -89,7 +90,7 @@ class GradedAssignmentSerializer(serializers.ModelSerializer):
 
     def create(self, request):
         data = request.data
-        print(data)
+        # print(data)
 
         assignment = Assignment.objects.get(id=data['asntId'])
         student = User.objects.get(username=data['username'])
@@ -100,14 +101,14 @@ class GradedAssignmentSerializer(serializers.ModelSerializer):
         # Exam solution
 
         questions = [q for q in assignment.questions.all().order_by('order')]
-        print(type(assignment.questions.all()))
+        # print(type(assignment.questions.all()))
         answers = [data['answers'][a] for a in data['answers']]
         wrong_answer = 0
         answered_correct_count = 0
         blank = 0
         for i in range(len(questions)):
             if questions[i].answer.title == answers[i]:
-                print("Answer--->>", answers[i])
+                # print("Answer--->>", answers[i])
                 answered_correct_count += 1
 
             elif answers[i] == "blank":
@@ -119,9 +120,9 @@ class GradedAssignmentSerializer(serializers.ModelSerializer):
         graded_asnt.exam_start_at = time.strftime("%B %d %Y %I:%M:%S %p")
         right_answer = graded_asnt.right_answer = answered_correct_count
         total_marks = graded_asnt.total_marks = len(questions)
-        print("right answer", right_answer)
-        print("wrong anser", wrong_answer)
-        print("blank", blank)
+        # print("right answer", right_answer)
+        # print("wrong anser", wrong_answer)
+        # print("blank", blank)
         om = graded_asnt.right_answer - wrong_answer * .25
 
         graded_asnt.obtained_marks = om

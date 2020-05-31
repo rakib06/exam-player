@@ -61,7 +61,7 @@ class GradedAssignment(models.Model):
 
         q = GradedAssignment.objects.filter(
             assignment=self.assignment).order_by('-obtained_marks')
-        print('QQQQQQQQQQQ', q)
+        # print('QQQQQQQQQQQ', q)
         # print(len(q))
         t = len(q)
         i = 0
@@ -80,7 +80,7 @@ class GradedAssignment(models.Model):
     def rank(self):
         q = GradedAssignment.objects.filter(
             assignment=self.assignment).order_by('-obtained_marks')
-        print('QQQQQQQQQQQ', q)
+        # print('QQQQQQQQQQQ', q)
         # print(len(q))
         t = len(q)
         i = 0
