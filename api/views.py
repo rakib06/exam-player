@@ -20,22 +20,21 @@ class AssignmentViewSet(viewsets.ModelViewSet):
         teachers = User.objects.filter(is_teacher=True)
 
         username = getattr(self.request, 'user', None)
-        print('----------------', username)
+        # print('----------------', username)
         is_teacher = False
         for item in teachers:
-            print(item.username)
+            # (item.username)
             if str(item.username) == str(username):
                 is_teacher = True
         if is_teacher:
-            print('LLLLLLLLLLLLLLLLLLLLLLLLLLL')
-            print(teachers, type(teachers))
+            # print('LLLLLLLLLLLLLLLLLLLLLLLLLLL')
+            # print(teachers, type(teachers))
             queryset = Assignment.objects.filter(teacher__username=username)
             return queryset
 
         else:
             queryset = Assignment.objects.filter(is_hide=False)
-            print(
-                'Studenrt--------------------------<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>...')
+            # print('Studenrt--------------------------<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>...')
 
             return queryset
 
@@ -72,7 +71,7 @@ class GradedAssignmentCreateView(CreateAPIView):
     queryset = GradedAssignment.objects.all()
 
     def post(self, request):
-        print(request.data)
+        # print(request.data)
         serializer = GradedAssignmentSerializer(data=request.data)
         serializer.is_valid()
         graded_assignment = serializer.create(request)

@@ -41,8 +41,8 @@ class Profile extends React.PureComponent {
                         <p>
                           <h3>
                             <Link to={`/answer/${a.assignment}`}>
-                              <strong>  Exam : {a.assignment_title}</strong>
-
+                              <strong>  Exam : {a.assignment_title} </strong>
+                              <small style={{ color: 'red' }}> (উত্তরপত্রটি দেখতে এখানে চাপুন) </small>
                             </Link></h3>
                           <br></br>
                           {a.exam_start_at}
