@@ -6,11 +6,13 @@ import Choices from "../components/Choices";
 import { getASNTSDetail } from "../store/actions/assignments";
 import { createGradedASNT } from "../store/actions/gradedAssignments";
 import Hoc from "../hoc/hoc";
-import Timer from './Timer'
+import Timer from './Timer';
+import Pdf from "react-to-pdf";
 //import { Button } from "antd";
 //import { Redirect } from "react-router-dom";
 //import { Message } from "../components/test/Message";
 //mport { Counter } from '../components/test/Counter'
+const ref = React.createRef();
 class AssignmentDetail extends React.Component {
   state = {
     usersAnswers: {},
@@ -66,6 +68,7 @@ class AssignmentDetail extends React.Component {
     //this.refs.btn.setAttribute("disabled", "disabled");
     this.btn.setAttribute("disabled", "disabled");
     this.changeSubmit()
+
     //this.btn.removeAttribute("disabled");
     // this.props.history.push("/");
   }
@@ -90,60 +93,69 @@ class AssignmentDetail extends React.Component {
 
 
 
-
-                <div >
-                  <center>
-
-
-                    <h2  >
-                      {title}<br></br>
-                      <small> Total marks : {total_marks} </small>
-                    </h2>
-                    <Timer startCount={time_in_min * 60} />
-
-                  </center>
-
-                  {currentAssignment.questions.map(q => {
-                    return (
-
-                      <Card
+                <div className="App">
+                  {this.state.isSubmit === "Yes" ?
+                    <Pdf targetRef={ref} filename="example-player.pdf">
+                      {({ toPdf }) => <button onClick={toPdf}>Download Your result</button>}
+                    </Pdf> : ""}
+                  <div ref={ref}>
+                    <center>
 
 
-                        key={q.id}
+                      <h2  >
+                        {title}<br></br>
+                        <small> Total marks : {total_marks} </small>
+                      </h2>
+                      <Timer startCount={time_in_min * 60} />
 
-                      >
-                        <strong> {`${q.order}. ${q.question}`}</strong>
-                        <br></br>
-                        <div>
-                          <Choices
-                            isSubmit={this.state.isSubmit}
-                            questionId={q.order}
-                            choices={q.choices}
-                            change={this.onChange}
-                            answer={q.answer}
-                            usersAnswers={usersAnswers}
-                          />
-                        </div>
+                    </center>
 
-                      </Card>
+                    {currentAssignment.questions.map(q => {
+                      return (
 
-                    );
+                        <Card
 
 
-                  })}
-                  <br>
-                  </br>
-                  <center>
-                    <button ref={btn => { this.btn = btn; }}
-                      style={{ color: "red" }}
-                      type="primary" onClick={() => {
-                        this.handleSubmit()
+                          key={q.id}
+
+                        >
+                          <strong> {`${q.order}. ${q.question}`}</strong>
+                          <br></br>
+                          <div>
+                            <Choices
+                              isSubmit={this.state.isSubmit}
+                              questionId={q.order}
+                              choices={q.choices}
+                              change={this.onChange}
+                              answer={q.answer}
+                              usersAnswers={usersAnswers}
+                            />
+                          </div>
+
+                        </Card>
+
+                      );
 
 
-                      }}>
-                      Submit
+                    })}
+                    <br>
+                    </br>
+                    <center>
+                      <button ref={btn => { this.btn = btn; }}
+                        style={{ color: "red" }}
+                        type="primary" onClick={() => {
+                          this.handleSubmit()
+
+
+                        }}>
+                        Submit
           </button>
-                  </center>
+
+
+
+                    </center>
+
+                  </div>
 
                 </div>
               )}
