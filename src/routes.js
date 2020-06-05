@@ -13,7 +13,7 @@ import Answer from "./containers/Answer";
 const BaseRouter = () => (
   <Hoc>
     <Route exact path="/" component={AssignmentList} />
-    <Route exact path="/answer/:id" component={Answer} />
+    <Route exact path="/answerdfghjkdfhjkghfd/:id" component={Answer} />
     <Route exact path="/exam" component={AssignmentList} />
     <Route exact path="/create/" component={AssignmentCreate} />
     <Route exact path="/login/" component={Login} />
