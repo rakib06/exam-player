@@ -7,12 +7,32 @@ import { getASNTSDetail } from "../store/actions/assignments";
 import { createGradedASNT } from "../store/actions/gradedAssignments";
 import Hoc from "../hoc/hoc";
 import Timer from './Timer'
-import { Button } from "antd";
-
+//import { Button } from "antd";
+//import { Redirect } from "react-router-dom";
+//import { Message } from "../components/test/Message";
+//mport { Counter } from '../components/test/Counter'
 class AssignmentDetail extends React.Component {
   state = {
-    usersAnswers: {}
+    usersAnswers: {},
+    //isSubmit: "No"
+
   };
+
+  constructor() {
+    super()
+    this.state = {
+      usersAnswers: {},
+      isSubmit: "No"
+    }
+  }
+
+  changeSubmit = () => {
+    // const { isSubmit } = this.state;
+    // this.isSubmit = "Yes"
+    this.setState({ isSubmit: "Yes" });
+  };
+
+
 
   componentDidMount() {
     if (this.props.token !== undefined && this.props.token !== null) {
@@ -35,7 +55,7 @@ class AssignmentDetail extends React.Component {
   };
 
   handleSubmit() {
-    message.success("Thank you ! Check your profile for result!");
+    message.success("Thank you ! Check your result!");
     const { usersAnswers } = this.state;
     const asnt = {
       username: this.props.username,
@@ -43,7 +63,11 @@ class AssignmentDetail extends React.Component {
       answers: usersAnswers
     };
     this.props.createGradedASNT(this.props.token, asnt);
-    this.props.history.push("/");
+    //this.refs.btn.setAttribute("disabled", "disabled");
+    this.btn.setAttribute("disabled", "disabled");
+    this.changeSubmit()
+    //this.btn.removeAttribute("disabled");
+    // this.props.history.push("/");
   }
 
   render() {
@@ -53,6 +77,8 @@ class AssignmentDetail extends React.Component {
     const { time_in_min } = currentAssignment;
     const { total_marks } = currentAssignment;
     const { usersAnswers } = this.state;
+    //const { isSubmit } = this.isSubmit;
+
     return (
       <Hoc>
         {Object.keys(currentAssignment).length > 0 ? (
@@ -90,9 +116,11 @@ class AssignmentDetail extends React.Component {
                         <br></br>
                         <div>
                           <Choices
+                            isSubmit={this.state.isSubmit}
                             questionId={q.order}
                             choices={q.choices}
                             change={this.onChange}
+                            answer={q.answer}
                             usersAnswers={usersAnswers}
                           />
                         </div>
@@ -106,9 +134,15 @@ class AssignmentDetail extends React.Component {
                   <br>
                   </br>
                   <center>
-                    <Button type="primary" onClick={() => this.handleSubmit()}>
+                    <button ref={btn => { this.btn = btn; }}
+                      style={{ color: "red" }}
+                      type="primary" onClick={() => {
+                        this.handleSubmit()
+
+
+                      }}>
                       Submit
-          </Button>
+          </button>
                   </center>
 
                 </div>

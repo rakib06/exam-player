@@ -13,6 +13,9 @@ class Choices extends React.Component {
   render() {
     const { questionId } = this.props;
     const { usersAnswers } = this.props;
+    const { isSubmit } = this.props;
+    const { answer } = this.props;
+
     return (
       <RadioGroup
         onChange={(e, qId) => this.props.change(e, questionId)}
@@ -29,11 +32,19 @@ class Choices extends React.Component {
               {c}
 
 
+
+              {isSubmit === "Yes" && usersAnswers[questionId] === answer && c === answer ? <span style={{ color: "green" }}> &#10004; </span> : ""}
+
+              {isSubmit === "Yes" && usersAnswers[questionId] !== answer && c === answer ? <span style={{ color: "purple" }}>  &#10004; &#10175; </span> : ""
+              }
+              {isSubmit === "Yes" && usersAnswers[questionId] === c && usersAnswers[questionId] !== "blank" && c !== answer ? <span style={{ color: "red" }}>  &#10008; </span> : ""}
+
               {console.log(c)}
             </Radio>
           );
-        })}
-      </RadioGroup>
+        })
+        }
+      </RadioGroup >
     );
   }
 }

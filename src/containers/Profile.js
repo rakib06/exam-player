@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import Result from "../components/Result";
 import { getGradedASNTS } from "../store/actions/gradedAssignments";
 import Hoc from "../hoc/hoc";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 class Profile extends React.PureComponent {
   componentDidMount() {
     if (this.props.token !== undefined && this.props.token !== null) {
@@ -40,10 +40,10 @@ class Profile extends React.PureComponent {
                         <hr></hr>
                         <p>
                           <h3>
-                            <Link to={`/answer/${a.assignment}`}>
-                              <strong>  Exam : {a.assignment_title} </strong>
-                              <small style={{ color: 'red' }}> (উত্তরপত্রটি দেখতে এখানে চাপুন) </small>
-                            </Link></h3>
+
+                            <strong>  Exam : {a.assignment_title} </strong>
+                            <small style={{ color: 'red' }}> </small>
+                          </h3>
                           <br></br>
                           {a.exam_start_at}
                         </p>
