@@ -24,7 +24,7 @@ class Timer extends Component {
             <div>
                 <p>
 
-                    <strong style={{ color: 'red', justifySelf: 'center', justifyItems: 'center' }}> You have {Math.floor(count / 60)} min(s) {count - (Math.floor(count / 60)) * 60} sec to finish </strong>
+                    <strong style={{ color: 'red', justifySelf: 'center', justifyItems: 'center' }}>  {Math.floor(count / 60)} min(s) {count - (Math.floor(count / 60)) * 60} sec to finish </strong>
                     <br></br>{" "}
                     <strong style={{ color: 'green', justifyItems: 'center' }}> Total Time: {Math.floor(count2 / 60)} min(s) {count2 - (Math.floor(count2 / 60)) * 60} sec </strong>
 

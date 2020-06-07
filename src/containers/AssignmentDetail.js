@@ -1,5 +1,5 @@
 import React from "react";
-import { connect } from "react-redux";
+import { connect, batch } from "react-redux";
 import { Card, Skeleton, message } from "antd";
 // import Questions from "./Questions";
 import Choices from "../components/Choices";
@@ -7,12 +7,17 @@ import { getASNTSDetail } from "../store/actions/assignments";
 import { createGradedASNT } from "../store/actions/gradedAssignments";
 import Hoc from "../hoc/hoc";
 import Timer from './Timer';
-import Pdf from "react-to-pdf";
+import ReactToPdf from "react-to-pdf";
 //import { Button } from "antd";
 //import { Redirect } from "react-router-dom";
 //import { Message } from "../components/test/Message";
 //mport { Counter } from '../components/test/Counter'
 const ref = React.createRef();
+const options = {
+  orientation: 'landscape',
+  unit: 'in',
+  format: [4, 2]
+};
 class AssignmentDetail extends React.Component {
   state = {
     usersAnswers: {},
@@ -78,6 +83,7 @@ class AssignmentDetail extends React.Component {
 
     const { title } = currentAssignment;
     const { time_in_min } = currentAssignment;
+    const { batch } = currentAssignment;
     const { total_marks } = currentAssignment;
     const { usersAnswers } = this.state;
     //const { isSubmit } = this.isSubmit;
@@ -93,19 +99,24 @@ class AssignmentDetail extends React.Component {
 
 
 
-                <div className="App">
+                <div className="App" style={{ margin: "auto" }}>
                   {this.state.isSubmit === "Yes" ?
-                    <Pdf targetRef={ref} filename="example-player.pdf">
-                      {({ toPdf }) => <button onClick={toPdf}>Download Your result</button>}
-                    </Pdf> : ""}
+                    <ReactToPdf targetRef={ref} filename="exam-player.pdf" >
+                      {({ toPdf }) => (
+                        <button onClick={toPdf}></button>
+                      )}
+                    </ReactToPdf>
+                    : ""}
                   <div ref={ref}>
                     <center>
 
-
+                      <h1 style={{ color: "black" }}>{batch}</h1>
                       <h2  >
                         {title}<br></br>
+
                         <small> Total marks : {total_marks} </small>
                       </h2>
+
                       <Timer startCount={time_in_min * 60} />
 
                     </center>

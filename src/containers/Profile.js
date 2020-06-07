@@ -52,13 +52,13 @@ class Profile extends React.PureComponent {
 
                         <div>
                           <p>
-                            <h1><strong style={{ color: ' crimson' }} > {a.obtained_marks === a.highest ? "Congratulations!!!! Rank. 1  " : ""}</strong></h1>
+                            <h1><strong style={{ color: ' crimson' }} > {a.obtained_marks === a.highest ? <h1> Congratulations!!!!  &#127942;  </h1> : ""}</strong></h1>
 
                             <h2> {" Your Score: "}  <strong style={{ color: 'green' }}> {a.obtained_marks}</strong> <small>{"out of "}</small>
                               <strong style={{ color: 'purple' }}> {a.total_marks}</strong> ( <q style={{ color: 'firebrick' }}> Highest : {a.highest} </q> ) </h2>
                           </p>
                           <p>
-                            <h2> Your Position:  <strong style={{ color: ' crimson' }}> {a.rank}  </strong> Total Participant :  <strong style={{ color: 'green' }}> {a.total_participant}</strong></h2>
+                            <h2> &#127941; <small>Rank: </small> <strong style={{ color: ' crimson' }}> {a.rank}  </strong> &#9621; &#127943; Contestant :  <strong style={{ color: 'green' }}> {a.total_participant}</strong></h2>
                           </p>
 
 
@@ -67,8 +67,8 @@ class Profile extends React.PureComponent {
                         <Card>
 
                           <p>
-                            <strong> Right Answer: <b style={{ color: 'green' }} >{a.right_answer} </b></strong> </p>
-                          <strong > Wrong Answer: <b style={{ color: 'red' }}> {-(a.right_answer - a.obtained_marks)}</b></strong>
+                            <strong> &#9996; Right Answer: <b style={{ color: 'green' }} >{a.right_answer} </b></strong> </p>
+                          <strong > &#9940; Wrong Answer:  <b style={{ color: 'red' }}> {-(a.right_answer - a.obtained_marks)} </b></strong>
 
                         </Card>
 

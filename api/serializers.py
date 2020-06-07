@@ -22,6 +22,7 @@ class AssignmentSerializer(serializers.ModelSerializer):
     questions = serializers.SerializerMethodField()
     teacher = StringSerializer(many=False)
     total_marks = serializers.ReadOnlyField()
+    batch = serializers.ReadOnlyField()
 
     class Meta:
         model = Assignment

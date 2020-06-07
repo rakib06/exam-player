@@ -25,6 +25,10 @@ class Assignment(models.Model):
         tq = Question.objects.filter(assignment__id=self.id).count()
         return tq
 
+    @property
+    def batch(self):
+        return self.teacher.first_name
+
     class Meta:
         verbose_name = "Exam"
 
