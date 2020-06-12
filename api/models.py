@@ -12,7 +12,7 @@ class CustomDateTimeField(models.DateTimeField):
 
 
 class Assignment(models.Model):
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=300)
     teacher = models.ForeignKey(User, on_delete=models.CASCADE)
     is_hide = models.BooleanField(default=True)
     time_in_min = models.IntegerField(null=True)
@@ -109,7 +109,7 @@ class GradedAssignment(models.Model):
 
 
 class Choice(models.Model):
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=500)
 
     def __str__(self):
         return self.title
