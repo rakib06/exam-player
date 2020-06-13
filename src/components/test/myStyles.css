@@ -1,0 +1,28 @@
+.primary{
+    
+
+  color: black;
+  animation-name: example;
+  position: relative;
+  animation-duration: 4s;
+  animation-delay: 5s;
+  font-family: Impact;
+  animation-iteration-count: infinite;
+}
+
+@keyframes example {
+    0%   {color:red; left:0px; top:0px;}
+    25%  {color:purple; left:100px; top:0px;}
+    /*50%  {color:blue; left:100px; top:15px;}
+    75%  {color:green; left:0px; top:15px;}
+    100% {color:red; left:0px; top:0px;}*/
+  }
+
+  .primary1{
+    
+
+    color: black;
+    
+    font-family: Impact;
+   
+  }

@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { List, Skeleton } from "antd";
 import * as actions from "../store/actions/assignments";
 import Hoc from "../hoc/hoc";
+import Stylesheet from '../components/test/Stylesheet'
+
 
 class AssignmentList extends React.PureComponent {
   componentDidMount() {
@@ -30,13 +32,17 @@ class AssignmentList extends React.PureComponent {
 
   render() {
     return (
+
       <Hoc>
         {this.props.loading ? (
           <Skeleton active />
         ) : (
+
             <div>
-              <h3 style={{ margin: "16px 0" }}>Live Exams </h3>
-              <List
+              <Stylesheet />
+
+              {/*<h3 style={{ margin: "16px 0" }}>Live Exams {new Date().toLocaleDateString()} </h3 > */}
+              < List
                 size="large"
                 bordered
                 dataSource={this.props.assignments}

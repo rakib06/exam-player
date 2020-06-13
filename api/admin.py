@@ -28,7 +28,8 @@ class AdminGradedAssignment(admin.ModelAdmin):
 @admin.register(Assignment)
 class AdminAssignment(admin.ModelAdmin):
 
-    list_display = ['title', 'is_hide', 'time_in_min', 'total_marks']
+    list_display = ['title', 'is_hide',
+                    'time_in_min', 'total_marks', 'batch']
     search_fields = ('title',)
     list_display_links = ('title',)
     list_editable = ('is_hide', 'time_in_min')

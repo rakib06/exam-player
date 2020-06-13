@@ -8,6 +8,8 @@ const radioStyle = {
     height: "30px",
     lineHeight: "30px"
 };
+//const { isSubmit } = this.props;
+//{ isSubmit === "Yes" && c === answer ? " << " : "" }
 
 class Options extends React.Component {
     render() {

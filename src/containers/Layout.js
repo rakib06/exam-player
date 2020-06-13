@@ -4,8 +4,8 @@ import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../store/actions/auth";
 import { MDBContainer, MDBFooter } from "mdbreact";
-
-
+import Footer from "../components/Footer/Footer";
+import Sidebar from "../components/Sidebar/Sidebar";
 const { Header, Content } = Layout;
 
 class CustomLayout extends React.Component {
@@ -76,6 +76,8 @@ class CustomLayout extends React.Component {
 
           </Menu>
         </Header>
+
+
         <Content style={{ padding: "0 50px" }}>
           <Breadcrumb style={{ margin: "16px 0" }}>
 
@@ -90,14 +92,9 @@ class CustomLayout extends React.Component {
           </div>
         </Content>
 
-        <MDBFooter color="red" className="font-small pt-3 mt-2">
 
-          <div className="footer-copyright text-center">
-            <MDBContainer fluid>
-              &copy; {new Date().getFullYear()}  <b > LinB1 </b>
-            </MDBContainer>
-          </div>
-        </MDBFooter>
+
+        <Footer />
       </Layout >
     );
   }

@@ -6,7 +6,6 @@ import Options from "../components/Options";
 import { getASNTSDetail } from "../store/actions/assignments";
 import { createGradedASNT } from "../store/actions/gradedAssignments";
 import Hoc from "../hoc/hoc";
-import { Button } from "antd";
 
 class Answer extends React.Component {
     state = {
@@ -34,7 +33,7 @@ class Answer extends React.Component {
     };
 
     handleSubmit() {
-        message.success("Thank you ! Check your profile for result!");
+        message.success("Thank you ! Check your result!");
         const { usersAnswers } = this.state;
         const asnt = {
             username: this.props.username,
@@ -91,6 +90,7 @@ class Answer extends React.Component {
                                                         questionId={q.order}
                                                         choices={q.choices}
                                                         answer={q.answer}
+                                                        //selected={q.selected("admin")}
                                                         usersAnswers={usersAnswers}
                                                     />
                                                 </div>
