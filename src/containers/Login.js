@@ -1,5 +1,6 @@
 import React from "react";
-import { Form, Icon, Input, Button, Spin } from "antd";
+import { Form, Input, Button, Spin } from "antd";
+import Icon from "@ant-design/icons";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import * as actions from "../store/actions/auth";
@@ -33,57 +34,59 @@ class NormalLoginForm extends React.Component {
           <Spin indicator={antIcon} />
         ) : (
             <Form onSubmit={this.handleSubmit} className="login-form">
-              <FormItem>
-                <strong> Username  </strong>
-                {getFieldDecorator("username", {
-                  rules: [
-                    { required: true, message: "Please input your username!" }
-                  ]
-                })(
-                  <Input
-                    prefix={
-                      <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
-                    }
-                    placeholder="Username"
-                  />
-                )}
-              </FormItem>
+              <div className="b">
+                <FormItem>
+                  <strong> Username  </strong>
+                  {getFieldDecorator("username", {
+                    rules: [
+                      { required: true, message: "Please input your username!" }
+                    ]
+                  })(
+                    <Input
+                      prefix={
+                        <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
+                      }
+                      placeholder="Username"
+                    />
+                  )}
+                </FormItem>
 
-              <FormItem>
-                <strong> Password  </strong>
-                {getFieldDecorator("password", {
-                  rules: [
-                    { required: true, message: "Please input your Password!" }
-                  ]
-                })(
-                  <Input
-                    prefix={
-                      <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
-                    }
-                    type="password"
-                    placeholder="Password"
-                  />
-                )}
-              </FormItem>
+                <FormItem>
+                  <strong> Password  </strong>
+                  {getFieldDecorator("password", {
+                    rules: [
+                      { required: true, message: "Please input your Password!" }
+                    ]
+                  })(
+                    <Input
+                      prefix={
+                        <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
+                      }
+                      type="password"
+                      placeholder="Password"
+                    />
+                  )}
+                </FormItem>
 
-              <FormItem>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  style={{ marginRight: "10px" }}
-                >
-                  Login
+                <FormItem>
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    style={{ marginRight: "10px" }}
+                  >
+                    Login
               </Button>
 
-                <NavLink style={{ marginRight: "10px" }} to="/signup/">
-                  {" "}
-                  <br></br>
+                  <NavLink style={{ marginRight: "10px" }} to="/signup/">
+                    {" "}
+                    <br></br>
                 Don't have an account?
                 <br></br>
                 Tap to Sign Up
               </NavLink>
 
-              </FormItem>
+                </FormItem>
+              </div>
             </Form>
           )}
       </div>

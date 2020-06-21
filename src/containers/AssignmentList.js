@@ -34,7 +34,7 @@ class AssignmentList extends React.PureComponent {
         {this.props.loading ? (
           <Skeleton active />
         ) : (
-            <div>
+            <div className="b">
               <h3 style={{ margin: "16px 0" }}>Live Exams </h3>
               <List
                 size="large"

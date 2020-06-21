@@ -1,26 +1,22 @@
 import React from "react";
-import { Layout } from "antd";
-import { Link, withRouter, NavLink, Router } from "react-router-dom";
+import { Layout, Menu, Breadcrumb } from "antd";
+import { Link, withRouter, NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../store/actions/auth";
+import { MDBContainer, MDBFooter } from "mdbreact";
 import Navbar from 'react-bootstrap/Navbar'
 import { Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
-import './components/light-bootstrap-dashboard-react.css'
-import { Container } from 'react-bootstrap';
-import { HeartTwoTone } from '@ant-design/icons';
-
-import './css.css';
-
-const { Content } = Layout;
-
+import './css.css'
+import { LogoutOutlined } from "@ant-design/icons";
+const { Header, Content } = Layout;
 
 class CustomLayout extends React.Component {
-
   render() {
     return (
 
+      <div >
 
-      <div>
+
         <header className="header">
 
           <Navbar  >
@@ -41,17 +37,6 @@ class CustomLayout extends React.Component {
                     {this.props.isAuthenticated ? (
 
                       <Nav.Link key="10">
-                        <Link to="/profile"><div className="a"><h5>Profile</h5></div></Link>
-                      </Nav.Link>
-
-
-                    ) : (
-                        null
-                      )}
-
-                    {this.props.isAuthenticated ? (
-
-                      <Nav.Link key="10">
                         <Link to="/exam"><div className="a"><h5>Exam</h5></div></Link>
                       </Nav.Link>
 
@@ -60,10 +45,6 @@ class CustomLayout extends React.Component {
                           <Link to="/login"><div className="a"><h5>Login</h5></div></Link>
                         </Nav.Link>
                       )}
-
-
-
-
 
 
                     {this.props.token !== null ? (
@@ -79,6 +60,9 @@ class CustomLayout extends React.Component {
                     ) : null}
 
 
+
+
+
                     {this.props.isAuthenticated ? (
                       null
 
@@ -87,21 +71,29 @@ class CustomLayout extends React.Component {
                           <Link to="/signup"><div className="a"><h5>Signup</h5></div></Link>
                         </Nav.Link>
                       )}
+                    <div className="a"><h5>
+                      <NavDropdown title="QUICK ACCESS" id="basic-nav-dropdown">
+                        {this.props.isAuthenticated ? (
+                          <NavDropdown.Item href="/Profile/:id">Profile</NavDropdown.Item>) : null}
+                        {this.props.isAuthenticated ? (
+                          <NavDropdown.Item href="/teachers">Teachers</NavDropdown.Item>) : null}
+                        {this.props.isAuthenticated ? (
+                          <NavDropdown.Item href="/students">Students</NavDropdown.Item>) : null}
+                        <NavDropdown.Divider />
+                        {this.props.isAuthenticated ? (
+                          <NavDropdown.Item className="a" key="3" onClick={this.props.logout}>
+                            <div className="c"><h5>Logout <LogoutOutlined /></h5></div>
+                          </NavDropdown.Item>
+                          /* </Menu.Item><Menu.Item key="3">
+                            <Link to="/logout"> Logout</Link>
+                          
+                          </Menu.Item>
+                          */
 
-                    {this.props.isAuthenticated ? (
+                        ) : null}
 
-                      <Nav.Link key="10" onClick={this.props.logout}>
-                        <div className="a"><h5>Logout</h5></div>
-                      </Nav.Link>
-
-
-                    ) : (
-                        null
-                      )}
-                    <div className="a">
-                      <Nav.Link key="10" >
-                        <div className="a"><h5></h5></div>
-                      </Nav.Link>
+                      </NavDropdown>
+                    </h5>
                     </div>
                     <div >
                       <Form inline>
@@ -119,9 +111,6 @@ class CustomLayout extends React.Component {
         </header>
 
 
-
-
-
         {/* <Content style={{ background: "cornsilk", padding: 24, height: "100vh" }} >
 
           <div >
@@ -135,35 +124,14 @@ class CustomLayout extends React.Component {
           </div>
         </Content>
 
+        <MDBFooter color="red" className="font-small pt-3 mt-2">
 
-        <footer className="footer">
-          <Container fluid>
-            <nav className="pull-left">
-              <ul>
-                <li>
-                  <a href="/">Home</a>
-                </li>
-                <li>
-                  <a href="/linb1">Company</a>
-                </li>
-                <li>
-                  <a href="/exam">Exam</a>
-                </li>
-                <li>
-                  <a href="/">Blog</a>
-                </li>
-              </ul>
-            </nav>
-            <p className="copyright pull-right">
-              &copy; {new Date().getFullYear()}{" "}
-              <a href="http://www.linb1.com">
-                LinB1
-            </a>
-            , made with <HeartTwoTone twoToneColor="#eb2f96" />  for a better web
-
-          </p>
-          </Container>
-        </footer>
+          <div className="footer-copyright text-center">
+            <MDBContainer fluid>
+              &copy; {new Date().getFullYear()}  <b > LinB1 </b>
+            </MDBContainer>
+          </div>
+        </MDBFooter>
 
       </div>
     );

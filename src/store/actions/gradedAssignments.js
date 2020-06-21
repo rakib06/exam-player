@@ -29,7 +29,8 @@ export const getGradedASNTS = (username, token) => {
       Authorization: `Token ${token}`
     };
     axios
-      .get(`https://rk-mcq.herokuapp.com/graded-assignments/?username=${username}`)
+      //.get(`https://rk-mcq.herokuapp.com/graded-assignments/?username=${username}`)
+      .get(`http://127.0.0.1:8000/graded-assignments/?username=${username}`)
       .then(res => {
         const assignments = res.data;
         dispatch(getGradedASNTListSuccess(assignments));
@@ -48,7 +49,8 @@ export const createGradedASNT = (token, asnt) => {
       Authorization: `Token ${token}`
     };
     axios
-      .post(`https://rk-mcq.herokuapp.com/graded-assignments/create/`, asnt)
+      //.post(`https://rk-mcq.herokuapp.com/graded-assignments/create/`, asnt)
+      .post(`http://127.0.0.1:8000/graded-assignments/create/`, asnt)
       .then(res => {
         console.log("success");
         console.log(asnt)

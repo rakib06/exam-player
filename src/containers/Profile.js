@@ -29,13 +29,14 @@ class Profile extends React.PureComponent {
 
             <Hoc>
               <h1>Progress Report: {this.props.username}</h1>
+
               <div class="row">
 
                 <List
                   size="small"
                   dataSource={this.props.gradedAssignments}
                   renderItem={a =>
-                    <div class="col-4">
+                    <div class="col-12">
                       <div>
                         <hr></hr>
                         <p>

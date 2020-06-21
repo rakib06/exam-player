@@ -4,8 +4,9 @@ import { connect } from "react-redux";
 import BaseRouter from "./routes";
 import "antd/dist/antd.css";
 import * as actions from "./store/actions/auth";
-
+import { Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
 import CustomLayout from "./containers/Layout";
+import Navbar from 'react-bootstrap/Navbar'
 
 class App extends Component {
   componentDidMount() {
@@ -14,6 +15,7 @@ class App extends Component {
 
   render() {
     return (
+
       <Router>
         <CustomLayout {...this.props}>
           <BaseRouter />
