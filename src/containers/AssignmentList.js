@@ -22,9 +22,11 @@ class AssignmentList extends React.PureComponent {
 
   renderItem(item) {
     return (
-      <Link to={`/assignments/${item.id}`}>
-        <List.Item>{item.title}</List.Item>
-      </Link>
+      <div className="card" >
+        <Link to={`/assignments/${item.id}`}>
+          <List.Item > {item.title}</List.Item>
+        </Link>
+      </div >
     );
   }
 
@@ -34,7 +36,7 @@ class AssignmentList extends React.PureComponent {
         {this.props.loading ? (
           <Skeleton active />
         ) : (
-            <div className="b">
+            <div >
               <h3 style={{ margin: "16px 0" }}>Live Exams </h3>
               <List
                 size="large"

@@ -1,20 +1,19 @@
 .header{
-    grid-area: header;
-    background-color: #2778ca;
-    color: #ffffff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.5rem;
+    
+    
+    
   }
   .a{
     color: #ffffff;
-    font-size: 1.2rem;
+    
+    color: #ffffff;
+    
   }
   .b{
-    padding-left: 40%;
-    padding-right: 20%;
+
+    background-color: #ffffff;
+    color: #ffffff;
   }
   .c{
-    color: black;
+    color: rgb(255,255, 255);
   }

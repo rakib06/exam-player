@@ -26,9 +26,7 @@ class CustomLayout extends React.Component {
           <Navbar  >
             <div>
               <nav className="navbar fixed-top"></nav>
-              <Navbar.Brand href="/">
-                <div className="a"><h1>Exam-Player</h1></div>
-              </Navbar.Brand>
+
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                 <div className="a">
@@ -103,12 +101,7 @@ class CustomLayout extends React.Component {
                         <div className="a"><h5></h5></div>
                       </Nav.Link>
                     </div>
-                    <div >
-                      <Form inline>
-                        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                        <Button variant="outline-success"><div className="a">Search</div></Button>
-                      </Form>
-                    </div>
+
                   </Nav>
                 </div>
 
