@@ -1,164 +1,104 @@
 import React from "react";
-import { Layout } from "antd";
-import { Link, withRouter, NavLink, Router } from "react-router-dom";
+import { Layout, Menu, Breadcrumb } from "antd";
+import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../store/actions/auth";
-import Navbar from 'react-bootstrap/Navbar'
-import { Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
-import './components/light-bootstrap-dashboard-react.css'
-import { Container } from 'react-bootstrap';
-import { HeartTwoTone } from '@ant-design/icons';
+import { MDBContainer, MDBFooter } from "mdbreact";
 
-import './css.css';
 
-const { Content } = Layout;
-
+const { Header, Content } = Layout;
 
 class CustomLayout extends React.Component {
-
   render() {
     return (
-
-
-      <div>
-        <header className="header">
-
-          <Navbar  >
-            <div>
-              <nav className="navbar fixed-top"></nav>
-
-              <Navbar.Toggle aria-controls="basic-navbar-nav" />
-              <Navbar.Collapse id="basic-navbar-nav">
-                <div className="a">
-
-                  <Nav className="mr-auto">
-                    <Nav.Link key="10">
-                      <Link to="/"><div className="a"><h5>Home</h5></div></Link>
-                    </Nav.Link>
-
-                    {this.props.isAuthenticated ? (
-
-                      <Nav.Link key="10">
-                        <Link to="/profile"><div className="a"><h5>Profile</h5></div></Link>
-                      </Nav.Link>
-
-
-                    ) : (
-                        null
-                      )}
-
-                    {this.props.isAuthenticated ? (
-
-                      <Nav.Link key="10">
-                        <Link to="/exam"><div className="a"><h5>Exam</h5></div></Link>
-                      </Nav.Link>
-
-                    ) : (
-                        <Nav.Link className="a" key="1">
-                          <Link to="/login"><div className="a"><h5>Login</h5></div></Link>
-                        </Nav.Link>
-                      )}
+      <Layout className="layout">
+        <Header>
+          <div className="logo" />
+          <Menu
+            theme="dark"
+            mode="horizontal"
+            defaultSelectedKeys={["2"]}
+            style={{ lineHeight: "64px" }}
+          >
 
 
 
+            {this.props.isAuthenticated ? (
+
+              <Menu.Item key="10">
+                <Link to="/exam">Exam</Link>
+              </Menu.Item>
+
+            ) : (
+                <Menu.Item key="1">
+                  <Link to="/login">Login</Link>
+                </Menu.Item>
+              )}
+
+
+            {this.props.token !== null ? (
+              <Menu.Item key="4">
+                <Link to={`/profile/${this.props.userId}`}>Result</Link>
+              </Menu.Item>
+            ) : null}
+
+            {this.props.token !== null && this.props.is_teacher ? (
+              <Menu.Item key="5">
+                <Link to="/create">Create Questions </Link>
+              </Menu.Item>
+            ) : null}
 
 
 
-                    {this.props.token !== null ? (
-                      <Nav.Link className="a" key="4">
-                        <Link to={`/profile/${this.props.userId}`}><div className="a"><h5>Result</h5></div></Link>
-                      </Nav.Link>
-                    ) : null}
+            {this.props.isAuthenticated ? (
+              <Menu.Item key="3" onClick={this.props.logout}>
+                Logout
+              </Menu.Item>
+              /* </Menu.Item><Menu.Item key="3">
+                <Link to="/logout"> Logout</Link>
 
-                    {this.props.token !== null && this.props.is_teacher ? (
-                      <Nav.Link className="a" key="5">
-                        <Link to="/create"><div className="a"><h5>Create Question</h5></div> </Link>
-                      </Nav.Link>
-                    ) : null}
+              </Menu.Item>
+              */
 
+            ) : null}
 
-                    {this.props.isAuthenticated ? (
-                      null
+            {this.props.isAuthenticated ? (
+              null
 
-                    ) : (
-                        <Nav.Link className="a" key="9">
-                          <Link to="/signup"><div className="a"><h5>Signup</h5></div></Link>
-                        </Nav.Link>
-                      )}
-
-                    {this.props.isAuthenticated ? (
-
-                      <Nav.Link key="10" onClick={this.props.logout}>
-                        <div className="a"><h5>Logout</h5></div>
-                      </Nav.Link>
-
-
-                    ) : (
-                        null
-                      )}
-                    <div className="a">
-                      <Nav.Link key="10" >
-                        <div className="a"><h5></h5></div>
-                      </Nav.Link>
-                    </div>
-
-                  </Nav>
-                </div>
-
-              </Navbar.Collapse>
-
-            </div>
-          </Navbar>
-        </header>
+            ) : (
+                <Menu.Item key="9">
+                  <Link to="/signup">Signup</Link>
+                </Menu.Item>
+              )}
 
 
 
 
+          </Menu>
+        </Header>
+        <Content style={{ padding: "0 50px" }}>
+          <Breadcrumb style={{ margin: "16px 0" }}>
 
-        {/* <Content style={{ background: "cornsilk", padding: 24, height: "100vh" }} >
 
-          <div >
-            {this.props.children}
-          </div>
-        </Content> */}
-        <Content style={{ padding: "20px 20px " }}>
+            <Breadcrumb.Item>
+              <Link to="/">Exam Player </Link>
+            </Breadcrumb.Item>
 
-          <div style={{ background: "cornsilk", padding: 24, minHeight: 280 }}>
+          </Breadcrumb>
+          <div style={{ background: "#fff", padding: 24, minHeight: 280 }}>
             {this.props.children}
           </div>
         </Content>
 
+        <MDBFooter color="red" className="font-small pt-3 mt-2">
 
-        <footer className="footer">
-          <Container fluid>
-            <nav className="pull-left">
-              <ul>
-                <li>
-                  <a href="/">Home</a>
-                </li>
-                <li>
-                  <a href="/linb1">Company</a>
-                </li>
-                <li>
-                  <a href="/exam">Exam</a>
-                </li>
-                <li>
-                  <a href="/">Blog</a>
-                </li>
-              </ul>
-            </nav>
-            <p className="copyright pull-right">
-              &copy; {new Date().getFullYear()}{" "}
-              <a href="http://www.linb1.com">
-                LinB1
-            </a>
-            , made with <HeartTwoTone twoToneColor="#eb2f96" />  for a better web
-
-          </p>
-          </Container>
-        </footer>
-
-      </div>
+          <div className="footer-copyright text-center">
+            <MDBContainer fluid>
+              &copy; {new Date().getFullYear()}  <b > LinB1 </b>
+            </MDBContainer>
+          </div>
+        </MDBFooter>
+      </Layout >
     );
   }
 }
