@@ -3,40 +3,39 @@ import * as actionTypes from "./actionTypes";
 
 const getASNTListStart = () => {
   return {
-    type: actionTypes.GET_ASSIGNMENT_LIST_START
+    type: actionTypes.GET_ASSIGNMENT_LIST_START,
   };
 };
 
-const getASNTListSuccess = assignments => {
+const getASNTListSuccess = (assignments) => {
   return {
     type: actionTypes.GET_ASSIGNMENTS_LIST_SUCCESS,
-    assignments
+    assignments,
   };
 };
 
-const getASNTListFail = error => {
+const getASNTListFail = (error) => {
   return {
     type: actionTypes.GET_ASSIGNMENTS_LIST_FAIL,
-    error: error
+    error: error,
   };
 };
 
-export const getASNTS = token => {
-  return dispatch => {
+export const getASNTS = (token) => {
+  return (dispatch) => {
     dispatch(getASNTListStart());
     axios.defaults.headers = {
       "Content-Type": "application/json",
-      Authorization: `Token ${token}`
+      Authorization: `Token ${token}`,
     };
     axios
       //.get("https://rk-mcq.herokuapp.com/assignments/")
       .get("http://127.0.0.1:8000/assignments/")
-      .then(res => {
+      .then((res) => {
         const assignments = res.data;
         dispatch(getASNTListSuccess(assignments));
-
       })
-      .catch(err => {
+      .catch((err) => {
         dispatch(getASNTListFail());
       });
   };
@@ -44,39 +43,39 @@ export const getASNTS = token => {
 
 const getASNTDetailStart = () => {
   return {
-    type: actionTypes.GET_ASSIGNMENT_DETAIL_START
+    type: actionTypes.GET_ASSIGNMENT_DETAIL_START,
   };
 };
 
-const getASNTDetailSuccess = assignment => {
+const getASNTDetailSuccess = (assignment) => {
   return {
     type: actionTypes.GET_ASSIGNMENT_DETAIL_SUCCESS,
-    assignment
+    assignment,
   };
 };
 
-const getASNTDetailFail = error => {
+const getASNTDetailFail = (error) => {
   return {
     type: actionTypes.GET_ASSIGNMENT_DETAIL_FAIL,
-    error: error
+    error: error,
   };
 };
 
 export const getASNTSDetail = (token, id) => {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(getASNTDetailStart());
     axios.defaults.headers = {
       "Content-Type": "application/json",
-      Authorization: `Token ${token}`
+      Authorization: `Token ${token}`,
     };
     axios
       //.get(`https://rk-mcq.herokuapp.com/assignments/${id}/`)
       .get(`http://127.0.0.1:8000/assignments/${id}/`)
-      .then(res => {
+      .then((res) => {
         const assignment = res.data;
         dispatch(getASNTDetailSuccess(assignment));
       })
-      .catch(err => {
+      .catch((err) => {
         dispatch(getASNTDetailFail());
       });
   };
@@ -84,38 +83,38 @@ export const getASNTSDetail = (token, id) => {
 
 const createASNTStart = () => {
   return {
-    type: actionTypes.CREATE_ASSIGNMENT_START
+    type: actionTypes.CREATE_ASSIGNMENT_START,
   };
 };
 
-const createASNTSuccess = assignment => {
+const createASNTSuccess = (assignment) => {
   return {
     type: actionTypes.CREATE_ASSIGNMENT_SUCCESS,
-    assignment
+    assignment,
   };
 };
 
-const createASNTFail = error => {
+const createASNTFail = (error) => {
   return {
     type: actionTypes.CREATE_ASSIGNMENT_FAIL,
-    error: error
+    error: error,
   };
 };
 
 export const createASNT = (token, asnt) => {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(createASNTStart());
     axios.defaults.headers = {
       "Content-Type": "application/json",
-      Authorization: `Token ${token}`
+      Authorization: `Token ${token}`,
     };
     axios
       //.post(`https://rk-mcq.herokuapp.com/assignments/`, asnt)
-      .get("http://127.0.0.1:8000/assignments/", asnt)
-      .then(res => {
+      .post("http://127.0.0.1:8000/assignments/", asnt)
+      .then((res) => {
         dispatch(createASNTSuccess());
       })
-      .catch(err => {
+      .catch((err) => {
         dispatch(createASNTFail());
       });
   };

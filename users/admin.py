@@ -56,6 +56,10 @@ class UserAdmin(UserAdmin):
     list_display_links = ('username',)
     search_fields = ('username', 'mobile', )
 
+    
+            
+
+        
 # Define a new User admin
 # @admin.register(User)
 # class UserAdmin(admin.ModelAdmin):
@@ -72,14 +76,40 @@ class UserAdmin(UserAdmin):
 
 @admin.register(MyStudent)
 class StudentAdmin(admin.ModelAdmin):
-    list_display = ['user', 'is_accepted', 'is_deleted']
-    search_fields = ('user', )
-    list_editable = ('is_accepted', 'is_deleted')
+    list_display = ['user', 'is_accepted', ]
+    search_fields = ('user__username', )
+    list_editable = ('is_accepted',)
+    
+    def get_queryset(self, request):
 
+        if request.user.is_superuser==False:
 
+            self.list_display = ['user','mobile', 'is_accepted', ]
+            self.list_editable =('is_accepted', )
+            self.search_fields = ('user__username',)
+            self.list_display_links = (None,)
+            teacher = MyTeacher.objects.get(user=request.user)
+            qs1 = MyStudent.objects.filter(teachers=teacher)
+            return qs1
+        else:
+            return MyTeacher.objects.all()
+
+@admin.register( MyTeacher)
+class TeacherAdmin(admin.ModelAdmin):
+    list_display = ['user', 'promo_code', ]
+    def get_queryset(self, request):
+
+        if request.user.is_superuser==False:
+            self.list_display = ['user', 'promo_code', ]
+            self.list_editable =('promo_code',)
+            self.list_display_links = (None,)
+            qs1 = MyTeacher.objects.filter(user=request.user)
+            return qs1
+        else:
+            return MyTeacher.objects.all()
 # admin.site.register(User, UserAdmin)
 # admin.site.register(MyStudent)
-admin.site.register(MyTeacher)
+
 
 admin.site.register(User, UserAdmin)
 # python manage.py runserver

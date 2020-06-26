@@ -3,7 +3,7 @@ from rest_auth.registration.serializers import RegisterSerializer
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 
-from .models import User
+from .models import User, MyTeacher, MyStudent
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -66,3 +66,36 @@ class TokenSerializer(serializers.ModelSerializer):
             'is_student': is_student,
             'is_teacher': is_teacher
         }
+
+
+'''
+
+
+
+Now we are going to add a student to teacher
+
+
+Step 1 , get the promo code from a student 
+let promo code = pc
+let username = student 
+Step 2, 
+match the promo code
+t = MyTeacher.objects.get(promo_code=pc)
+
+s = User.objects.get(username="student")
+
+Step 3, if match any promocode then
+
+create my student 
+ms = MyStudent()
+>>> ms.teachers = x
+>>> ms.user = y
+>>> ms.save()
+>>> ms
+'''
+
+class MyStudentSerializer(serializers.ModelSerializer):
+    username = serializers.ReadOnlyField()
+    class Meta:
+        model = MyStudent
+        fields = ('__all__')

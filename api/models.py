@@ -14,8 +14,9 @@ class CustomDateTimeField(models.DateTimeField):
 class Assignment(models.Model):
     title = models.CharField(max_length=300)
     teacher = models.ForeignKey(User, on_delete=models.CASCADE)
-    is_hide = models.BooleanField(default=True)
+    is_hide = models.BooleanField(default=True,verbose_name="Private" )
     time_in_min = models.IntegerField(null=True)
+    negative_marking = models.BooleanField(default=True, blank=True)
 
     def __str__(self):
         return self.title
@@ -31,6 +32,7 @@ class Assignment(models.Model):
 
     class Meta:
         verbose_name = "Exam"
+
 
 
 class GradedAssignment(models.Model):

@@ -42,7 +42,7 @@ class AssignmentSerializer(serializers.ModelSerializer):
         assignment.teacher = teacher
         assignment.title = data['title']
         assignment.save()
-
+        print('hello------------')
         order = 1
         for q in data['questions']:
             newQ = Question()
@@ -124,8 +124,9 @@ class GradedAssignmentSerializer(serializers.ModelSerializer):
         # print("right answer", right_answer)
         # print("wrong anser", wrong_answer)
         # print("blank", blank)
-        om = graded_asnt.right_answer - wrong_answer * .25
-
+        om = graded_asnt.right_answer
+        if assignment.negative_marking:
+            om = graded_asnt.right_answer - wrong_answer * .25
         graded_asnt.obtained_marks = om
         grade_1 = answered_correct_count / len(questions) * 100
         grade = om / len(questions) * 100

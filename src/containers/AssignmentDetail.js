@@ -6,7 +6,7 @@ import Choices from "../components/Choices";
 import { getASNTSDetail } from "../store/actions/assignments";
 import { createGradedASNT } from "../store/actions/gradedAssignments";
 import Hoc from "../hoc/hoc";
-import Timer from './Timer';
+import Timer from "./Timer";
 import ReactToPdf from "react-to-pdf";
 //import { Button } from "antd";
 //import { Redirect } from "react-router-dom";
@@ -14,23 +14,22 @@ import ReactToPdf from "react-to-pdf";
 //mport { Counter } from '../components/test/Counter'
 const ref = React.createRef();
 const options = {
-  orientation: 'landscape',
-  unit: 'in',
-  format: [4, 2]
+  orientation: "landscape",
+  unit: "in",
+  format: [4, 2],
 };
 class AssignmentDetail extends React.Component {
   state = {
     usersAnswers: {},
     //isSubmit: "No"
-
   };
 
   constructor() {
-    super()
+    super();
     this.state = {
       usersAnswers: {},
-      isSubmit: "No"
-    }
+      isSubmit: "No",
+    };
   }
 
   changeSubmit = () => {
@@ -38,8 +37,6 @@ class AssignmentDetail extends React.Component {
     // this.isSubmit = "Yes"
     this.setState({ isSubmit: "Yes" });
   };
-
-
 
   componentDidMount() {
     if (this.props.token !== undefined && this.props.token !== null) {
@@ -67,12 +64,12 @@ class AssignmentDetail extends React.Component {
     const asnt = {
       username: this.props.username,
       asntId: this.props.currentAssignment.id,
-      answers: usersAnswers
+      answers: usersAnswers,
     };
     this.props.createGradedASNT(this.props.token, asnt);
     //this.refs.btn.setAttribute("disabled", "disabled");
     this.btn.setAttribute("disabled", "disabled");
-    this.changeSubmit()
+    this.changeSubmit();
 
     //this.btn.removeAttribute("disabled");
     // this.props.history.push("/");
@@ -92,109 +89,88 @@ class AssignmentDetail extends React.Component {
       <Hoc>
         {Object.keys(currentAssignment).length > 0 ? (
           <Hoc>
-
             {this.props.loading ? (
               <Skeleton active />
             ) : (
+              <div className="App" style={{ margin: "auto" }}>
+                {this.state.isSubmit === "Yes" ? (
+                  <ReactToPdf targetRef={ref} filename="exam-player.pdf">
+                    {({ toPdf }) => <button onClick={toPdf}></button>}
+                  </ReactToPdf>
+                ) : (
+                  ""
+                )}
+                <div ref={ref}>
+                  <center>
+                    <h1 style={{ color: "black" }}>{batch}</h1>
+                    <h2>
+                      {title}
+                      <br></br>
 
+                      <small> Total marks : {total_marks} </small>
+                    </h2>
 
+                    <Timer startCount={time_in_min * 60} />
+                  </center>
 
-                <div className="App" style={{ margin: "auto" }}>
-                  {this.state.isSubmit === "Yes" ?
-                    <ReactToPdf targetRef={ref} filename="exam-player.pdf" >
-                      {({ toPdf }) => (
-                        <button onClick={toPdf}></button>
-                      )}
-                    </ReactToPdf>
-                    : ""}
-                  <div ref={ref}>
-                    <center>
-
-                      <h1 style={{ color: "black" }}>{batch}</h1>
-                      <h2  >
-                        {title}<br></br>
-
-                        <small> Total marks : {total_marks} </small>
-                      </h2>
-
-                      <Timer startCount={time_in_min * 60} />
-
-                    </center>
-
-                    {currentAssignment.questions.map(q => {
-                      return (
-
-                        <Card
-
-
-                          key={q.id}
-
-                        >
-                          <strong> {`${q.order}. ${q.question}`}</strong>
-                          <br></br>
-                          <div>
-                            <Choices
-                              isSubmit={this.state.isSubmit}
-                              questionId={q.order}
-                              choices={q.choices}
-                              change={this.onChange}
-                              answer={q.answer}
-                              usersAnswers={usersAnswers}
-                            />
-                          </div>
-
-                        </Card>
-
-                      );
-
-
-                    })}
-                    <br>
-                    </br>
-                    <center>
-                      <button ref={btn => { this.btn = btn; }}
-                        style={{ color: "red" }}
-                        type="primary" onClick={() => {
-                          this.handleSubmit()
-
-
-                        }}>
-                        Submit
-          </button>
-
-
-
-                    </center>
-
-                  </div>
-
+                  {currentAssignment.questions.map((q) => {
+                    return (
+                      <Card key={q.id}>
+                        <strong> {`${q.order}. ${q.question}`}</strong>
+                        <br></br>
+                        <div>
+                          <Choices
+                            isSubmit={this.state.isSubmit}
+                            questionId={q.order}
+                            choices={q.choices}
+                            change={this.onChange}
+                            answer={q.answer}
+                            usersAnswers={usersAnswers}
+                          />
+                        </div>
+                      </Card>
+                    );
+                  })}
+                  <br></br>
+                  <center>
+                    <button
+                      className="btn btn-danger"
+                      ref={(btn) => {
+                        this.btn = btn;
+                      }}
+                      style={{ color: "white" }}
+                      type="primary"
+                      onClick={() => {
+                        this.handleSubmit();
+                      }}
+                    >
+                      Submit
+                    </button>
+                  </center>
                 </div>
-              )}
+              </div>
+            )}
           </Hoc>
-        ) : null
-        }
+        ) : null}
       </Hoc>
     );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     token: state.auth.token,
     currentAssignment: state.assignments.currentAssignment,
     loading: state.assignments.loading,
-    username: state.auth.username
+    username: state.auth.username,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     getASNTSDetail: (token, id) => dispatch(getASNTSDetail(token, id)),
-    createGradedASNT: (token, asnt) => dispatch(createGradedASNT(token, asnt))
+    createGradedASNT: (token, asnt) => dispatch(createGradedASNT(token, asnt)),
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AssignmentDetail);
+export default connect(mapStateToProps, mapDispatchToProps)(AssignmentDetail);

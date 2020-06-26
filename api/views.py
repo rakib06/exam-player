@@ -33,9 +33,17 @@ class AssignmentViewSet(viewsets.ModelViewSet):
             return queryset
 
         else:
+            
+            # don't show exam after a student have finished it
             queryset = Assignment.objects.filter(is_hide=False)
+            esa = GradedAssignment.objects.filter(student__username=username )
+            # esa = GradedAssignment.objects.filter(student__username=username )
+            # esa = GradedAssignment._meta.get_field('assignmet')
+            done = []
+            for item in esa:
+                done.append(item.assignment)
             # print('Studenrt--------------------------<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>...')
-
+            queryset = queryset.exclude(assignment__in=done)
             return queryset
 
     def create(self, request):
