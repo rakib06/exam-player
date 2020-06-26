@@ -1,117 +1,104 @@
-import React, { Component } from "react";
-import { Form, Input, Button, Select } from "antd";
+import React from "react";
+import { Form, Input, Button,  message } from "antd";
 
-const { Option } = Select;
-const layout = {
-  labelCol: {
-    span: 8,
-  },
-  wrapperCol: {
-    span: 16,
-  },
-};
-const tailLayout = {
-  wrapperCol: {
-    offset: 8,
-    span: 16,
-  },
-};
+import { connect } from "react-redux";
+import { createVRF } from "../store/actions/mystudents";
+const FormItem = Form.Item;
+
 
 class VerifyCreate extends React.Component {
   formRef = React.createRef();
 
   onRoomChange = (value) => {
     this.formRef.current.setFieldsValue({
-      note: `Hi, ${value === "male" ? "man" : "lady"}!`,
+      note: `Hi, ${value === "SSC" ? "Good Job" : "Good Luck"}!`,
     });
   };
 
-  onFinish = (values) => {
-    console.log(values);
-  };
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        console.log("Received values of form: ", values);
 
-  onReset = () => {
-    this.formRef.current.resetFields();
-  };
-
-  onFill = () => {
-    this.formRef.current.setFieldsValue({
-      note: "Hello world!",
-      Room: "male",
+        const vrf = {
+          student: this.props.username,
+          // bujhte hibe
+          code: values.code,
+          class_id: values.class_id,
+        };
+        this.props.createVRF(this.props.token, vrf);
+        message.success("Thank you!  Please wait for verification");
+        //this.props.history.push("/");
+      }
     });
   };
 
   render() {
+    const { getFieldDecorator } = this.props.form;
     return (
-      <Form
-        {...layout}
-        ref={this.formRef}
-        name="control-ref"
-        onFinish={this.onFinish}
-      >
-        <Form.Item
-          name="code"
-          label="Verification Code"
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-        >
-          <Input placeholder="Please contact your teacher for this code" />
-        </Form.Item>
-        <Form.Item
-          name="class"
-          label="Classroom "
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-        >
-          <Select
-            placeholder="Select a option and change input text above"
-            onChange={this.onRoomChange}
-            allowClear
-          >
-            <Option value="Admission">Admission</Option>
-            <Option value="HSC">HSC</Option>
-            <Option value="SSC">SSC</Option>
-            <Option value="Other">other</Option>
-          </Select>
-        </Form.Item>
-        <Form.Item
-          noStyle
-          shouldUpdate={(prevValues, currentValues) =>
-            prevValues.Room !== currentValues.Room
-          }
-        >
-          {({ getFieldValue }) =>
-            getFieldValue("Room") === "other" ? (
-              <Form.Item
-                name="customizeRoom"
-                label="Customize Room"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-            ) : null
-          }
-        </Form.Item>
-        <Form.Item {...tailLayout}>
+      <Form onSubmit={this.handleSubmit}>
+        <FormItem label={""}>
+          <center>
+            <b> Account Verification for {this.props.username} </b>
+          </center>
+          <center>
+            <span> Account Verification Code </span>
+          </center>
+
+          {getFieldDecorator(`code`, {
+            validateTrigger: ["onChange", "onBlur"],
+            rules: [
+              {
+                required: true,
+                message: "Please input verification code",
+              },
+            ],
+          })(<Input placeholder="Write teacher verification code here" />)}
+        </FormItem>
+        <FormItem label={""}>
+          <center>
+            <span> Class / Classroom ID </span>
+          </center>
+
+          {getFieldDecorator(`class_id`, {
+            validateTrigger: ["onChange", "onBlur"],
+            rules: [
+              {
+                required: true,
+                message: "Please input your classroom ID or class",
+              },
+            ],
+          })(
+            <Input placeholder=" classroom ID or class ( SSC/HSC/9/10/Admission etc.)" />
+          )}
+        </FormItem>
+        <FormItem>
           <Button type="danger" htmlType="submit">
-            Send
+            Submit
           </Button>
-        </Form.Item>
+        </FormItem>
       </Form>
     );
   }
 }
-
 const WrappedVerifyCreate = Form.create()(VerifyCreate);
 
-export default WrappedVerifyCreate;
+const mapStateToProps = (state) => {
+  return {
+    token: state.auth.token,
+    username: state.auth.username,
+    loading: state.assignments.loading,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createVRF: (token, vrf) => dispatch(createVRF(token, vrf)),
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(WrappedVerifyCreate);

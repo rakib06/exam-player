@@ -99,3 +99,21 @@ class MyStudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = MyStudent
         fields = ('__all__')
+    def create(self, request):
+        data = request.data
+        t = MyTeacher.objects.get(promo_code=data['code'])
+        student = User.objects.get(username=data['student'])
+        class_id = data['class_id']
+        if len(MyStudent.objects.filter(user=student))>0:
+            return None
+        else:
+         
+            try:   
+                ms = MyStudent()
+                ms.teachers = t
+                ms.user = student
+                ms.class_id = class_id
+                ms.save()
+                return ms
+            except:
+                return None

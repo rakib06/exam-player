@@ -33,7 +33,7 @@ class MyStudent(models.Model):
     user = models.ForeignKey(
         User, null=True, on_delete=models.SET_NULL, verbose_name='Student')
     is_accepted = models.BooleanField(default=False, verbose_name='Accept')
-    
+    class_id = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):
         return self.user.username

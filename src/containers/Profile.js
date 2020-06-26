@@ -26,93 +26,112 @@ class Profile extends React.PureComponent {
         {this.props.loading ? (
           <Skeleton active />
         ) : (
+          <Hoc>
+            <h5 style={{ textAlign: "center" }}>
+              Progress Report: {this.props.username}
+            </h5>
 
-            <Hoc>
-              <h1>Progress Report: {this.props.username}</h1>
+            <div class="row" style={{}}>
+              <List
+                size="small"
+                dataSource={this.props.gradedAssignments}
+                renderItem={(a) => (
+                  <Card>
+                    <h6>
+                      <strong> Exam : {a.assignment_title} </strong>(
+                      {a.exam_start_at})
+                      <small style={{ color: "red" }}> </small>
+                      <Result key={a.id} grade={a.grade} />
+                      <strong style={{ color: " crimson" }}>
+                        {" "}
+                        {a.obtained_marks === a.highest ? (
+                          <h6>
+                            {" "}
+                            Congratulations!!!!{" "}
+                            <span role="img">&#127942;</span>{" "}
+                          </h6>
+                        ) : (
+                          ""
+                        )}
+                      </strong>
+                    </h6>
 
-              <div class="row">
+                    <h6>
+                      {" "}
+                      {" Your Score: "}{" "}
+                      <strong style={{ color: "green" }}>
+                        {" "}
+                        {a.obtained_marks}
+                      </strong>{" "}
+                      <small>{"out of "}</small>
+                      <strong style={{ color: "purple" }}>
+                        {" "}
+                        {a.total_marks}
+                      </strong>{" "}
+                      ({" "}
+                      <q style={{ color: "firebrick" }}>
+                        {" "}
+                        Highest : {a.highest}{" "}
+                      </q>{" "}
+                      ){" "}
+                    </h6>
 
-                <List
-                  size="small"
-                  dataSource={this.props.gradedAssignments}
-                  renderItem={a =>
-                    <div class="col-12">
-                      <div>
-                        <hr></hr>
-                        <p>
-                          <h3>
+                    <p>
+                      <h6>
+                        {" "}
+                        <span role="img">&#127941;</span> <small>Rank: </small>{" "}
+                        <strong style={{ color: " crimson" }}>
+                          {" "}
+                          {a.rank}{" "}
+                        </strong>{" "}
+                        <span role="img"> &#9621; &#127943; </span> Contestant :{" "}
+                        <strong style={{ color: "green" }}>
+                          {" "}
+                          {a.total_participant}
+                        </strong>
+                      </h6>
+                    </p>
 
-                            <strong>  Exam : {a.assignment_title} </strong>
-                            <small style={{ color: 'red' }}> </small>
-                          </h3>
-                          <br></br>
-                          {a.exam_start_at}
-                        </p>
-
-                        <Result key={a.id} grade={a.grade} />
-
-                        <div>
-                          <p>
-                            <h1><strong style={{ color: ' crimson' }} > {a.obtained_marks === a.highest ? <h1> Congratulations!!!!  &#127942;  </h1> : ""}</strong></h1>
-
-                            <h2> {" Your Score: "}  <strong style={{ color: 'green' }}> {a.obtained_marks}</strong> <small>{"out of "}</small>
-                              <strong style={{ color: 'purple' }}> {a.total_marks}</strong> ( <q style={{ color: 'firebrick' }}> Highest : {a.highest} </q> ) </h2>
-                          </p>
-                          <p>
-                            <h2> &#127941; <small>Rank: </small> <strong style={{ color: ' crimson' }}> {a.rank}  </strong> &#9621; &#127943; Contestant :  <strong style={{ color: 'green' }}> {a.total_participant}</strong></h2>
-                          </p>
-
-
-                        </div>
-
-                        <Card>
-
-                          <p>
-                            <strong> &#9996; Right Answer: <b style={{ color: 'green' }} >{a.right_answer} </b></strong> </p>
-                          <strong > &#9940; Wrong Answer:  <b style={{ color: 'red' }}> {-(a.right_answer - a.obtained_marks)} </b></strong>
-
-                        </Card>
-
-                        <hr></hr>
-
-                      </div>
-                    </div>
-
-
-
-
-                  }
-
-                />
-
-
-              </div>
-
-            </Hoc>
-
-          )}
+                    <p>
+                      <strong>
+                        {" "}
+                        <span role="img">&#9996; </span> Right Answer:{" "}
+                        <b style={{ color: "green" }}>{a.right_answer} </b>
+                      </strong>{" "}
+                    </p>
+                    <strong>
+                      {" "}
+                      <span role="img"> &#9940;</span> Wrong Answer:{" "}
+                      <b style={{ color: "red" }}>
+                        {" "}
+                        {-(a.right_answer - a.obtained_marks)}{" "}
+                      </b>
+                    </strong>
+                  </Card>
+                )}
+              />
+            </div>
+          </Hoc>
+        )}
       </Hoc>
     );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     token: state.auth.token,
     username: state.auth.username,
     gradedAssignments: state.gradedAssignments.assignments,
-    loading: state.gradedAssignments.loading
+    loading: state.gradedAssignments.loading,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     getGradedASNTS: (username, token) =>
-      dispatch(getGradedASNTS(username, token))
+      dispatch(getGradedASNTS(username, token)),
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Profile);
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

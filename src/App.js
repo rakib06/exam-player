@@ -4,9 +4,9 @@ import { connect } from "react-redux";
 import BaseRouter from "./routes";
 import "antd/dist/antd.css";
 import * as actions from "./store/actions/auth";
-import { Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
+
 import CustomLayout from "./containers/Layout";
-import Navbar from 'react-bootstrap/Navbar'
+
 
 class App extends Component {
   componentDidMount() {
@@ -15,7 +15,6 @@ class App extends Component {
 
   render() {
     return (
-
       <Router>
         <CustomLayout {...this.props}>
           <BaseRouter />
@@ -25,19 +24,16 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    isAuthenticated: state.auth.token !== null
+    isAuthenticated: state.auth.token !== null,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    onTryAutoSignup: () => dispatch(actions.authCheckState())
+    onTryAutoSignup: () => dispatch(actions.authCheckState()),
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

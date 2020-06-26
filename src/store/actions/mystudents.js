@@ -39,3 +39,42 @@ export const getMyStu = (token) => {
       });
   };
 };
+
+const createVRFStart = () => {
+  return {
+    type: actionTypes.CREATE_VRF_START,
+  };
+};
+
+const createVRFSuccess = (vrf) => {
+  return {
+    type: actionTypes.CREATE_VRF_SUCCESS,
+    vrf,
+  };
+};
+
+const createVRFFail = (error) => {
+  return {
+    type: actionTypes.CREATE_VRF_FAIL,
+    error: error,
+  };
+};
+
+export const createVRF = (token, vrf) => {
+  return (dispatch) => {
+    dispatch(createVRFStart());
+    axios.defaults.headers = {
+      "Content-Type": "application/json",
+      Authorization: `Token ${token}`,
+    };
+    axios
+      //.post(`https://rk-mcq.herokuapp.com/assignments/`, asnt)
+      .post("http://127.0.0.1:8000/verify/", vrf)
+      .then((res) => {
+        dispatch(createVRFSuccess());
+      })
+      .catch((err) => {
+        dispatch(createVRFFail());
+      });
+  };
+};

@@ -25,3 +25,7 @@ export const GET_GRADED_ASSIGNMENTS_LIST_SUCCESS =
 export const GET_MyStudent_LIST_START = "GET_MyStudent_LIST_START";
 export const GET_MyStudentLIST_FAIL = "GET_MyStudent_LIST_FAIL";
 export const GET_MyStudent_LIST_SUCCESS = "GET_MyStudent_LIST_SUCCESS";
+
+export const CREATE_VRF_START = "CREATE_VRF_START";
+export const CREATE_VRF_FAIL = "CREATE_VRF_FAIL";
+export const CREATE_VRF_SUCCESS = "CREATE_VRF_SUCCESS";

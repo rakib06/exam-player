@@ -8,7 +8,7 @@ const radioStyle = {
   height: "30px",
   lineHeight: "30px"
 };
-var marks = 0;
+
 class Choices extends React.Component {
   render() {
     const { questionId } = this.props;
