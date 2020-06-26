@@ -41,7 +41,7 @@ export const authLogin = (username, password) => {
     dispatch(authStart());
     axios
       //.post("https://rk-mcq.herokuapp.com/rest-auth/login/", {
-      .post("https://rk-mcq.herokuapp.com0/rest-auth/login/", {
+      .post("https://rk-mcq.herokuapp.com/rest-auth/login/", {
         username: username,
         password: password,
       })
@@ -83,7 +83,7 @@ export const authSignup = (
     };
     axios
       //.post("https://rk-mcq.herokuapp.com/rest-auth/registration/", user)
-      .post("https://rk-mcq.herokuapp.com0/rest-auth/registration/", user)
+      .post("https://rk-mcq.herokuapp.com/rest-auth/registration/", user)
       .then((res) => {
         const user = {
           token: res.data.key,

@@ -30,7 +30,7 @@ export const getASNTS = (token) => {
     };
     axios
       //.get("https://rk-mcq.herokuapp.com/assignments/")
-      .get("https://rk-mcq.herokuapp.com0/assignments/")
+      .get("https://rk-mcq.herokuapp.com/assignments/")
       .then((res) => {
         const assignments = res.data;
         dispatch(getASNTListSuccess(assignments));
@@ -70,7 +70,7 @@ export const getASNTSDetail = (token, id) => {
     };
     axios
       //.get(`https://rk-mcq.herokuapp.com/assignments/${id}/`)
-      .get(`https://rk-mcq.herokuapp.com0/assignments/${id}/`)
+      .get(`https://rk-mcq.herokuapp.com/assignments/${id}/`)
       .then((res) => {
         const assignment = res.data;
         dispatch(getASNTDetailSuccess(assignment));
@@ -110,7 +110,7 @@ export const createASNT = (token, asnt) => {
     };
     axios
       //.post(`https://rk-mcq.herokuapp.com/assignments/`, asnt)
-      .post("https://rk-mcq.herokuapp.com0/assignments/", asnt)
+      .post("https://rk-mcq.herokuapp.com/assignments/", asnt)
       .then((res) => {
         dispatch(createASNTSuccess());
       })
