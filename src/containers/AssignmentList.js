@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { List, Skeleton, Divider } from "antd";
+import { List, Skeleton, Divider, Card } from "antd";
 import * as actions from "../store/actions/assignments";
 import Hoc from "../hoc/hoc";
 
