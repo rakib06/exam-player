@@ -1,10 +1,9 @@
 import React from "react";
-import { Form, Input, Button,  message } from "antd";
+import { Form, Input, Button, message, List } from "antd";
 
 import { connect } from "react-redux";
 import { createVRF } from "../store/actions/mystudents";
 const FormItem = Form.Item;
-
 
 class VerifyCreate extends React.Component {
   formRef = React.createRef();
@@ -78,6 +77,21 @@ class VerifyCreate extends React.Component {
             Submit
           </Button>
         </FormItem>
+        <List>
+          <p>
+            <b style={{ fontSize: "17px" }}>
+              <a href="https://www.facebook.com/groups/2693927037547637/">
+                {" "}
+                Join Facebook Group | পছন্দের-সব.কম
+              </a>
+              <p>
+                প্রিয় শহরের প্রিয় শপ থেকে সরাসরি হোম ডেলিভারি। বই,
+                ইলেক্ট্রনিক্স, মোবাইল, কম্পিটার এক্সেসরিজ, ড্রেস, এবং সবকিছুই
+                পাচ্ছেন ফেইসবুক গ্রূপ বা আমাদের ওয়েবসাইট থেকে।{" "}
+              </p>
+            </b>
+          </p>
+        </List>
       </Form>
     );
   }
