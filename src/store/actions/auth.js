@@ -3,33 +3,33 @@ import * as actionTypes from "./actionTypes";
 
 export const authStart = () => {
   return {
-    type: actionTypes.AUTH_START
+    type: actionTypes.AUTH_START,
   };
 };
 
-export const authSuccess = user => {
+export const authSuccess = (user) => {
   return {
     type: actionTypes.AUTH_SUCCESS,
-    user
+    user,
   };
 };
 
-export const authFail = error => {
+export const authFail = (error) => {
   return {
     type: actionTypes.AUTH_FAIL,
-    error: error
+    error: error,
   };
 };
 
 export const logout = () => {
   localStorage.removeItem("user");
   return {
-    type: actionTypes.AUTH_LOGOUT
+    type: actionTypes.AUTH_LOGOUT,
   };
 };
 
-export const checkAuthTimeout = expirationTime => {
-  return dispatch => {
+export const checkAuthTimeout = (expirationTime) => {
+  return (dispatch) => {
     setTimeout(() => {
       dispatch(logout());
     }, expirationTime * 1000);
@@ -37,28 +37,28 @@ export const checkAuthTimeout = expirationTime => {
 };
 
 export const authLogin = (username, password) => {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(authStart());
     axios
       //.post("https://rk-mcq.herokuapp.com/rest-auth/login/", {
-      .post("http://127.0.0.1:8000/rest-auth/login/", {
+      .post("https://rk-mcq.herokuapp.com0/rest-auth/login/", {
         username: username,
-        password: password
+        password: password,
       })
-      .then(res => {
+      .then((res) => {
         const user = {
           token: res.data.key,
           username,
           userId: res.data.user,
           is_student: res.data.user_type.is_student,
           is_teacher: res.data.user_type.is_teacher,
-          expirationDate: new Date(new Date().getTime() + 36000000 * 1000)
+          expirationDate: new Date(new Date().getTime() + 36000000 * 1000),
         };
         localStorage.setItem("user", JSON.stringify(user));
         dispatch(authSuccess(user));
         dispatch(checkAuthTimeout(36000000));
       })
-      .catch(err => {
+      .catch((err) => {
         dispatch(authFail(err));
       });
   };
@@ -71,7 +71,7 @@ export const authSignup = (
   password2,
   is_student
 ) => {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(authStart());
     const user = {
       username,
@@ -79,32 +79,32 @@ export const authSignup = (
       password1,
       password2,
       is_student,
-      is_teacher: !is_student
+      is_teacher: !is_student,
     };
     axios
       //.post("https://rk-mcq.herokuapp.com/rest-auth/registration/", user)
-      .post("http://127.0.0.1:8000/rest-auth/registration/", user)
-      .then(res => {
+      .post("https://rk-mcq.herokuapp.com0/rest-auth/registration/", user)
+      .then((res) => {
         const user = {
           token: res.data.key,
           username,
           userId: res.data.user,
           is_student,
           is_teacher: !is_student,
-          expirationDate: new Date(new Date().getTime() + 360000 * 100000)
+          expirationDate: new Date(new Date().getTime() + 360000 * 100000),
         };
         localStorage.setItem("user", JSON.stringify(user));
         dispatch(authSuccess(user));
         dispatch(checkAuthTimeout(36000000));
       })
-      .catch(err => {
+      .catch((err) => {
         dispatch(authFail(err));
       });
   };
 };
 
 export const authCheckState = () => {
-  return dispatch => {
+  return (dispatch) => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user === undefined || user === null) {
       dispatch(logout());

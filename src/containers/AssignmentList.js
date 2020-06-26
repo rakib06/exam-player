@@ -69,7 +69,22 @@ class AssignmentList extends React.PureComponent {
             <List
               size="large"
               footer={
-                <div style={{ textAlign: "center" }}>Stay Home, Stay Safe</div>
+                <div style={{ textAlign: "center" }}>
+                  <p>
+                    <b>
+                      {" "}
+                      Verify your account with the verification code from your
+                      teacher{" "}
+                    </b>
+                  </p>
+                  <p>
+                    <b>
+                      আপনার শিক্ষকের কাছ থেকে ভেরিফিকেশন কোডটি নিয়ে আপনার
+                      একাউন্টটি ভেরিফাই করে নিন
+                    </b>
+                  </p>
+                  Stay Home, Stay Safe
+                </div>
               }
               bordered
               dataSource={this.props.assignments}

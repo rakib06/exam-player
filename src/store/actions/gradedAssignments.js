@@ -3,60 +3,62 @@ import * as actionTypes from "./actionTypes";
 
 const getGradedASNTListStart = () => {
   return {
-    type: actionTypes.GET_GRADED_ASSIGNMENT_LIST_START
+    type: actionTypes.GET_GRADED_ASSIGNMENT_LIST_START,
   };
 };
 
-const getGradedASNTListSuccess = assignments => {
+const getGradedASNTListSuccess = (assignments) => {
   return {
     type: actionTypes.GET_GRADED_ASSIGNMENTS_LIST_SUCCESS,
-    assignments
+    assignments,
   };
 };
 
-const getGradedASNTListFail = error => {
+const getGradedASNTListFail = (error) => {
   return {
     type: actionTypes.GET_GRADED_ASSIGNMENTS_LIST_FAIL,
-    error: error
+    error: error,
   };
 };
 
 export const getGradedASNTS = (username, token) => {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(getGradedASNTListStart());
     axios.defaults.headers = {
       "Content-Type": "application/json",
-      Authorization: `Token ${token}`
+      Authorization: `Token ${token}`,
     };
     axios
       //.get(`https://rk-mcq.herokuapp.com/graded-assignments/?username=${username}`)
-      .get(`http://127.0.0.1:8000/graded-assignments/?username=${username}`)
-      .then(res => {
+      .get(
+        `https://rk-mcq.herokuapp.com0/graded-assignments/?username=${username}`
+      )
+      .then((res) => {
         const assignments = res.data;
         dispatch(getGradedASNTListSuccess(assignments));
       })
-      .catch(err => {
+      .catch((err) => {
         dispatch(getGradedASNTListFail(err));
       });
   };
 };
 
 export const createGradedASNT = (token, asnt) => {
-  return dispatch => {
+  return (dispatch) => {
     //   dispatch(createASNTStart());
     axios.defaults.headers = {
       "Content-Type": "application/json",
-      Authorization: `Token ${token}`
+      Authorization: `Token ${token}`,
     };
     axios
       //.post(`https://rk-mcq.herokuapp.com/graded-assignments/create/`, asnt)
-      .post(`http://127.0.0.1:8000/graded-assignments/create/`, asnt)
-      .then(res => {
+      .post(`https://rk-mcq.herokuapp.com0/graded-assignments/create/`, asnt)
+      .then((res) => {
         console.log("success");
-        console.log(asnt)
+        console.log(asnt);
         //   dispatch(createASNTSuccess());
       })
-      .catch(err => {
+      .catch((err) => {
         //   dispatch(createASNTFail());
       });
   };
