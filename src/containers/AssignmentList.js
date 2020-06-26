@@ -86,28 +86,35 @@ class AssignmentList extends React.PureComponent {
               size="large"
               footer={
                 <div style={{ textAlign: "center" }}>
-                  <p style={{ color: "purple" }}>
-                    <b>
-                      {" "}
-                      If your account is not verified, then please verify your
-                      account with the verification code from your teacher{" "}
-                    </b>
-                  </p>
-                  <p>
-                    <a href="https://pochonder-shob.com/"> পছন্দের-সব.কম </a>
-                  </p>
-                  <p>
-                    <b style={{ fontSize: "17px" }}>
-                      <a href="https://www.facebook.com/groups/2693927037547637/">
+                  <br></br>
+                  <br></br>
+                  <Card>
+                    <p style={{ color: "purple" }}>
+                      <b>
                         {" "}
-                        Join our Facebook Group
-                      </a>
+                        If your account is not verified, then please verify your
+                        account with the verification code from your teacher{" "}
+                      </b>
+                    </p>
+                    <p>
+                      <a href="https://pochonder-shob.com/"> পছন্দের-সব.কম </a>
+                    </p>
+
+                    <p>
+                      <b style={{ fontSize: "17px" }}>
+                        <a href="https://www.facebook.com/groups/2693927037547637/">
+                          {" "}
+                          Join our Facebook Group
+                        </a>
+                      </b>
+                    </p>
+                    <p>
                       প্রিয় শহরের প্রিয় শপ থেকে সরাসরি হোম ডেলিভারি। বই,
                       ইলেক্ট্রনিক্স, মোবাইল, কম্পিটার এক্সেসরিজ, ড্রেস, এবং
                       সবকিছুই পাচ্ছেন ফেইসবুক গ্রূপ বা আমাদের ওয়েবসাইট থেকে।{" "}
-                    </b>
-                  </p>
-                  Stay Home, Stay Safe
+                    </p>
+                    <p>Stay Home, Stay Safe</p>
+                  </Card>
                 </div>
               }
               bordered
