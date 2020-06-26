@@ -21,7 +21,7 @@ class MyTeacher(models.Model):
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, verbose_name='My Account')
     promo_code = models.CharField(max_length=50, blank=True, null=True)
     class Meta:
-        verbose_name='My PromoCode'
+        verbose_name='Verification Code'
 
     def __str__(self):
         return self.user.username
