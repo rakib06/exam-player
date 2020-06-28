@@ -1,6 +1,5 @@
 import React from "react";
-import { Form, Input, Button } from "antd";
-import Icon from "@ant-design/icons";
+import { Form, Input, Icon, Button } from "antd";
 import Hoc from "../hoc/hoc";
 
 const FormItem = Form.Item;
@@ -8,12 +7,12 @@ const FormItem = Form.Item;
 let id = 0;
 
 class QuestionForm extends React.Component {
-  remove = k => {
+  remove = (k) => {
     const { form } = this.props;
     const keys = form.getFieldValue("keys");
     if (keys.length === 1) return;
     form.setFieldsValue({
-      keys: keys.filter(key => key !== k)
+      keys: keys.filter((key) => key !== k),
     });
   };
 
@@ -22,7 +21,7 @@ class QuestionForm extends React.Component {
     const keys = form.getFieldValue("keys");
     const nextKeys = keys.concat(++id);
     form.setFieldsValue({
-      keys: nextKeys
+      keys: nextKeys,
     });
   };
 
@@ -31,7 +30,6 @@ class QuestionForm extends React.Component {
     getFieldDecorator("keys", { initialValue: [] });
     const keys = getFieldValue("keys");
     const formItems = keys.map((k, index) => (
-
       <FormItem label={index === 0 ? "" : ""} key={k}>
         <strong> {index === 0 ? "Choices (A)" : ""}</strong>
         <strong> {index === 1 ? "Choices (B)" : ""}</strong>
@@ -45,12 +43,10 @@ class QuestionForm extends React.Component {
             {
               required: true,
               whitespace: true,
-              message: "Please input a choice to the question"
-            }
-          ]
-        })(
-
-          <Input placeholder="Options/ Choice" />)}
+              message: "Please input a choice to the question",
+            },
+          ],
+        })(<Input placeholder="Options" />)}
         {keys.length > 1 ? (
           <Icon
             className="dynamic-delete-button"
@@ -64,33 +60,38 @@ class QuestionForm extends React.Component {
     return (
       <Hoc>
         <strong>
-          <h3 style={{ color: 'red' }}>
-            Querstion {this.props.id + 1}
-          </h3>
-
+          <h5 style={{ color: "red" }}>
+            {" "}
+            {this.props.id + 1}
+            {". "}
+            <span style={{ color: "purple", fontSize: "12px" }}>
+              {" "}
+              Write your Question below
+            </span>{" "}
+          </h5>
         </strong>
 
-        <FormItem >
+        <FormItem>
           {getFieldDecorator(`question[${this.props.id}]`, {
             validateTrigger: ["onChange", "onBlur"],
             rules: [
               {
                 required: true,
-                message: "Please input a question"
-              }
-            ]
+                message: "Please input a question",
+              },
+            ],
           })(<Input placeholder="Add a question" />)}
         </FormItem>
         <FormItem label="">
-          <strong style={{ color: 'green' }}> Answer (সঠিক উত্তর) </strong>
+          <strong style={{ color: "green" }}> Answer (সঠিক উত্তর) </strong>
           {getFieldDecorator(`answers[${this.props.id}]`, {
             validateTrigger: ["onChange", "onBlur"],
             rules: [
               {
                 required: true,
-                message: "Please input an answer to this question"
-              }
-            ]
+                message: "Please input an answer to this question",
+              },
+            ],
           })(<Input placeholder="What is the answer?" />)}
         </FormItem>
         {formItems}

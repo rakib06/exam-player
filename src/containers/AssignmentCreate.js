@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Form, Input, Button, Divider, message } from "antd";
-import Icon from "@ant-design/icons";
+import { Form, Input, Icon, Button, Divider, message } from "antd";
 import QuestionForm from "./QuestionForm";
 import Hoc from "../hoc/hoc";
 import { createASNT } from "../store/actions/assignments";
@@ -68,7 +67,6 @@ class AssignmentCreate extends React.Component {
               onClick={() => this.remove()}
             />
           ) : null}
-
           <QuestionForm id={i} {...this.props} />
           <Divider />
         </Hoc>
@@ -76,35 +74,33 @@ class AssignmentCreate extends React.Component {
     }
     return (
       <Form onSubmit={this.handleSubmit}>
-        <div className="b">
-          <h1>Create an Exam / Assignment</h1>
-          <FormItem label={""}>
-            <center>
-              <h2> Exam Title </h2>
-            </center>
+        <h1>Create an Exam / Assignment</h1>
+        <FormItem label={""}>
+          <center>
+            <h2> Exam Title </h2>
+          </center>
 
-            {getFieldDecorator(`title`, {
-              validateTrigger: ["onChange", "onBlur"],
-              rules: [
-                {
-                  required: true,
-                  message: "Please input a title",
-                },
-              ],
-            })(<Input placeholder="Add an exam title" />)}
-          </FormItem>
-          {questions}
-          <FormItem>
-            <Button type="secondary" onClick={this.add}>
-              <Icon type="plus" /> Add question
-            </Button>
-          </FormItem>
-          <FormItem>
-            <Button type="primary" htmlType="submit">
-              Submit
-            </Button>
-          </FormItem>
-        </div>
+          {getFieldDecorator(`title`, {
+            validateTrigger: ["onChange", "onBlur"],
+            rules: [
+              {
+                required: true,
+                message: "Please input a title",
+              },
+            ],
+          })(<Input placeholder="Add a title" />)}
+        </FormItem>
+        {questions}
+        <FormItem>
+          <Button type="secondary" onClick={this.add}>
+            <Icon type="plus" /> Add question
+          </Button>
+        </FormItem>
+        <FormItem>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+        </FormItem>
       </Form>
     );
   }
