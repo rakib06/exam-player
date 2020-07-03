@@ -29,7 +29,7 @@ export const getMyStu = (token) => {
       Authorization: `Token ${token}`,
     };
     axios
-      .get("https://rk-mcq.herokuapp.com/verify/")
+      .get("https://exam-player.com/verify/")
       .then((res) => {
         const mystudents = res.data;
         dispatch(getMyStuListSuccess(mystudents));
@@ -68,8 +68,8 @@ export const createVRF = (token, vrf) => {
       Authorization: `Token ${token}`,
     };
     axios
-      //.post(`https://rk-mcq.herokuapp.com/assignments/`, asnt)
-      .post("https://rk-mcq.herokuapp.com/verify/", vrf)
+      //.post(`https://exam-player.com/assignments/`, asnt)
+      .post("https://exam-player.com/verify/", vrf)
       .then((res) => {
         dispatch(createVRFSuccess());
       })

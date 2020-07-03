@@ -1,5 +1,6 @@
 import React from "react";
-import { Form, Input, Icon, Button } from "antd";
+import { Form, Input, Button } from "antd";
+import Icon from "@ant-design/icons";
 import Hoc from "../hoc/hoc";
 
 const FormItem = Form.Item;
@@ -31,12 +32,12 @@ class QuestionForm extends React.Component {
     const keys = getFieldValue("keys");
     const formItems = keys.map((k, index) => (
       <FormItem label={index === 0 ? "" : ""} key={k}>
-        <strong> {index === 0 ? "Option (A)" : ""}</strong>
-        <strong> {index === 1 ? " Option(B)" : ""}</strong>
-        <strong> {index === 2 ? "Option (C)" : ""}</strong>
-        <strong> {index === 3 ? "Option (D)" : ""}</strong>
-        <strong> {index === 4 ? "Option (E)" : ""}</strong>
-        <strong> {index === 5 ? "Option (F)" : ""}</strong>
+        <strong> {index === 0 ? "Choices (A)" : ""}</strong>
+        <strong> {index === 1 ? "Choices (B)" : ""}</strong>
+        <strong> {index === 2 ? "Choices (C)" : ""}</strong>
+        <strong> {index === 3 ? "Choices (D)" : ""}</strong>
+        <strong> {index === 4 ? "Choices (E)" : ""}</strong>
+        <strong> {index === 5 ? "Choices (F)" : ""}</strong>
         {getFieldDecorator(`questions[${this.props.id}]choices[${k}]`, {
           validateTrigger: ["onChange", "onBlur"],
           rules: [
@@ -46,12 +47,11 @@ class QuestionForm extends React.Component {
               message: "Please input a choice to the question",
             },
           ],
-        })(<Input placeholder="Options" />)}
+        })(<Input placeholder="Options/ Choice" />)}
         {keys.length > 1 ? (
           <Icon
             className="dynamic-delete-button"
             type="minus-circle-o"
-            color="red"
             disabled={keys.length === 1}
             onClick={() => this.remove(k)}
           />

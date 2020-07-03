@@ -45,3 +45,7 @@ class MyStudent(models.Model):
     @property
     def username(self):
         return self.user.username
+
+    @property
+    def teacher(self):
+        return self.teachers.user.username

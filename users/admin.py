@@ -76,7 +76,7 @@ class UserAdmin(UserAdmin):
 
 @admin.register(MyStudent)
 class StudentAdmin(admin.ModelAdmin):
-    list_display = ['user', 'is_accepted', 'class_id' ]
+    list_display = ['user', 'is_accepted', 'class_id', 'teacher' ]
     search_fields = ('user__username', )
     list_editable = ('is_accepted',)
     

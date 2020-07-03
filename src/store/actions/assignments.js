@@ -29,8 +29,8 @@ export const getASNTS = (token) => {
       Authorization: `Token ${token}`,
     };
     axios
-      //.get("https://rk-mcq.herokuapp.com/assignments/")
-      .get("https://rk-mcq.herokuapp.com/assignments/")
+      //.get("https://exam-player.com/assignments/")
+      .get("https://exam-player.com/assignments/")
       .then((res) => {
         const assignments = res.data;
         dispatch(getASNTListSuccess(assignments));
@@ -69,8 +69,8 @@ export const getASNTSDetail = (token, id) => {
       Authorization: `Token ${token}`,
     };
     axios
-      //.get(`https://rk-mcq.herokuapp.com/assignments/${id}/`)
-      .get(`https://rk-mcq.herokuapp.com/assignments/${id}/`)
+      //.get(`https://exam-player.com/assignments/${id}/`)
+      .get(`https://exam-player.com/assignments/${id}/`)
       .then((res) => {
         const assignment = res.data;
         dispatch(getASNTDetailSuccess(assignment));
@@ -109,8 +109,8 @@ export const createASNT = (token, asnt) => {
       Authorization: `Token ${token}`,
     };
     axios
-      //.post(`https://rk-mcq.herokuapp.com/assignments/`, asnt)
-      .post("https://rk-mcq.herokuapp.com/assignments/", asnt)
+      //.post(`https://exam-player.com/assignments/`, asnt)
+      .post("https://exam-player.com/assignments/", asnt)
       .then((res) => {
         dispatch(createASNTSuccess());
       })
