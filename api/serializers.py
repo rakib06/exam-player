@@ -2,7 +2,7 @@ from rest_framework import serializers
 import datetime
 from users.models import User
 from .models import Assignment, Question, Choice, GradedAssignment
-
+from django.db.models import Q
 
 class StringSerializer(serializers.StringRelatedField):
     def to_internal_value(self, value):
@@ -72,6 +72,9 @@ class AssignmentSerializer(serializers.ModelSerializer):
 class GradedAssignmentSerializer(serializers.ModelSerializer):
     student = StringSerializer(many=False)
     exam = serializers.SerializerMethodField('exam')
+
+    
+
     # right_answer = serializers.SerializerMethodField('right_answer')
     # wrong_answer = serializers.SerializerMethodField('wrong_answer')
     assignment_title = serializers.ReadOnlyField()
@@ -95,6 +98,17 @@ class GradedAssignmentSerializer(serializers.ModelSerializer):
 
         assignment = Assignment.objects.get(id=data['asntId'])
         student = User.objects.get(username=data['username'])
+
+        
+        # 2 bar sumbit off
+        
+        f  =  GradedAssignment.objects.filter(
+            Q(assignment=assignment) & Q(student=student)
+        )
+
+        if(len(f))>=1:
+            return None
+        
 
         graded_asnt = GradedAssignment()
         graded_asnt.assignment = assignment
