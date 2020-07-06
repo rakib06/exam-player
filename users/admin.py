@@ -54,7 +54,8 @@ class UserAdmin(UserAdmin):
     list_display = ['username', 'mobile',
                     'email', 'is_student', 'is_teacher', ]
     list_display_links = ('username',)
-    search_fields = ('username', 'mobile', )
+    search_fields = ( 'mobile', )
+    list_editable = ( 'mobile', 'email')
 
     
             
