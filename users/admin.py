@@ -51,7 +51,7 @@ class UserAdmin(UserAdmin):
             'fields': ('username', 'mobile', 'password1', 'password2', 'is_student', 'is_teacher'),
         }),
     )
-    list_display = ['username', 'mobile',
+    list_display = ['username','mobile',
                     'email', 'is_student', 'is_teacher', ]
     list_display_links = ('username',)
     search_fields = ( 'mobile', )
@@ -79,15 +79,15 @@ class UserAdmin(UserAdmin):
 class StudentAdmin(admin.ModelAdmin):
     list_display = ['user', 'is_accepted', 'class_id', 'teacher' ]
     search_fields = ('user__username', 'teachers__user__username', 'class_id',)
-    list_editable = ('is_accepted',)
+    list_editable = ('is_accepted','class_id', )
     
     def get_queryset(self, request):
 
         if request.user.is_superuser==False:
             try:
                 self.list_display = ['user','mobile', 'is_accepted', 'class_id' ]
-                self.list_editable =('is_accepted', )
-                self.search_fields = ('user__username','class_id')
+                self.list_editable =('is_accepted','class_id' )
+                self.search_fields = ('user__username','class_id',)
                 self.list_display_links = (None,)
                 teacher = MyTeacher.objects.get(user=request.user)
                 qs1 = MyStudent.objects.filter(teachers=teacher)

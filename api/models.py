@@ -1,6 +1,6 @@
 from django.db import models
-from users.models import User
-
+from users.models import *
+from django.db.models import Q
 
 class CustomDateTimeField(models.DateTimeField):
     def value_to_string(self, obj):
@@ -47,6 +47,15 @@ class GradedAssignment(models.Model):
     exam_start_at = models.CharField(max_length=50, default='NA')
     t = 0
 
+    @property
+    def class_id(self):
+        try:
+            t = MyTeacher.objects.get(user__username=self.assignment.teacher.username)
+            # print('cccccccccc',self.assignment.teacher.username)
+            x = MyStudent.objects.get(Q(user=self.student) & Q(teachers__user__username=t))
+        except:
+            return None
+        return x.class_id
     @property
     def position(self):
         global t

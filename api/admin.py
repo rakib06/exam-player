@@ -1,13 +1,13 @@
 from django.contrib import admin
 from django.db.models import Q
 from .models import Choice, Question, Assignment, GradedAssignment
-
+from users.models import *
 teacher_ID = None
 
 
 @admin.register(GradedAssignment)
 class AdminGradedAssignment(admin.ModelAdmin):
-    list_display = ['student', 'assignment',
+    list_display = ['student','class_id',
                     'right_answer', 'wrong_answer', 'obtained_marks', 'total_marks', 'grade']
     search_fields = ('student__username', 'assignment__title')
     ordering = ('assignment',)
