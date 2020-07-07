@@ -39,13 +39,17 @@ class AssignmentViewSet(viewsets.ModelViewSet):
             '''
             Teacher match korlei prosno dekha jabe 
             '''
-            stu = MyStudent.objects.get(user__username=username)
-            if stu.is_accepted:
-                t = stu.teachers
-                t_username = t.user.username
-                queryset = Assignment.objects.filter(teacher__username=t_username)
-                queryset = queryset.filter(is_hide=False)
-                return queryset
+            stu = MyStudent.objects.filter(user__username=username)
+            queryset = None
+            teachers = []
+            for item in stu:
+                if item.is_accepted:
+                    t = item.teachers
+                    t_username = t.user.username
+                    teachers.append(t_username)
+            queryset = Assignment.objects.filter(teacher__username__in=teachers)
+            queryset = queryset.filter(is_hide=False)
+            return queryset
             # esa = GradedAssignment.objects.filter(student__username=username )
             # esa = GradedAssignment.objects.filter(student__username=username )
             # esa = GradedAssignment._meta.get_field('assignmet')

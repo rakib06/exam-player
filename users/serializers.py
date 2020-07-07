@@ -106,6 +106,8 @@ class MyStudentSerializer(serializers.ModelSerializer):
         class_id = data['class_id']
         if len(MyStudent.objects.filter(user=student))>10:
             return None
+        if len(MyStudent.objects.filter(teachers=t))>0:
+            return None
         else:
          
             try:   
