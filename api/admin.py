@@ -60,7 +60,7 @@ class AdminQuestion(admin.ModelAdmin):
     search_fields = ('assignment__title', 'question')
     # ordering = ('order',)
     list_display_links = ('question',)
-
+    list_editable = ('order','question',)
     # list_editable = ('answer',)
     list_filter = (('assignment', admin.RelatedOnlyFieldListFilter),)
     ordering = ('order',)
