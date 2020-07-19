@@ -56,11 +56,11 @@ class AdminAssignment(admin.ModelAdmin):
 
 @admin.register(Question)
 class AdminQuestion(admin.ModelAdmin):
-    list_display = ['order', 'question', 'answer', ]
+    list_display = ['id','order', 'question', 'answer', 'assignment']
     search_fields = ('assignment__title', 'question')
     # ordering = ('order',)
-    list_display_links = ('question',)
-    list_editable = ('order','question',)
+    list_display_links = ('id',)
+    list_editable = ('order','question','assignment')
     # list_editable = ('answer',)
     list_filter = (('assignment', admin.RelatedOnlyFieldListFilter),)
     ordering = ('order',)
