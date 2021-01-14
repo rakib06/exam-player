@@ -81,12 +81,7 @@ export const authSignup = (
       is_teacher: !is_student,
     };
     axios
-<<<<<<< HEAD
       .post("https://exam-player.herokuapp.com/rest-auth/registration/", user)
-=======
-      //.post("https://exam-player.com/rest-auth/registration/", user)
-      .post("https://exam-player.com/rest-auth/registration/", user)
->>>>>>> ae402b036b4f708f5c17fc3808f11de93a7da8e8
       .then((res) => {
         const user = {
           token: res.data.key,
@@ -94,11 +89,7 @@ export const authSignup = (
           userId: res.data.user,
           is_student,
           is_teacher: !is_student,
-<<<<<<< HEAD
           expirationDate: new Date(new Date().getTime() + 3600 * 1000),
-=======
-          expirationDate: new Date(new Date().getTime() + 360000 * 100000),
->>>>>>> ae402b036b4f708f5c17fc3808f11de93a7da8e8
         };
         localStorage.setItem("user", JSON.stringify(user));
         dispatch(authSuccess(user));
