@@ -3,22 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@ant-design/icons": "^4.2.1",
-    "@react-pdf/renderer": "^2.0.0-beta.6",
     "antd": "^3.7.3",
-    "axios": "^0.21.1",
+    "axios": "^0.18.0",
     "react": "^16.4.1",
-    "react-bootstrap": "^1.0.1",
-    "react-compound-timer": "^1.2.0",
     "react-dom": "^16.4.1",
-    "react-hover-button": "^0.4.3",
-    "react-phone-number-input": "^3.0.22",
-    "react-progress-timer": "^1.0.1",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "^3.4.1",
-    "react-sticky": "^6.0.3",
-    "react-to-pdf": "0.0.11",
+    "react-scripts": "1.1.4",
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0"
   },
@@ -32,17 +23,5 @@
   "engines": {
     "node": "9.5.0",
     "npm": "6.4.1"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
   }
 }
