@@ -107,12 +107,7 @@ export const createASNT = (token, asnt) => {
       Authorization: `Token ${token}`,
     };
     axios
-<<<<<<< HEAD
       .post(`https://exam-player.herokuapp.com/assignments/`, asnt)
-=======
-      //.post(`https://exam-player.com/assignments/`, asnt)
-      .post("https://exam-player.com/assignments/", asnt)
->>>>>>> ae402b036b4f708f5c17fc3808f11de93a7da8e8
       .then((res) => {
         dispatch(createASNTSuccess());
       })

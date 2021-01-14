@@ -40,12 +40,7 @@ export const authLogin = (username, password) => {
   return (dispatch) => {
     dispatch(authStart());
     axios
-<<<<<<< HEAD
       .post("https://exam-player.herokuapp.com/rest-auth/login/", {
-=======
-      //.post("https://exam-player.com/rest-auth/login/", {
-      .post("https://exam-player.com/rest-auth/login/", {
->>>>>>> ae402b036b4f708f5c17fc3808f11de93a7da8e8
         username: username,
         password: password,
       })
@@ -56,11 +51,7 @@ export const authLogin = (username, password) => {
           userId: res.data.user,
           is_student: res.data.user_type.is_student,
           is_teacher: res.data.user_type.is_teacher,
-<<<<<<< HEAD
           expirationDate: new Date(new Date().getTime() + 3600 * 1000),
-=======
-          expirationDate: new Date(new Date().getTime() + 36000000 * 1000),
->>>>>>> ae402b036b4f708f5c17fc3808f11de93a7da8e8
         };
         localStorage.setItem("user", JSON.stringify(user));
         dispatch(authSuccess(user));
