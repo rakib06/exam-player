@@ -40,7 +40,12 @@ export const authLogin = (username, password) => {
   return (dispatch) => {
     dispatch(authStart());
     axios
+<<<<<<< HEAD
       .post("https://exam-player.herokuapp.com/rest-auth/login/", {
+=======
+      //.post("https://exam-player.com/rest-auth/login/", {
+      .post("https://exam-player.com/rest-auth/login/", {
+>>>>>>> ae402b036b4f708f5c17fc3808f11de93a7da8e8
         username: username,
         password: password,
       })
@@ -51,11 +56,15 @@ export const authLogin = (username, password) => {
           userId: res.data.user,
           is_student: res.data.user_type.is_student,
           is_teacher: res.data.user_type.is_teacher,
+<<<<<<< HEAD
           expirationDate: new Date(new Date().getTime() + 3600 * 1000),
+=======
+          expirationDate: new Date(new Date().getTime() + 36000000 * 1000),
+>>>>>>> ae402b036b4f708f5c17fc3808f11de93a7da8e8
         };
         localStorage.setItem("user", JSON.stringify(user));
         dispatch(authSuccess(user));
-        dispatch(checkAuthTimeout(3600));
+        dispatch(checkAuthTimeout(36000000));
       })
       .catch((err) => {
         dispatch(authFail(err));
@@ -65,7 +74,7 @@ export const authLogin = (username, password) => {
 
 export const authSignup = (
   username,
-  email,
+  mobile,
   password1,
   password2,
   is_student
@@ -74,14 +83,19 @@ export const authSignup = (
     dispatch(authStart());
     const user = {
       username,
-      email,
+      mobile,
       password1,
       password2,
       is_student,
       is_teacher: !is_student,
     };
     axios
+<<<<<<< HEAD
       .post("https://exam-player.herokuapp.com/rest-auth/registration/", user)
+=======
+      //.post("https://exam-player.com/rest-auth/registration/", user)
+      .post("https://exam-player.com/rest-auth/registration/", user)
+>>>>>>> ae402b036b4f708f5c17fc3808f11de93a7da8e8
       .then((res) => {
         const user = {
           token: res.data.key,
@@ -89,11 +103,15 @@ export const authSignup = (
           userId: res.data.user,
           is_student,
           is_teacher: !is_student,
+<<<<<<< HEAD
           expirationDate: new Date(new Date().getTime() + 3600 * 1000),
+=======
+          expirationDate: new Date(new Date().getTime() + 360000 * 100000),
+>>>>>>> ae402b036b4f708f5c17fc3808f11de93a7da8e8
         };
         localStorage.setItem("user", JSON.stringify(user));
         dispatch(authSuccess(user));
-        dispatch(checkAuthTimeout(3600));
+        dispatch(checkAuthTimeout(36000000));
       })
       .catch((err) => {
         dispatch(authFail(err));

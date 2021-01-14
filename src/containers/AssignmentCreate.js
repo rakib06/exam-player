@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Form, Input, Icon, Button, Divider } from "antd";
+import { Form, Input, Icon, Button, Divider, message } from "antd";
 import QuestionForm from "./QuestionForm";
 import Hoc from "../hoc/hoc";
 import { createASNT } from "../store/actions/assignments";
@@ -9,24 +9,24 @@ const FormItem = Form.Item;
 
 class AssignmentCreate extends React.Component {
   state = {
-    formCount: 1
+    formCount: 1,
   };
 
   remove = () => {
     const { formCount } = this.state;
     this.setState({
-      formCount: formCount - 1
+      formCount: formCount - 1,
     });
   };
 
   add = () => {
     const { formCount } = this.state;
     this.setState({
-      formCount: formCount + 1
+      formCount: formCount + 1,
     });
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
@@ -35,16 +35,20 @@ class AssignmentCreate extends React.Component {
         for (let i = 0; i < values.questions.length; i += 1) {
           questions.push({
             title: values.question[i],
-            choices: values.questions[i].choices.filter(el => el !== null),
-            answer: values.answers[i]
+            choices: values.questions[i].choices.filter((el) => el !== null),
+            answer: values.answers[i],
           });
         }
         const asnt = {
           teacher: this.props.username,
           title: values.title,
-          questions
+          questions,
         };
         this.props.createASNT(this.props.token, asnt);
+        message.success(
+          "Thank you! We are Creating your Question!\n Please check your admin panel "
+        );
+        //this.props.history.push("/");
       }
     });
   };
@@ -70,16 +74,20 @@ class AssignmentCreate extends React.Component {
     }
     return (
       <Form onSubmit={this.handleSubmit}>
-        <h1>Create an assignment</h1>
-        <FormItem label={"Title: "}>
+        <h1>Create an Exam / Assignment</h1>
+        <FormItem label={""}>
+          <center>
+            <h2> Exam Title </h2>
+          </center>
+
           {getFieldDecorator(`title`, {
             validateTrigger: ["onChange", "onBlur"],
             rules: [
               {
                 required: true,
-                message: "Please input a title"
-              }
-            ]
+                message: "Please input a title",
+              },
+            ],
           })(<Input placeholder="Add a title" />)}
         </FormItem>
         {questions}
@@ -100,17 +108,17 @@ class AssignmentCreate extends React.Component {
 
 const WrappedAssignmentCreate = Form.create()(AssignmentCreate);
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     token: state.auth.token,
     username: state.auth.username,
-    loading: state.assignments.loading
+    loading: state.assignments.loading,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    createASNT: (token, asnt) => dispatch(createASNT(token, asnt))
+    createASNT: (token, asnt) => dispatch(createASNT(token, asnt)),
   };
 };
 

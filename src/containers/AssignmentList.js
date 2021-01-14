@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { List, Skeleton } from "antd";
+import { List, Skeleton, Divider, Card } from "antd";
 import * as actions from "../store/actions/assignments";
 import Hoc from "../hoc/hoc";
 
@@ -22,9 +22,39 @@ class AssignmentList extends React.PureComponent {
 
   renderItem(item) {
     return (
-      <Link to={`/assignments/${item.id}`}>
-        <List.Item>{item.title}</List.Item>
-      </Link>
+      <div className="card">
+        <p style={{ color: "grey", textAlign: "center" }}>
+          <small> {item.batch}</small>
+        </p>
+        <Link to={`/assignments/${item.id}`}>
+          <List.Item
+            style={{ color: "black", fontSize: "17px", textAlign: "center" }}
+          >
+            <b
+              style={{
+                color: "black",
+              }}
+            >
+              {item.title}
+            </b>
+            <small
+              style={{
+                color: "grey",
+                marginLeft: "auto",
+                marginRight: "auto",
+                paddingRight: "auto",
+              }}
+            >
+              <span>
+                {" Total marks: "}
+                {item.total_marks}
+                {"    Time: "}
+                {item.time_in_min} {"Min(s)"}
+              </span>
+            </small>
+          </List.Item>
+        </Link>
+      </div>
     );
   }
 
@@ -32,15 +62,64 @@ class AssignmentList extends React.PureComponent {
     return (
       <Hoc>
         {this.props.loading ? (
-          <Skeleton active />
+          <Skeleton active>
+            <p>
+              <a href="https://pochonder-shob.com/"> পছন্দের-সব.কম </a>
+            </p>
+            <p>
+              <b style={{ fontSize: "17px" }}>
+                <a href="https://www.facebook.com/groups/2693927037547637/">
+                  {" "}
+                  Join our Facebook |
+                </a>
+                প্রিয় শহরের প্রিয় শপ থেকে সরাসরি হোম ডেলিভারি। বই,
+                ইলেক্ট্রনিক্স, মোবাইল, কম্পিটার এক্সেসরিজ, ড্রেস, এবং সবকিছুই
+                পাচ্ছেন ফেইসবুক গ্রূপ বা আমাদের ওয়েবসাইট থেকে।{" "}
+              </b>
+            </p>
+            Stay Home, Stay Safe
+          </Skeleton>
         ) : (
           <div>
-            <h3 style={{ margin: "16px 0" }}>Assignment List</h3>
+            <Divider orientation="left">Live Exams</Divider>
             <List
               size="large"
+              footer={
+                <div style={{ textAlign: "center" }}>
+                  <br></br>
+                  <br></br>
+                  <Card>
+                    <p style={{ color: "purple" }}>
+                      <b>
+                        {" "}
+                        If your account is not verified, then please verify your
+                        account with the verification code from your teacher{" "}
+                      </b>
+                    </p>
+                    <p>
+                      <a href="https://pochonder-shob.com/"> পছন্দের-সব.কম </a>
+                    </p>
+
+                    <p>
+                      <b style={{ fontSize: "17px" }}>
+                        <a href="https://www.facebook.com/groups/2693927037547637/">
+                          {" "}
+                          Join our Facebook Group
+                        </a>
+                      </b>
+                    </p>
+                    <p>
+                      প্রিয় শহরের প্রিয় শপ থেকে সরাসরি হোম ডেলিভারি। বই,
+                      ইলেক্ট্রনিক্স, মোবাইল, কম্পিটার এক্সেসরিজ, ড্রেস, এবং
+                      সবকিছুই পাচ্ছেন ফেইসবুক গ্রূপ বা আমাদের ওয়েবসাইট থেকে।{" "}
+                    </p>
+                    <p>Stay Home, Stay Safe</p>
+                  </Card>
+                </div>
+              }
               bordered
               dataSource={this.props.assignments}
-              renderItem={item => this.renderItem(item)}
+              renderItem={(item) => this.renderItem(item)}
             />
           </div>
         )}
@@ -49,21 +128,18 @@ class AssignmentList extends React.PureComponent {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     token: state.auth.token,
     assignments: state.assignments.assignments,
-    loading: state.assignments.loading
+    loading: state.assignments.loading,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    getASNTS: token => dispatch(actions.getASNTS(token))
+    getASNTS: (token) => dispatch(actions.getASNTS(token)),
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AssignmentList);
+export default connect(mapStateToProps, mapDispatchToProps)(AssignmentList);

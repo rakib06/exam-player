@@ -1,15 +1,18 @@
 import React from "react";
 import { Steps, Button } from "antd";
+//import { ProgressTimer } from "react-progress-timer";
+//const Step = Steps.Step;
 
-const Step = Steps.Step;
 
 class Questions extends React.Component {
   state = {
-    current: 0
+    current: 0,
+
   };
 
   next() {
     const current = this.state.current + 1;
+
     this.setState({ current });
   }
 
@@ -23,13 +26,38 @@ class Questions extends React.Component {
     const { questions } = this.props;
     return (
       <div>
-        <Steps progressDot current={current}>
-          {questions.map((q, index) => (
-            <Step key={index} />
-          ))}
-        </Steps>
+
+
+        {
+          < Steps current={current}>
+            {questions.map((q, index) => (
+              <strong>
+                {//current} of {questions.length
+                  //Total Questions : {questions.length}
+                }
+              </strong>
+
+            ))}
+          </Steps>
+        }
+
         <div>{questions[current]}</div>
+
         <div>
+
+          {current === 0 && (
+            <Button type="danger" >
+              Start
+            </Button>
+
+          )}
+          {current > 0 && (
+            <Button type="danger" onClick={() => this.prev()}>
+              Prev
+            </Button>
+
+          )} {"  "}
+
           {current < questions.length - 1 && (
             <Button type="primary" onClick={() => this.next()}>
               Next
@@ -40,13 +68,9 @@ class Questions extends React.Component {
               Submit
             </Button>
           )}
-          {current > 0 && (
-            <Button style={{ marginLeft: 8 }} onClick={() => this.prev()}>
-              Previous
-            </Button>
-          )}
+
         </div>
-      </div>
+      </div >
     );
   }
 }
